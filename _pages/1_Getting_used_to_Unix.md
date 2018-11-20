@@ -4,8 +4,6 @@ layout: archive
 permalink: /getting_used_to_unix/
 ---
 
-## Getting used to Unix
-
 ### What is Unix?
 
 [Unix is an operating system or OS](https://en.wikipedia.org/wiki/Unix). Much like Windows, Mac OS X and Ubuntu it is a way to interact to interact with your computer. Unlike those systems though, it is not a graphical user interface (**GUI**). The Unix kernel is the essentially the 'hub' of the operating system and you can interact with it using the command line. Don't worry if this doesn't make sense at first, it will do soon...
