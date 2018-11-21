@@ -10,3 +10,51 @@ main:
   #   url: /collection-archive/
   # - title: "Sitemap"
   #   url: /sitemap/
+
+pages:
+  - title: "Learning Unix"
+    children:
+      - title: "Getting used to Unix"
+        url: /getting_used_to_unix/
+      - title: "Going further with Unix"
+        url: /going_further_unix/
+
+  - title: "Handling NGS data"
+    children:
+      - title: "Understanding NGS data"
+        url: /child-1-page-url/
+      - title: "Mapping to a reference genome"
+        url: /child-2-page-url/
+      - title: "Variant calling"
+        url: /child-3-page-url/
+      - title: "Filtering and handling VCFs"
+        url: /child-3-page-url/
+
+  - title: "Learning R"
+    children:
+      - title: "An introduction to R"
+        url: /child-1-page-url/
+      - title: "Visualisation and data manipulation in R"
+        url: /child-2-page-url/
+      - title: "More advanced R use"
+        url: /child-3-page-url/
+
+  - title: "Population genomics"
+    children:
+      - title: "Calculating genome-wide statistics"
+        url: /child-1-page-url/
+      - title: "Population genomic statistics and the divergence landscape"
+        url: /child-2-page-url/
+      - title: "Long-range haplotype tests of selection"
+        url: /child-3-page-url/
+      - title: "Introgression statistics"
+        url: /child-3-page-url/
+
+  - title: "Demographic inference"
+    children:
+      - title: "Generating a site-frequency spectru"
+        url: /child-1-page-url/
+      - title: "Demographic history with fastsimcoal2"
+        url: /child-2-page-url/
+      - title: "Estimating past effective population size with PSMC"
+        url: /child-3-page-url/
