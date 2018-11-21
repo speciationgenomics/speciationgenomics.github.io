@@ -12,7 +12,7 @@ There are a huge number of different Unix command line utilities and tools. What
 
 We will use a very simple pipe here to demonstrate the principal but throughout the course, we will use pipes in more complicated examples, always with a detailed explanation. First of all, let's create some files.
 
-```
+```Shell
 cd ~/home/dir2
 touch file1.txt file2.txt file3.txt
 ```
@@ -36,28 +36,193 @@ There are a huge number of extremely helpful Unix command line tools. We have al
 
 For now though, we will introduce six tools which are really essential and that you will encounter numerous times. These are `head`, `tail`, `grep`, `sed`, `cut` and `awk`. Each of these tools could have a tutorial dedicated to them in their own right and they take some time to get used to - but it is worth it, they can really make your life a lot, lot easier when working with bioinformatic data!
 
+#### git to get data
+
+Before we introduce you to the Unix tools, we are going to explore a little trick that we will use *throughout* this course - cloning and pulling repositories from the [course github page](https://github.com/speciationgenomics). This is a way for use to easily distribute files and update exercises where necessary. Luckily, it's also extremely simple and straightforward to use. Let's clone a repository now to get some text files that we can demonstrate the Unix command line tools with.
+
+```
+# move into your home directory
+cd ~
+# clone the appropriate repository
+git clone https://github.com/speciationgenomics/unix_exercises.git
+```
+When you run the `git clone` command, you will essentially clone a directory of files we have prepared (and hosted) for you on Github into your own home directory. If you use `ls` you should now see a directory called `unix_exercises`.
+
+Take a look inside. You will see three files.
+
+* **iris_data.tsv** - a tab separated dataset that was used by [Ronald Fisher to formulate linear discrimination analysis](https://en.wikipedia.org/wiki/Iris_flower_data_set).
+* **mobydick.txt** - the entire text of [Herman Melville's](https://en.wikipedia.org/wiki/Moby-Dick) novel stored as a text file.
+* **udhr.txt** - the text of the [Universal Declaration of Human Rights](https://en.wikipedia.org/wiki/Universal_Declaration_of_Human_Rights).
+
 #### head
 
 `head` will display the 'head' of a file - i.e. the first 10 lines by default. This command is essential if you are going to be working with bioinformatic data as often your files are millions of lines long and you just want to have a quick peek at what it contains.
+
+For example, we can use `head` on the `udhr.txt` file to see the first 10 lines
+
+```
+head udhr.txt
+```
+
+We can also specify exactly how many lines we want to display. For example, if we want to see 20 lines:
+
+```
+head -20 udhr.txt
+```
 
 #### tail
 
 `tail` is much the same as `head`, except it operates at the other end - i.e. it shows you the **last** ten lines of a file. It is also useful for skipping the start of a file.
 
+First of all, let's look at the last 10 lines of the `udhr.txt` file.
+
+```
+tail udhr.txt
+```
+Or the last 20?
+
+```
+tail -20 udhr.txt
+```
+And if you would like to skip a line, we can use tail for this too.
+
+Let's first just extract the first 10 lines of the declaration using `head`.
+
+```
+head udhr.txt > my_file.txt
+```
+
+Now if we use `tail` with `-n` flag, we can skip lines from the start of the file. For example:
+
+```
+tail -n+3 my_file.txt
+```
+The `-n+3` argument skips the first three lines of the file. This is very useful for removing lines you are not interested in.
+
 #### grep
 
 `grep` allows you to search for text data and strings. It is very useful for checking whether a pattern occurs in your data and also counting for occurences.
 
+As an example, let's search the text of Moby-Dick for the word "whale".
+
+```
+grep --colour "whale" mobydick.txt
+```
+This will return every line of Moby-Dick where the word whale is mentioned. We used the `--colour` flag (**N.B.** `--color` will. work too if you want to spell it like that!) to return the results with a highlight, which makes it a bit easier to see. Feel free to compare without this flag if you'd like.
+
+There are a couple of useful `grep` tricks here. We can return all the lines **without** the word "whale" if we want.
+
+```
+grep -v "whale" mobydick.txt
+```
+Here, `-v` just means invert the search. Alternatively, we can look for the word whale and print lines that come after each match.
+
+```
+grep --colour -A 2 "whale" mobydick.txt
+```
+
+The `-A 2` flag just says, print the two lines after each match. We can do the same for the lines before the match with `-B`.
+
+```
+grep --colour -B 2 "whale" mobydick.txt
+```
+
+Whereas if we use `-C`, we can get the number of lines we want either side of a match.
+
+```
+grep --colour -C 3 "whale" mobydick.txt
+```
+
+This will return 3 lines before and after each match, which is equivalent to `-B 3 -A 3`.
+
+Finally we can also use `grep` to count occurrences of a word. How many times do you think the word "whale" appears in Moby-Dick? You can use `grep` to find out...
+
+```
+grep -c "whale" mobydick.txt
+```
+
+Actually though, this is not quite accurate since searching for `"whale"` does not include instances where the word starts with a capital letter. We can solve this by altering our search term a little:
+
+```
+grep -c "[Ww]hale" mobydick.txt
+```
+
+Here the `[Ww]` simply means we are looking for any matches where the first letter is either "W" or "w".
+
 #### sed
+
 `sed` is similar to grep in that it allows you to search through text and replace it. Again this makes it very powerful for altering text data very rapidly.
+
+Let's extract some text from `mobydick.txt` to demonstrate `sed`. To do this, we will `grep` all sentences with the name "Ishmael" (the main character in the novel) on.
+
+```
+grep "Ishmael" mobydick.txt > ishmael.txt
+```
+
+Have a look at the file we created. Quite clearly, Ishmael is mentioned a lot less than the whale he is chasing... Anyway, let's have a look at what we can do with `sed`. Firstly, it is possible to look at a specific line of our text:
+
+```
+sed -n 3p ishmael.txt
+```
+
+In this command, `3p` is just telling the `-n` flag we want to see the third line. We could also extract lines 3-5 like so:
+
+```
+sed -n 3-5p ishmael.txt
+```
+
+But `sed` can actually do much more than this. For example, it can replace text. Let's replace all instances of "Ishmael" with another name, like "Dave":
+
+```
+sed 's/Ishmael/Dave/g' ishmael.txt
+```
+
+Which certainly changes the gravitas of the text. This is just a small demonstration of what it is possible to do with `sed`. It is a very useful tool, especially for file conversion and [well worth getting more familiar with](https://www.digitalocean.com/community/tutorials/the-basics-of-using-the-sed-stream-editor-to-manipulate-text-in-linux).
+
 
 #### cut
 
-`cut` is a command-line utility which allows you to cut a specific column out of a file. This is a particularly useful command for accessing specfic parts of datafiles .
+`cut` is a command-line utility which allows you to cut a specific column out of a file. This is a particularly useful command for accessing specfic parts of datafiles.
+
+`cut` is probably the more straightforward of the tools here. We can use it to get some columns of the `iris_data.tsv`.
+
+```
+cut -f 1 iris_data.tsv | head
+```
+Note that we piped the output to `head` to make it clearer. We could also extract multiple columns:
+
+```
+cut -f 3,5 iris_data.tsv | head
+```
+
+Note that `cut` expects a tab-delimited file by default. So if your file is comma-separated or uses spaces, you need to use the `-d` flag to specify it. You can see examples (and more information on `cut` by using `man cut` to view the manual. Note that this works for most command-line tools too.
 
 #### awk
 
-`awk` is not so much a command-line tool, rather a full programming language. It is extremely flexible and can actually be used to do many of the things the previous commands do too. However, it is particularly useful for in-line editing and converting file formats.
+`awk` is not so much a command-line tool, rather a full programming language. It is extremely flexible and can actually be used to do many of the things the previous commands do too. However, it is particularly useful for in-line editing and converting file formats. We can get an idea of how it works with the `iris_data.tsv`.
+
+For example, let's use it in a similar way to `cut` and just print a single column of the data.
+
+```
+awk '{print $1}' iris_data.tsv | head
+```
+
+`awk` essentially iterates through each row of the file we provided it. So we can also get it to print additional values next to the column we extract. For example:
+
+```
+awk '{print $1,"\t"50}' iris_data.tsv | head
+```
+
+Here we added a tab space with `"\t"` and told `awk` to print 50 for each row.
+
+We could also do something like add 1 to each value of a specific column. For example:
+
+```
+awk '{print $3,"\t"$3+1}' iris_data.tsv | head
+```
+Here we printed column 3 and also column 3 but with 1 added to all the values in it.
+
+`awk` can do even more than this. It is definitely worth checking out [a few tutorials on it](http://www.hcs.harvard.edu/~dholland/computers/awk.html). We will leave our introduction to `awk` and the other tools here - but we will return to them and their uses throughout our bioinformatics training.
 
 ### Bash - a Unix based programming language
 
@@ -371,3 +536,31 @@ Now write this script out as a `file_renamer.sh`.
 If you run this as `sh file_renamer.sh` - it will print the name of each file it converts to the screen. You can then use `ls` to see that it has indeed converted all the `.txt` files to `.jpg`.
 
 ### A script writing challenge
+
+With all the skills we have learned in this tutorial, it is now time for you to put them to the test. Return to the `unix_exercises` directory you created when you used `git clone` and write a short script to do the following:
+
+* make an array of the three files
+* loop through the array and count the number of lines in the file
+* print the number of lines and the name of the file to the output
+
+<details><summary>Click here to see a possible solution.</summary>
+<p>
+
+```
+#!/bin/sh
+
+# a possible solution script
+
+# declare an array
+ARRAY=($(for i in *.t*; do echo $i; done))
+
+# loop over array
+for FILE in ${ARRAY[@]}
+do
+echo "${FILE}"
+wc -l ${FILE}
+done
+```
+
+</p>
+</details>

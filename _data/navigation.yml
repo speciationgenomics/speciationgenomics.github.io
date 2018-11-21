@@ -52,7 +52,7 @@ pages:
 
   - title: "Demographic inference"
     children:
-      - title: "Generating a site-frequency spectru"
+      - title: "Generating a site-frequency spectrum"
         url: /child-1-page-url/
       - title: "Demographic history with fastsimcoal2"
         url: /child-2-page-url/
