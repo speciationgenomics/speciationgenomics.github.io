@@ -12,7 +12,7 @@ There are a huge number of different Unix command line utilities and tools. What
 
 We will use a very simple pipe here to demonstrate the principal but throughout the course, we will use pipes in more complicated examples, always with a detailed explanation. First of all, let's create some files.
 
-```Shell
+```shell
 cd ~/home/dir2
 touch file1.txt file2.txt file3.txt
 ```
