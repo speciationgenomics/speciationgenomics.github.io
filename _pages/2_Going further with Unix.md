@@ -18,12 +18,12 @@ touch file1.txt file2.txt file3.txt
 ```
 So in this instance, we know we created three text files. But what if we want to actually check this? Well we already learned that `ls` will show us the files in a directory.
 
-```
+```shell
 ls *.txt
 ```
 But this will just show the files, it won't count them for us. Of course in such a simple example, we can actually just count them ourselves - but this will rarely be practical in a proper bioinformatics context. So let's use a pipe to do the work for us.
 
-```
+```shell
 ls *.txt | wc -l
 ```
 We already saw what the first part of this command does - it lists the files. This list is then piped into `wc` which is a utility to count words and lines (i.e. word count). Last but not least, the `-l` flag tells `wc` to count lines and not words.
@@ -40,7 +40,7 @@ For now though, we will introduce six tools which are really essential and that 
 
 Before we introduce you to the Unix tools, we are going to explore a little trick that we will use *throughout* this course - cloning and pulling repositories from the [course github page](https://github.com/speciationgenomics). This is a way for use to easily distribute files and update exercises where necessary. Luckily, it's also extremely simple and straightforward to use. Let's clone a repository now to get some text files that we can demonstrate the Unix command line tools with.
 
-```
+```shell
 # move into your home directory
 cd ~
 # clone the appropriate repository
@@ -60,13 +60,13 @@ Take a look inside. You will see three files.
 
 For example, we can use `head` on the `udhr.txt` file to see the first 10 lines
 
-```
+```shell
 head udhr.txt
 ```
 
 We can also specify exactly how many lines we want to display. For example, if we want to see 20 lines:
 
-```
+```shell
 head -20 udhr.txt
 ```
 
@@ -76,25 +76,25 @@ head -20 udhr.txt
 
 First of all, let's look at the last 10 lines of the `udhr.txt` file.
 
-```
+```shell
 tail udhr.txt
 ```
 Or the last 20?
 
-```
+```shell
 tail -20 udhr.txt
 ```
 And if you would like to skip a line, we can use tail for this too.
 
 Let's first just extract the first 10 lines of the declaration using `head`.
 
-```
+```shell
 head udhr.txt > my_file.txt
 ```
 
 Now if we use `tail` with `-n` flag, we can skip lines from the start of the file. For example:
 
-```
+```shell
 tail -n+3 my_file.txt
 ```
 The `-n+3` argument skips the first three lines of the file. This is very useful for removing lines you are not interested in.
@@ -105,31 +105,31 @@ The `-n+3` argument skips the first three lines of the file. This is very useful
 
 As an example, let's search the text of Moby-Dick for the word "whale".
 
-```
+```shell
 grep --colour "whale" mobydick.txt
 ```
 This will return every line of Moby-Dick where the word whale is mentioned. We used the `--colour` flag (**N.B.** `--color` will. work too if you want to spell it like that!) to return the results with a highlight, which makes it a bit easier to see. Feel free to compare without this flag if you'd like.
 
 There are a couple of useful `grep` tricks here. We can return all the lines **without** the word "whale" if we want.
 
-```
+```shell
 grep -v "whale" mobydick.txt
 ```
 Here, `-v` just means invert the search. Alternatively, we can look for the word whale and print lines that come after each match.
 
-```
+```shell
 grep --colour -A 2 "whale" mobydick.txt
 ```
 
 The `-A 2` flag just says, print the two lines after each match. We can do the same for the lines before the match with `-B`.
 
-```
+```shell
 grep --colour -B 2 "whale" mobydick.txt
 ```
 
 Whereas if we use `-C`, we can get the number of lines we want either side of a match.
 
-```
+```shell
 grep --colour -C 3 "whale" mobydick.txt
 ```
 
@@ -137,13 +137,13 @@ This will return 3 lines before and after each match, which is equivalent to `-B
 
 Finally we can also use `grep` to count occurrences of a word. How many times do you think the word "whale" appears in Moby-Dick? You can use `grep` to find out...
 
-```
+```shell
 grep -c "whale" mobydick.txt
 ```
 
 Actually though, this is not quite accurate since searching for `"whale"` does not include instances where the word starts with a capital letter. We can solve this by altering our search term a little:
 
-```
+```shell
 grep -c "[Ww]hale" mobydick.txt
 ```
 
@@ -155,25 +155,25 @@ Here the `[Ww]` simply means we are looking for any matches where the first lett
 
 Let's extract some text from `mobydick.txt` to demonstrate `sed`. To do this, we will `grep` all sentences with the name "Ishmael" (the main character in the novel) on.
 
-```
+```shell
 grep "Ishmael" mobydick.txt > ishmael.txt
 ```
 
 Have a look at the file we created. Quite clearly, Ishmael is mentioned a lot less than the whale he is chasing... Anyway, let's have a look at what we can do with `sed`. Firstly, it is possible to look at a specific line of our text:
 
-```
+```shell
 sed -n 3p ishmael.txt
 ```
 
 In this command, `3p` is just telling the `-n` flag we want to see the third line. We could also extract lines 3-5 like so:
 
-```
+```shell
 sed -n 3-5p ishmael.txt
 ```
 
 But `sed` can actually do much more than this. For example, it can replace text. Let's replace all instances of "Ishmael" with another name, like "Dave":
 
-```
+```shell
 sed 's/Ishmael/Dave/g' ishmael.txt
 ```
 
@@ -186,12 +186,12 @@ Which certainly changes the gravitas of the text. This is just a small demonstra
 
 `cut` is probably the more straightforward of the tools here. We can use it to get some columns of the `iris_data.tsv`.
 
-```
+```shell
 cut -f 1 iris_data.tsv | head
 ```
 Note that we piped the output to `head` to make it clearer. We could also extract multiple columns:
 
-```
+```shell
 cut -f 3,5 iris_data.tsv | head
 ```
 
@@ -203,13 +203,13 @@ Note that `cut` expects a tab-delimited file by default. So if your file is comm
 
 For example, let's use it in a similar way to `cut` and just print a single column of the data.
 
-```
+```shell
 awk '{print $1}' iris_data.tsv | head
 ```
 
 `awk` essentially iterates through each row of the file we provided it. So we can also get it to print additional values next to the column we extract. For example:
 
-```
+```shell
 awk '{print $1,"\t"50}' iris_data.tsv | head
 ```
 
@@ -217,7 +217,7 @@ Here we added a tab space with `"\t"` and told `awk` to print 50 for each row.
 
 We could also do something like add 1 to each value of a specific column. For example:
 
-```
+```shell
 awk '{print $3,"\t"$3+1}' iris_data.tsv | head
 ```
 Here we printed column 3 and also column 3 but with 1 added to all the values in it.
@@ -236,7 +236,7 @@ Variables in programming languages are just things that we refer to in the envir
 
 This is basically what you are doing when declaring variables. In otherwords, you can think of a variable as short hand for something you want your code to refer to. In bash, we declare a variable like so:
 
-```
+```shell
 EXAMPLE="Hello world"
 ```
 
@@ -244,18 +244,18 @@ Note that the variable doesn't **have** to be allcaps but that this is the conve
 
 Recalling variables is also simple, we just precede our variable name with `$`. To print it to the screen, we must use the utility `echo`:
 
-```
+```shell
 echo $EXAMPLE
 ```
 We can also declare multiple variables and combine them together:
 
-```
+```shell
 NAME="my name is Hal"
 echo ${EXAMPLE} ${NAME}
 ```
 Note that we wrap the variable names here in curly brackets in order to preserve them. This is not always necessary but it does ensure your code is interpreted properly. This makes more sense if we combine them in a string, i.e. to make them a full sentence.
 
-```
+```shell
 echo "${EXAMPLE}, ${NAME}"
 ```
 Although these examples are actual words, more often than not, you will use variables to store the names of files. Using variables in your scripting is a really useful way to make your code very efficient. Doing this means you can change what an entire script does just by changing a single variable.
@@ -268,29 +268,29 @@ Now that we have learned to create variables, we can also explore how to manipul
 
 First, let's declare a variable. We'll make a dummy filename in this instance:
 
-```
+```shell
 FILE="$HOME/an_example_file.txt"
 ```
 Let's echo this back to the screen:
 
-```
+```shell
 echo $FILE
 ```
 An important point to note here is that the `$HOME` variable has been interpreted so that we now have the entire file path.
 
 Let's say we just want the actual filename, i.e. without the directory or path? We can use `basename`:
 
-```
+```shell
 basename $FILE
 ```
 Alternatively, we could remove the filename and keep only the directory or path:
 
-```
+```shell
 dirname $FILE
 ```
 For now though, we want to operate on the filename itself, so let's redeclare the variable so it is *only* the filename.
 
-```
+```shell
 FILE=$(basename $FILE)
 echo $FILE
 ```
@@ -298,33 +298,33 @@ Note that here we have to wrap the `basename $FILE` command in `$()` because it 
 
 OK so onto some proper string manipulation. Let's remove the `.txt` suffix.
 
-```
+```shell
 echo ${FILE%.*}
 ```
 What did we do here? First we have to wrap the entire variable name in curly brackets - this will not work without them. The `%` denotes that we want to delete everything after the next character, which in this case is `.*` - i.e. everything after the period. Note that the following would have also worked:
 
-```
+```shell
 echo ${FILE%.txt}
 ```
 
 We don't need to limit ourselves to the suffix. We could also delete everything after the last underscore. Like so:
 
-```
+```shell
 echo ${FILE%_*}
 ```
 We could also set it so that we delete everything after the *first* underscore:
 
-```
+```shell
 echo ${FILE%%_*}
 ```
  We can also delete from infront of the characters in our string manipulation example. For example:
 
-```
+```shell
 echo ${FILE#*.}
 ```
 This deletes everything up to and including the period character. We could also do the same with the underscores:
 
-```
+```shell
 echo ${FILE#*_}
 echo ${FILE##*_}
 ```
@@ -333,7 +333,7 @@ Where again, a single `#` states we want to delete only after the last occurrenc
 
 You might be wondering, what exactly is the point of this? Well altering filenames is very important in most bioinformatics pipelines. So for example, with simple string manipulation you can change the suffix of a filename quickly and easily:
 
-```
+```shell
 echo $FILE
 echo ${FILE%.*}.jpg
 ```
@@ -347,7 +347,7 @@ Imagine you have to perform the same operation on many different files - do you 
 
 Let's have a look at a simple example:
 
-```
+```shell
 for i in {1..10}
 do
 echo "This is $i"
@@ -356,7 +356,7 @@ done
 
 All this is is saying is that for each number between 1 and 10, echo a "This is 1", "This is 2" and so on to the screen. `do` and `done` initiate and stop the loop respectively.  Here, the variable `i` is used within the loop but this is completely arbitrary - you can use whatever variable you would like. Indeed, it is often much more convenient to use a variable that makes sense to you. For example:
 
-```
+```shell
 for NUMBER in {1..10}
 do
 echo "This is $NUMBER"
@@ -364,7 +364,7 @@ done
 ```
 It doesn't just have to be numbers either. You can use a loop to iterate across multiple strings too. For example:
 
-```
+```shell
 for NAME in Mario Link Luigi Peach Zelda
 do
 echo "My name is $NAME"
@@ -377,7 +377,7 @@ Of course, this is a silly example, but you could easily substitute this with fi
 
 Imagine we want to run a `for` loop on some text files. We'll make five of them to demonstrate - and we can actually do this with a `for` loop too:
 
-```
+```shell
 for i in {1..5}
 do
 touch file_${i}.txt
@@ -387,7 +387,7 @@ Use `ls` after running this code and you'll see five text files.
 
 Now, what if we want to do something simple like go through all of them and print their names to the screen? We could do it like this:
 
-```
+```shell
 for FILE in *.txt
 do
 echo $FILE
@@ -397,17 +397,17 @@ This works really well for this simple example. However as your code becomes mor
 
 For this reason, it is **best practice** in bash to use **arrays**. These are essentially predefined lists of variables. They are easy to make too. Let's try a simple example.
 
-```
+```shell
 ARRAY=(Link Zelda Gannon)
 ```
 Now we can try printing this to the screen:
 
-```
+```shell
 echo $ARRAY
 ```
 This only prints the first value of our array. Actually, arrays have indexes, so we can print any value we specify like so:
 
-```
+```shell
 echo ${ARRAY[0]}
 echo ${ARRAY[1]}
 echo ${ARRAY[2]}
@@ -416,7 +416,7 @@ Notice that like python (and unlike R) everything in bash is zero-indexed - i.e.
 
 What if we want to print everything in the array?
 
-```
+```shell
 echo ${ARRAY[@]}
 echo ${ARRAY[*]}
 ```
@@ -424,7 +424,7 @@ Either of these will work fine.
 
 We can also loop through the array, like so:
 
-```
+```shell
 for CHARACTER in ${ARRAY[@]}
 do
 echo $CHARACTER
@@ -435,7 +435,7 @@ The purpose of the array here is that it ensures the **scope** of our loop is li
 
 One last point about arrays - it is often quite cumbersome to define them by hand. Imagine if you wanted to make an array for hundreds of files? Luckily you can also *declare* them from for loops too:
 
-```
+```shell
 ARRAY2=($(for i in *.txt
 do
 echo $i
@@ -444,7 +444,7 @@ done))
 
 This doesn't look very neat though - you can actually write a for loop like this on a single line - i.e.:
 
-```
+```shell
 ARRAY2=($(for i in *.txt ;do echo $i; done))
 ```
 Where `;` indicates a separate line (as seen in the above example).
@@ -459,7 +459,7 @@ Let's start with a really basic example. Type `nano` into the command line in or
 
 Then we can write a simple bash script, like so:
 
-```
+```shell
 #!/bin/sh
 
 # a simple bash script
@@ -474,7 +474,7 @@ Let's breakdown some of the script. First of all there is this `#!/bin/sh` line.
 
 Now we can actually run the script. We do that like so:
 
-```
+```shell
 sh my_first_script.sh
 ```
 
@@ -484,7 +484,7 @@ You can also write a script that is interactive. Let's write another script to t
 
 Open `nano` and create a script with the following:
 
-```
+```shell
 #!/bin/sh
 
 # a simple bash script with input
@@ -495,7 +495,7 @@ exit
 
 Save it as `name_script.sh`. In this script, the `${1}` and `${2}` variables are just specifying that this script will take the first and second arguments to the script from the command line. Let's see it in action.
 
-```
+```shell
 sh name_script.sh Mark Milo
 ```
 
@@ -507,7 +507,7 @@ Now we have learned a little about how to script, let's write one that will do s
 
 Firstly, let's make those files:
 
-```
+```shell
 for i in {1..5}
 do
 touch file_${i}.txt
@@ -516,7 +516,7 @@ done
 
 Now, we can open up `nano` and write out script. We would do this like so:
 
-```
+```shell
 #!/bin/sh
 
 # a script to rename files
@@ -546,7 +546,7 @@ With all the skills we have learned in this tutorial, it is now time for you to 
 <details><summary>Click here to see a possible solution.</summary>
 <p>
 
-```
+```shell
 #!/bin/sh
 
 # a possible solution script
