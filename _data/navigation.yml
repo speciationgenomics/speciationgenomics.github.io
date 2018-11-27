@@ -33,7 +33,7 @@ pages:
   - title: "Learning R"
     children:
       - title: "An introduction to R"
-        url: /child-1-page-url/
+        url: /R_introduction/
       - title: "Visualisation and data manipulation in R"
         url: /child-2-page-url/
       - title: "More advanced R use"
