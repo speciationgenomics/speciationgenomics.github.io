@@ -4,25 +4,20 @@ layout: archive
 permalink: /R_introduction/
 ---
 
+For this section, we will be introducing you to R, a statistical programming language and environment that is widely used in bioinformatics. R is flexible, clear and easy to learn. It also extremely good for producing quick, high quality visualisations of data, which makes it very useful for anyone trying to explore their data. Perhaps the greatest strength of R is its focus on statistics - this makes it an excellent tool for carrying out and learning statistical analysis. R is also used for data analysis beyond evolutionary biology - it forms the basis of data science for companies such as Google, Facebook and Twitter, among many others. If you find yourself wondering why you are learning a programming language, it is worth remembering this point - familiarity with R and scripting will provide you with a very flexible and useful skill.
+
+We believe the best way to get an idea of what R is and what it is capable of is to dive straight in. There really is no better way to learn and understand than to demonstrate the workings of the language to yourself. In this section, we will cover the absolute basics. In the next section, we will learn a bit more about how we can use R to properly manage and manipulate our data. These tutorials will form the basis for how we can apply to R to understanding the genomic data and analyses we have performed.
+
 What to expect
 --------------
 
-In this section we are going to:
+In this section we will:
 
 -   learn what R is, and start using R as a tool
 -   understand how to handle data structures in R
 -   get familiar with plotting and visualising data
 -   handle datasets and reading in data
 -   loading packages
-
-Introduction
-------------
-
-For modern evolutionary biologists, handling large amounts of data is a fundamental skill. Familiarity with a programming language, particularly one that makes it straightforward to visualise, explore and filter data is the best way to achieve this ability. There are many different types of programming and scripting languages; the entire concept may seem daunting at first, especially if you have never encountered it before. This is natural, many other biologists applying scripting tools on a daily basis have started from similar first principles. A little patience with the basics of any form of programming and you will soon be able to do much more than you thought possible.
-
-For this section, we will be introducing you to R, a statistical programming language and environment that is widely used in the biological sciences. R is flexible, clear and easy to learn. It also extremely good for producing quick, high quality visualisations of data, which makes it very useful for anyone trying to explore their data. Perhaps the greatest strength of R is its focus on statistics - this makes it an excellent tool for carrying out and learning statistical analysis. R is also used for data analysis beyond evolutionary biology - it forms the basis of data science for companies such as Google, Facebook and Twitter, among many others. If you find yourself wondering why you are learning a programming language, it is worth remembering this point - familiarity with R and scripting will provide you with a very flexible and useful skill.
-
-We believe the best way to get an idea of what R is and what it is capable of is to dive straight in. There really is no better way to learn and understand than to demonstrate the workings of the language to yourself. As a brief overview, we will show the utmost basics here before moving onto more advanced topics in the next chapter. We will also introduce some basic statistical concepts for which R makes visualisation and understanding straightforward. Together these first two chapters will form the foundations for applying R to more evolutionary genetics focused questions.
 
 Getting set up
 --------------
@@ -304,7 +299,7 @@ We can then simply use the `plot` function to plot them quickly and easily.
 plot(x, y)
 ```
 
-![](Introduction_speciation_genomics_files/figure-markdown_github/unnamed-chunk-23-1.png)
+![](Introduction_to_R_files/figure-markdown_github/unnamed-chunk-23-1.png)
 
 Perhaps not the prettiest plot you'll generate, but extremely easy to generate! Later, we will learn ways to alter the appearance of a plot.
 
@@ -328,7 +323,7 @@ This might not make sense immediately, but it will be clearer when we actually v
 hist(x)
 ```
 
-![](Introduction_speciation_genomics_files/figure-markdown_github/unnamed-chunk-25-1.png)
+![](Introduction_to_R_files/figure-markdown_github/unnamed-chunk-25-1.png)
 
 From the histogram plot we generated, you can see the mean is around 25.5, as expected. You can also see that most values from the dataset fall within approximately two standard deviations either side of the mean - i.e. 95% of the distribution occurs here. What this means is that values falling in the tails of the distribution are **outliers**.
 
@@ -347,7 +342,7 @@ All we did here was square all the values of `x` to make `y`. So now we can plot
 plot(x, y)
 ```
 
-![](Introduction_speciation_genomics_files/figure-markdown_github/unnamed-chunk-27-1.png)
+![](Introduction_to_R_files/figure-markdown_github/unnamed-chunk-27-1.png)
 
 First of all, perhaps we want to change the orientation of the values on the y-axis (maybe you are fussy, like we are). We can do this simply using the `las` argument.
 
@@ -355,7 +350,7 @@ First of all, perhaps we want to change the orientation of the values on the y-a
 plot(x, y, las = 1)
 ```
 
-![](Introduction_speciation_genomics_files/figure-markdown_github/unnamed-chunk-28-1.png)
+![](Introduction_to_R_files/figure-markdown_github/unnamed-chunk-28-1.png)
 
 Perhaps we want to make the points in our plot a different colour. For example, we can make them red with the `col` argument like so:
 
@@ -363,7 +358,7 @@ Perhaps we want to make the points in our plot a different colour. For example, 
 plot(x, y, las = 1, col = "red")
 ```
 
-![](Introduction_speciation_genomics_files/figure-markdown_github/unnamed-chunk-29-1.png)
+![](Introduction_to_R_files/figure-markdown_github/unnamed-chunk-29-1.png)
 
 Perhaps we also want to fit a line to our plot? To do that, we use the `lines` function like this:
 
@@ -372,7 +367,7 @@ plot(x, y, las = 1, col = "red")
 lines(x, y)
 ```
 
-![](Introduction_speciation_genomics_files/figure-markdown_github/unnamed-chunk-30-1.png)
+![](Introduction_to_R_files/figure-markdown_github/unnamed-chunk-30-1.png)
 
 Last of all, we might want to add a title to make sure we know what our plot is actually showing
 
@@ -381,9 +376,9 @@ plot(x, y, las = 1, col = "red", main = "Relationship between x & y")
 lines(x, y)
 ```
 
-![](Introduction_speciation_genomics_files/figure-markdown_github/unnamed-chunk-31-1.png)
+![](Introduction_to_R_files/figure-markdown_github/unnamed-chunk-31-1.png)
 
-We have only shown a few examples here but it is possible to do so much more with R than these simple plots. To see a few examples, you can use the `demo(graphics)` call - this will demonstrate plots and the code used to produce them. There are many more indepth R plotting tutorials available online and we provide links to them at the end of this chapter There are also plenty of packages such as `ggplot2` which allow advanced and more flexible plotting - we will touch on this in the next chapter.
+We have only shown a few examples here but it is possible to do so much more with R than these simple plots. To see a few examples, you can use the `demo(graphics)` call - this will demonstrate plots and the code used to produce them. There are many more indepth R plotting tutorials available online and we provide links to them at the end of this tutorial. There are also plenty of packages such as `ggplot2` which allow advanced and more flexible plotting - we will touch on this in the next session.
 
 Moving beyond vectors - matrices and dataframes
 -----------------------------------------------
@@ -416,7 +411,7 @@ is.matrix(z)
 dim(z)
 ```
 
-When we ask R if `z` is a matrix, it returns a *logical statemnt* - `TRUE` - indiciating it is indeed a matrix. Logical statements are an important concept in programming and we will return to them in the next chapter.
+When we ask R if `z` is a matrix, it returns a *logical statemnt* - `TRUE` - indiciating it is indeed a matrix. Logical statements are an important concept in programming and we will return to them in the next session.
 
 When we used `dim`, R responds with two values - the number of rows and the number of columns. A crucial point here is that whenever we refer to matrices, i.e. for extracting data, **we first specify the row and then the column.** We can also use separate functions such as `nrow` and `ncol` to get the same values, like so:
 
@@ -537,7 +532,7 @@ With this section, we have become familiar with the fundamental data structures 
 | matrix     | Numeric, character, complex or logical              | No                                             |
 | dataframe  | Numeric, character, complex or logical              | Yes                                            |
 
-It is worth noting that there are many other data structures in R and one in particular we have avoided in this introduction is the **list**. Lists are useful but a little complex for your first ventures with the language - we will cover them in the next chapter.
+It is worth noting that there are many other data structures in R and one in particular we have avoided in this introduction is the **list**. Lists are useful but a little complex for your first ventures with the language - we will cover them in the next session.
 
 Handling datasets in R
 ----------------------
@@ -570,13 +565,14 @@ boxplot(iris$Petal.Width ~ iris$Species, las = 1,
         ylab = "Petal width", xlab = "Species")
 ```
 
-![](Introduction_speciation_genomics_files/figure-markdown_github/unnamed-chunk-50-1.png)
+![](Introduction_to_R_files/figure-markdown_github/unnamed-chunk-50-1.png)
 
 Even if you aren't familiar with the concept of a boxplot (or more formally, the box-whisker plot), it should be fairly clear from this plot that the three species are quite different in petal width! Let's breakdown our use of the `boxplot` function before going into a bit more detail about the plot itself.
 
 What did we do with `rnorm`?
 
--   `iris$Petal.Width ~ iris$Species` - this argument is a formula in R. It basically means, petal width as a function of species. In plainer terms, we are asking R to show us how petal width varies among species - this will become much clearer as we work on some statistical tests in the next chapter.
+-   `iris$Petal.Width ~ iris$Species` - this argument is a formula in R. It basically means, petal width as a function of species. In plainer terms, we are asking R to show us how petal width varies among species.
+
 -   `las = 1` is just telling the `boxplot` command to orientate the y-axis horizontally.
 -   `ylab` specifies the text for the y-axis.
 -   `xlab` specifies the text for the x-axis.
@@ -636,7 +632,7 @@ In its simplest form, `write.csv` requires just two arguments, the object we wan
 
 ### In, out, shake it all about
 
-Reading and writing data to and from R is quite a convoluted topic as there are many ways to achieve the same thing. Often there are specific packages for handling large datasets or quickly accessing data in special formats. For now, it is sufficient to familiarise yourself with the basics here. Throughout the rest of the book, we will provide further simple examples for reading and writing out data. In the next chapter, we will also focus on how to export figures, neatly and cleanly for use in presentations and publications.
+Reading and writing data to and from R is quite a convoluted topic as there are many ways to achieve the same thing. Often there are specific packages for handling large datasets or quickly accessing data in special formats. For now, it is sufficient to familiarise yourself with the basics here. In the next session, we will also focus on how to export figures, neatly and cleanly for use in presentations and publications.
 
 Extending your R toolkit - loading packages
 -------------------------------------------
@@ -656,7 +652,7 @@ Similarly, we also used the function `data` earlier to look at the datasets avai
 
 But what if we want to go further than what is bundled with our original R download? Perhaps we want to run a complicated analysis that requires a specific function? Perhaps we just want access to a specific dataset? In that case, we can extend our available R functions by loading *packages*.
 
-Luckily getting packages in R is extremely straightforward. There are two basic steps - first we need to install a package and then we need to load it into the R environment. We will begin with learning how to install the package `ggplot2` - which we will use extensively in the next chapter.
+Luckily getting packages in R is extremely straightforward. There are two basic steps - first we need to install a package and then we need to load it into the R environment. We will begin with learning how to install the package `ggplot2` - which we will use extensively in the next session.
 
 To clarify the purpose of packages a little more, imagine your available set of R functiosn as being stored in a library (you will soon see the reason for this analogy). If you wish to increase your 'vocabulary' of functions, you need to increase the size of your library. By loading a package, you are adding to your library shelf and making it possible for you to do new operations and use new functions.
 
@@ -670,7 +666,7 @@ Actually, using the function `install.packages` we can download and install `ggp
 install.packages("ggplot2")
 ```
 
-For the most part throughout the book, we will be using packages from [CRAN](https://cran.r-project.org/). However, when working with genomic data and bioinformatics, we might also need to use [Bioconductor](https://www.bioconductor.org/). When we reach this point, we will deal with this explicitly.
+For the most of the course, we will be using packages from [CRAN](https://cran.r-project.org/). However, when working with genomic data and bioinformatics, we might occasionally also need to use [Bioconductor](https://www.bioconductor.org/).
 
 The final point to remember here is that we do not need to install the package more than once - it is now present in our R library.
 
@@ -688,12 +684,12 @@ With `ggplot2` loaded, we can look at the `ggplot` function with `?ggplot`. We c
 data(package = "ggplot2")
 ```
 
-Now we know how to install and load `ggplot2`, we are ready to learn to actually use that... but that is for the next chapter!
+Now we know how to install and load `ggplot2`, we are ready to learn to actually use that... but that is for the next session!
 
 Going further
 -------------
 
-Since R is so widely used, there are many excellent resources out there to help you learn your way. Our introduction is just one of them and so here we point you towards some good examples for developing and honing your understanding of working with R.
+Since R is so widely used, there are many excellent resources out there to help you learn your way. This introduction is just one of them and so here we point you towards some good examples for developing and honing your understanding of working with R.
 
 -   [Datacamp has an excellent, free introduction to R](https://www.datacamp.com/courses/free-introduction-to-r)
 -   [The R Core team provide an indepth introduction to R on CRAN](https://cran.r-project.org/)
