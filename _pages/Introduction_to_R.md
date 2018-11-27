@@ -299,7 +299,7 @@ We can then simply use the `plot` function to plot them quickly and easily.
 plot(x, y)
 ```
 
-![](Introduction_to_R_files/figure-markdown_github/unnamed-chunk-23-1.png)
+![](unnamed-chunk-23-1.png)
 
 Perhaps not the prettiest plot you'll generate, but extremely easy to generate! Later, we will learn ways to alter the appearance of a plot.
 
