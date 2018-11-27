@@ -34,10 +34,10 @@ pages:
     children:
       - title: "An introduction to R"
         url: /R_introduction/
-      - title: "Visualisation and data manipulation in R"
-        url: /child-2-page-url/
-      - title: "More advanced R use"
-        url: /child-3-page-url/
+      - title: "Data manipulation and visualisation in R"
+        url: /data_visualisation_handling/
+      - title: "More advanced R"
+        url: /more_advanced_R/
 
   - title: "Population genomics"
     children:
