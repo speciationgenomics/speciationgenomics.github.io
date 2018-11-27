@@ -299,7 +299,7 @@ We can then simply use the `plot` function to plot them quickly and easily.
 plot(x, y)
 ```
 
-![](/images/unnamed-chunk-23-1.png)
+![](/images/introRimg/unnamed-chunk-23-1.png)
 
 Perhaps not the prettiest plot you'll generate, but extremely easy to generate! Later, we will learn ways to alter the appearance of a plot.
 
@@ -323,7 +323,7 @@ This might not make sense immediately, but it will be clearer when we actually v
 hist(x)
 ```
 
-![](Introduction_to_R_files/figure-markdown_github/unnamed-chunk-25-1.png)
+![](/images/introRimg/unnamed-chunk-25-1.png)
 
 From the histogram plot we generated, you can see the mean is around 25.5, as expected. You can also see that most values from the dataset fall within approximately two standard deviations either side of the mean - i.e. 95% of the distribution occurs here. What this means is that values falling in the tails of the distribution are **outliers**.
 
@@ -342,7 +342,7 @@ All we did here was square all the values of `x` to make `y`. So now we can plot
 plot(x, y)
 ```
 
-![](Introduction_to_R_files/figure-markdown_github/unnamed-chunk-27-1.png)
+![](/images/introRimg/unnamed-chunk-27-1.png)
 
 First of all, perhaps we want to change the orientation of the values on the y-axis (maybe you are fussy, like we are). We can do this simply using the `las` argument.
 
@@ -350,7 +350,7 @@ First of all, perhaps we want to change the orientation of the values on the y-a
 plot(x, y, las = 1)
 ```
 
-![](Introduction_to_R_files/figure-markdown_github/unnamed-chunk-28-1.png)
+![](/images/introRimg/unnamed-chunk-28-1.png)
 
 Perhaps we want to make the points in our plot a different colour. For example, we can make them red with the `col` argument like so:
 
@@ -358,7 +358,7 @@ Perhaps we want to make the points in our plot a different colour. For example, 
 plot(x, y, las = 1, col = "red")
 ```
 
-![](Introduction_to_R_files/figure-markdown_github/unnamed-chunk-29-1.png)
+![](/images/introRimg/unnamed-chunk-29-1.png)
 
 Perhaps we also want to fit a line to our plot? To do that, we use the `lines` function like this:
 
@@ -367,7 +367,7 @@ plot(x, y, las = 1, col = "red")
 lines(x, y)
 ```
 
-![](Introduction_to_R_files/figure-markdown_github/unnamed-chunk-30-1.png)
+![](/images/introRimg/unnamed-chunk-30-1.png)
 
 Last of all, we might want to add a title to make sure we know what our plot is actually showing
 
@@ -376,7 +376,7 @@ plot(x, y, las = 1, col = "red", main = "Relationship between x & y")
 lines(x, y)
 ```
 
-![](Introduction_to_R_files/figure-markdown_github/unnamed-chunk-31-1.png)
+![](/images/introRimg/unnamed-chunk-31-1.png)
 
 We have only shown a few examples here but it is possible to do so much more with R than these simple plots. To see a few examples, you can use the `demo(graphics)` call - this will demonstrate plots and the code used to produce them. There are many more indepth R plotting tutorials available online and we provide links to them at the end of this tutorial. There are also plenty of packages such as `ggplot2` which allow advanced and more flexible plotting - we will touch on this in the next session.
 
@@ -565,7 +565,7 @@ boxplot(iris$Petal.Width ~ iris$Species, las = 1,
         ylab = "Petal width", xlab = "Species")
 ```
 
-![](Introduction_to_R_files/figure-markdown_github/unnamed-chunk-50-1.png)
+![](/images/introRimg/unnamed-chunk-50-1.png)
 
 Even if you aren't familiar with the concept of a boxplot (or more formally, the box-whisker plot), it should be fairly clear from this plot that the three species are quite different in petal width! Let's breakdown our use of the `boxplot` function before going into a bit more detail about the plot itself.
 
