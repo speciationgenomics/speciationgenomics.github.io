@@ -24,11 +24,11 @@ pages:
       - title: "Understanding NGS data"
         url: /child-1-page-url/
       - title: "Mapping to a reference genome"
-        url: /child-2-page-url/
+        url: /mapping_reference/
       - title: "Variant calling"
-        url: /child-3-page-url/
+        url: /variant_calling/
       - title: "Filtering and handling VCFs"
-        url: /child-3-page-url/
+        url: /filtering_vcfs/
 
   - title: "Learning R"
     children:
