@@ -24,7 +24,7 @@ pages:
   - title: "Handling NGS data"
     children:
       - title: "Understanding NGS data"
-        url: /child-1-page-url/
+        url: /readsExploration/
       - title: "Mapping to a reference genome"
         url: /mapping_reference/
       - title: "Variant calling"
