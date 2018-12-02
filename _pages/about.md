@@ -1,11 +1,12 @@
 ---
+title: "Course teachers"
 layout: archive
 permalink: /about/
 ---
 
 ### Joana Meier
 
-Joana Meier is a Junior Research Fellow at St John's College, University of Cambridge, UK. Her research focus is on speciation and evolutionary genomics. Why do some taxa rapidly generate new species, whereas others remain species-poor? She is particularly interested in the role of hybridisation (interbreeding) in rapid speciation and adaptation. Her study systems include *Heliconius* butterflies from the Andes in Ecuador and cichlid fishes from the East African Lake Victoria. You can learn more on [her website](https://www.zoo.cam.ac.uk/directory/joana-meier) or on [her Google scholar profile](https://scholar.google.co.uk/citations?user=5C_BoWQAAAAJ&hl=en&oi=ao).
+Joana Meier is a Bateson Fellow at St John's College, University of Cambridge, UK. Her research focus is on speciation and evolutionary genomics. Why do some taxa rapidly generate new species, whereas others remain species-poor? She is particularly interested in the role of hybridisation (interbreeding) in rapid speciation and adaptation. Her study systems include *Heliconius* butterflies from the Andes in Ecuador and cichlid fishes from the East African Lake Victoria. You can learn more on [her website](https://www.zoo.cam.ac.uk/directory/joana-meier) or on [her Google scholar profile](https://scholar.google.co.uk/citations?user=5C_BoWQAAAAJ&hl=en&oi=ao).
 
 ### Mark Ravinet
 

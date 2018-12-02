@@ -43,7 +43,14 @@ pages:
       - title: "More advanced R"
         url: /more_advanced_R/
 
-  - title: "Population genomics"
+  - title: "Population structure"
+    children:
+      - title: "Using PCA"
+        url: /pca/
+      - title: "Detecting structure with ADMIXTURE"
+        url: /child-2-page-url/
+
+  - title: "Genome scans"
     children:
       - title: "Calculating genome-wide statistics"
         url: /child-1-page-url/
