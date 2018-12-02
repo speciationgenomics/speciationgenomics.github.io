@@ -173,7 +173,7 @@ a <- ggplot(var_qual, aes(qual)) + geom_density(fill = "dodgerblue1", colour = "
 a + theme_light()
 ```
 
-![](images/snpfilter/unnamed-chunk-3-1.png)
+![](/images/snpfilter/unnamed-chunk-3-1.png)
 
 From this we can see that quality scores are actually very high for our sites. Remember that a Phred score of 30 represents a 1 in 1000 chance that our SNP call is erroneous. Clearly most sites exceed this - suggesting we have a lot of high confidence calls. This is most probably because we have sufficient read depth (as you will see in the next section). However since most sites have a high quality we can see that filtering on this is not really going to be that useful.
 
@@ -195,7 +195,7 @@ a <- ggplot(var_depth, aes(mean_depth)) + geom_density(fill = "dodgerblue1", col
 a + theme_light()
 ```
 
-![](images/snpfilter/unnamed-chunk-5-1.png)
+![](/images/snpfilter/unnamed-chunk-5-1.png)
 
 Hmm - this plot is a bit misleading because clearly, there are very few variants with extremely high coverage indeed. Let's take a closer at the mean depth:
 
@@ -203,7 +203,7 @@ Hmm - this plot is a bit misleading because clearly, there are very few variants
 summary(var_depth$mean_depth)
 ```
 
-    ##     Min.  1st Qu.   Median     Mean  3rd Qu.     Max. 
+    ##     Min.  1st Qu.   Median     Mean  3rd Qu.     Max.
     ##   0.0625  15.1250  17.8750  20.0078  20.0000 511.7500
 
 Since we all took different subsets, these values will likely differ slightly but clearly in this case most variants have a depth of 17-20x whereas there are some extreme outliers. We will redraw our plot to exclude these and get a better idea of the distribution of mean depth.
@@ -212,7 +212,7 @@ Since we all took different subsets, these values will likely differ slightly bu
 a + theme_light() + xlim(0, 100)
 ```
 
-![](images/snpfilter/unnamed-chunk-7-1.png)
+![](/images/snpfilter/unnamed-chunk-7-1.png)
 
 This gives a better idea of the distribution. We could set our minimum coverage at the 5 and 95% quantiles but we should keep in mind that the more reads that cover a site, the higher confidence our basecall is. 10x is a good rule of thumb as a minimum cutoff for read depth, although if we wanted to be conservative, we could go with 15x.
 
@@ -225,7 +225,7 @@ What is more important here is that we set a good **maximum depth** cufoff. As t
 Next up we will look at the proportion of missingness at each variant. This is a measure of how many individuals **lack** a genotype at a call site. Again, we read in the data with `read_delim`.
 
 ``` r
-var_miss <- read_delim("./cichlid_subset.lmiss", delim = "\t", 
+var_miss <- read_delim("./cichlid_subset.lmiss", delim = "\t",
                        col_names = c("chr", "pos", "nchr", "nfiltered", "nmiss", "fmiss"), skip = 1)
 ```
 
@@ -236,7 +236,7 @@ a <- ggplot(var_miss, aes(fmiss)) + geom_density(fill = "dodgerblue1", colour = 
 a + theme_light()
 ```
 
-![](images/snpfilter/unnamed-chunk-9-1.png)
+![](/images/snpfilter/unnamed-chunk-9-1.png)
 
 Our cichlid data has a very promising missingness profile - clearly most individuals have a call at almost every site. Indeed if we look at the summary of the data we can see this even more clearly.
 
@@ -244,7 +244,7 @@ Our cichlid data has a very promising missingness profile - clearly most individ
 summary(var_miss$fmiss)
 ```
 
-    ##    Min. 1st Qu.  Median    Mean 3rd Qu.    Max. 
+    ##    Min. 1st Qu.  Median    Mean 3rd Qu.    Max.
     ## 0.00000 0.00000 0.00000 0.01312 0.00000 0.93750
 
 Most sites have almost no issing data. Although clearly, there are sum (as the max value shows). This means we can be quite conservative when we set our missing data threshold. We will remove all sites where **over 10% of individuals are missing a genotype**. One thing to note here is that `vcftools` inverts the direction of missigness, so our 10% threshold means **we will tolerate 90% missingness** (yes this is confusing and counterintuitive... but that's the way it is!). Typically missingness of 75-95% is used.
@@ -254,7 +254,7 @@ Most sites have almost no issing data. Although clearly, there are sum (as the m
 Last of all for our per variant analyses, we will take a look at the distribution of allele frequencies. This will help inform our minor-allele frequency (MAF) thresholds. As previously, we read in the data:
 
 ``` r
-var_freq <- read_delim("./cichlid_subset.frq", delim = "\t", 
+var_freq <- read_delim("./cichlid_subset.frq", delim = "\t",
                        col_names = c("chr", "pos", "nalleles", "nchr", "a1", "a2"), skip = 1)
 ```
 
@@ -272,7 +272,7 @@ a <- ggplot(var_freq, aes(maf)) + geom_density(fill = "dodgerblue1", colour = "b
 a + theme_light()
 ```
 
-![](images/snpfilter/unnamed-chunk-13-1.png)
+![](/images/snpfilter/unnamed-chunk-13-1.png)
 
 The distribution might look a little odd - this is partly because of the low number of individuals we have in the dataset (16), meaning there are only certain frequencies possible. Nonetheless, it is clear that a large number of variants have low frequency alleles. We can also look at the distribution in more detail:
 
@@ -280,7 +280,7 @@ The distribution might look a little odd - this is partly because of the low num
 summary(var_freq$maf)
 ```
 
-    ##    Min. 1st Qu.  Median    Mean 3rd Qu.    Max. 
+    ##    Min. 1st Qu.  Median    Mean 3rd Qu.    Max.
     ##  0.0000  0.0625  0.1250  0.1788  0.2812  0.5000
 
 The upper bound of the distribution is 0.5, which makes sense because if MAF was more than this, it wouldn't be the MAF! How do we interpret MAF? It is an important measure because low MAF alleles may only occur in one or two individuals. It is possible that some of these low frequency alleles are in fact unreliable base calls - i.e. a source of error.
@@ -312,7 +312,7 @@ a <- ggplot(ind_depth, aes(depth)) + geom_histogram(fill = "dodgerblue1", colour
 a + theme_light()
 ```
 
-![](images/snpfilter/unnamed-chunk-16-1.png)
+![](/images/snpfilter/unnamed-chunk-16-1.png)
 
 Because we are only plotting data for 16 individuals, the plot looks a little disjointed. While there is some evidence that some individuals were sequenced to a higher depth than others, there are no extreme outliers. So this doesn't suggest any issue with individual sequencing depth.
 
@@ -332,7 +332,7 @@ a <- ggplot(ind_miss, aes(fmiss)) + geom_histogram(fill = "dodgerblue1", colour 
 a + theme_light()
 ```
 
-![](images/snpfilter/unnamed-chunk-18-1.png)
+![](/images/snpfilter/unnamed-chunk-18-1.png)
 
 Again this shows us, the proportion of missing data per individual is very small indeed. It ranges from 0.01-0.16, so we can safely say our individuals sequenced well.
 
@@ -346,7 +346,7 @@ a <- ggplot(ind_het, aes(f)) + geom_histogram(fill = "dodgerblue1", colour = "bl
 a + theme_light()
 ```
 
-![](images/snpfilter/unnamed-chunk-20-1.png)
+![](/images/snpfilter/unnamed-chunk-20-1.png)
 
 ### Applying filters to the VCF
 
