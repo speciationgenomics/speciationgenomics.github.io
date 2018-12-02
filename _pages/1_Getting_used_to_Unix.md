@@ -16,30 +16,11 @@ It might seem pretty stupid that in 2018, when you have a ridiculously powerful 
 
 Of course, the best way to actually learn about why and how Unix can be so powerful to actually use it. So in this tutorial, we will get used to some of the basics of interacting with the command prompt.
 
-### Getting started
-
-Although Mac and Linux computers have a Unix basis, typically when working in bioinformatics we would log into a computing cluster such as the one we have prepared for this course. When you are back in your home institutions, you can also use this to log into the computing nodes there. How do we log in?
-
-#### Mac OS X and Linux users
-
-If you are using a Mac or Linux machine, you will need to open a `terminal` window and then type `ssh`.
-
-`ssh` stands for [secure shell](https://en.wikipedia.org/wiki/Secure_Shell) and is a way of interacting with remote servers. You need to log on to the server for this course like so:
-
-```shell
-ssh username@login.node
-```
-You will then be prompted for a password and you should be inside the server!
-
-#### Windows users
-
-If you are using a Windows machine, you will need to log on using [PuTTY](https://www.putty.org/) since there is no native `ssh` client.
-
 ### Terminal and the prompt
 
 However you logged in, once you are on the cluster, you should see a terminal window. This is your main point of access to the cluster and the way you interact with Unix. In short, when we talk about the command-line, this is what we mean. It might look a little daunting at first, but it won't take too long to get to grips with.
 
-The first thing you will see in the terminal is a **prompt**. It looks like this
+The first thing you will see in the terminal is a **prompt**. It will look something like this
 
 ```shell
 [mark@ourserver ~]$

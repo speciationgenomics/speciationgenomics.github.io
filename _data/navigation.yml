@@ -4,6 +4,8 @@ main:
     url: https://speciationgenomics.github.io/
   - title: "About"
     url: https://speciationgenomics.github.io/about/
+  - title: "How to log in"
+    url: https://speciationgenomics.github.io/logging_on/
   # - title: "Sample Posts"
   #   url: /year-archive/
   # - title: "Sample Collections"
