@@ -55,6 +55,8 @@ If you are logging in and copying from a cluster regularly, it is sometimes good
 
 ### Windows users
 
+#### Logging on
+
 If you are using a Windows machine, you will need to log on using [PuTTY](https://www.putty.org/) since there is no native `ssh` client. PuTTY does not natively support the private key format (.pem) needed to login to our Amazon cloud instance. You first need to convert the private key that we gave to you to a key that PuTTY can read. PuTTY has a tool named PuTTYgen, which can convert keys to the required PuTTY format (.ppk). When you installed PuTTY, it will also have installed PuTTYgen.
 
 First, start PuTTYgen (for example, from the Start menu, choose All Programs > PuTTY > PuTTYgen). Then select RSA and click on Load:
@@ -92,3 +94,21 @@ When you log in the next time, you can just click on the saved session and click
 If the DNS did not change and you just want to login again, you can also right-click on the putty symbol in the taskbar (provided that you have pinned it to the taskbar) and select the session.
 
 ![](/images/putty/fig8.png)
+
+#### Downloading and uploading files with Filezilla
+
+Filezilla is a handy software to move files from a remote server such as the Amazon cloud or a cluster of your university.
+
+Open Filezilla and choose Edit -> Settings.
+
+![](/images/putty/fig10.png)
+
+Next, choose SFTP and Add the .pem key file as indicated below.
+
+![](/images/putty/fig11.png)
+
+Finally, enter the DNS and the user name and when you hit enter, it should connect you. Next, time, you can use the Quickconnect dropdown menu, provided the DNS has not changed in the meantime.
+
+![](/images/putty/fig11.png)
+
+Now you will see the file directory system (folders) on your local computer on the left and your folders on the amazon cloud on the rigth. You can now just drag and drop files from one side to the other.
