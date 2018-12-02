@@ -3,4 +3,8 @@ layout: archive
 permalink: /
 ---
 
-This is a test home page for the course website. More text and links will come soon.
+Welcome to the December Physalia 2018 course ran by Mark Ravinet & Joana Meier.
+
+Follow the links on the lefthand side to take part in the course modules!
+
+![](/images/other/pundamilia.png)
