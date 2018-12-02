@@ -4,8 +4,6 @@ layout: archive
 permalink: /allelicBalance/
 ---
 
-# Detecting PCR duplicates, contamination and other issues by checking the allelic balance at heteryzgote positions
-
 Heterozygote positions can be very useful to detect contamination or Illumina barcode switching issues. Without PCR duplicates, the reads at heterozygote positions should be completely independent and the two alleles should be represented with equal number of reads (except for stochastic differences). 
 
 To check the heterozygotes, you can use the script written by David Marques and me and apply it on a dataset of SNPs. Let's try it on a few samples that were RAD-sequenced:
