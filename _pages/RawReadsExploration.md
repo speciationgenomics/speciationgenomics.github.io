@@ -22,31 +22,23 @@ zcat /home/data/fastq/$file | wc -l
 The number of sequences is thus this number divided by 4, or we can count the number of lines starting with the header
 
 ```shell
-zgrep "@xy" /home/data/fastq/$file -c
+zgrep "@HWI" /home/data/fastq/$file -c
 ```
-### Subsampling reads
 
-In order to assess the read quality we do not need to check all reads. That would take way too long. We will thus generate a new file with every 1000th read. For the linux wizards among you, you can write a one-liner doing that. For the others, just directly use the subsampled datasets. We could also just take the first x reads from the file with head but that would not allow us to check if certain parts of the flow cell performed better or worse and the first x reads are thus not representative for the entire lane.
-
-We will use the whole-genome dataset and run fastqc on the forward and reverse reads of the 10558.PunPundMak sample:
-
+We might think that we could have just counted the number of "@". 
 ```shell
-# Forward (R1) reads
-zcat /home/data/fastq/10558.PunPundMak.R1.fastq.gz | awk '{printf("%s",$0); n++; if(n%4==0){
-printf("\n");}else{printf("\t");} }' | awk 'NR == 1 || NR % 1000 == 0' | tr "\t" "\n" | gzip > 10558.PunPundMak.R1.subsampled.fastq.gz &
-
-# Reverse (R2) reads
-zcat /home/data/10558.PunPundMak.R1.fastq.gz | awk '{printf("%s",$0); n++; if(n%4==0){
-printf("\n");}else{printf("\t");} }' | awk 'NR == 1 || NR % 1000 == 0' | tr "\t" "\n" | gzip > 10558.PunPundMak.R1.subsampled.fastq.gz &
+zgrep "@" /home/data/fastq/$file -c
 ```
+However, we see that this does not give us the same number. The reason is that @ is also a quality score and thus some quality score lines were also counted.
 
 
 ### Assessing read quality with fastqc
 
 To assess the read quality, we use fastqc which is extremely easy to run and takes only a single argument, the name of the fastq file. It can handle gzipped files.
 
+To get help on fastqc:
 ```shell
-fastqc <fastq.gz filename>
+fastqc -h
 ```
 
 Let's run fastqc on our read subsets:
@@ -70,7 +62,7 @@ fastqc -o ./ /home/data/RAD2.fastq.gz
 Now, we need to download the html or all files to the local computer for visualization. You can open the html file with any internet browser. 
 
 
-### Challenging exercise for the bash wizards and those with extra time left
+### Challenging exercises for the bash wizards and those with extra time left
 
 In RAD2 there are some reads with very low GC content. Find the 10 reads with the lowest GC content and check what they are.
 
@@ -95,3 +87,15 @@ zcat $file.fastq.gz | grep -f <(sort -k 2 -t " " $file.gc | tail | cut -d" " -f 
 grep -v "^--" $file.lowGC | gzip > $file.lowGC.fastq.gz
 ```
 
+### Subsampling reads
+Generate a new file from the fastqz file containing every 1000th read. 
+
+```shell
+# Forward (R1) reads
+zcat /home/data/fastq/10558.PunPundMak.R1.fastq.gz | awk '{printf("%s",$0); n++; if(n%4==0){
+printf("\n");}else{printf("\t");} }' | awk 'NR == 1 || NR % 1000 == 0' | tr "\t" "\n" | gzip > 10558.PunPundMak.R1.subsampled.fastq.gz &
+
+# Reverse (R2) reads
+zcat /home/data/10558.PunPundMak.R1.fastq.gz | awk '{printf("%s",$0); n++; if(n%4==0){
+printf("\n");}else{printf("\t");} }' | awk 'NR == 1 || NR % 1000 == 0' | tr "\t" "\n" | gzip > 10558.PunPundMak.R1.subsampled.fastq.gz &
+```
