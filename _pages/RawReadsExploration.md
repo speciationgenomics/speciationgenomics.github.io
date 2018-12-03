@@ -6,7 +6,7 @@ permalink: /readsExploration/
 
 ### fastq format
 
-Let's have a look at the first sequence: As we saw in the lecture, each DNA sequence is composed of four lines. Therefore, we need to visualize the first four lines to have a look at the first sequence. First we set the name of the fastq file that we will work with as the variable FILE. Then, we copy that file to our directory. Finally, we get the first 4 lines:
+Let's have a look at the first sequence: As we saw in the lecture, each DNA sequence is composed of four lines. Therefore, we need to visualize the first four lines to have a look at the first sequence. First we set the name of the fastq file that we will work with as the variable FILE. Then, we copy that file to our directory. Finally, we get the first 4 lines. However, we cannot just directly write head -4 $FILE because the fastq file is actually compressed. It is thus a binary file which cannot just be read. Luckily, there are many commands that can directly read binary files. Instead of cat, we use zcat, instead of grep, we use zgrep. If we want to use any other command, we need to read the file with zcat and then pipe the output into our command of joyce such as head.
 
 ```shell
 FILE="RAD1.fastq.gz"
