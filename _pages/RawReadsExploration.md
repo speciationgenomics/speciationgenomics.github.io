@@ -6,28 +6,29 @@ permalink: /readsExploration/
 
 ### fastq format
 
-Let's have a look at the first sequence: As we saw in the lecture, each DNA sequence is composed of four lines. Therefore, we need to visualize the first four lines to have a look at the first sequence.
+Let's have a look at the first sequence: As we saw in the lecture, each DNA sequence is composed of four lines. Therefore, we need to visualize the first four lines to have a look at the first sequence. First we set the name of the fastq file that we will work with as the variable FILE. Then, we copy that file to our directory. Finally, we get the first 4 lines:
 
 ```shell
 FILE="RAD1.fastq.gz"
-zcat /home/data/fastq/ | head -4
+cp /home/data/fastq/${FILE} ./
+zcat ${FILE} | head -4
 ```
 
 Let's count the number of lines in the file:
 
 ```shell
-zcat /home/data/fastq/${FILE} | wc -l
+zcat ${FILE} | wc -l
 ```
 
 The number of sequences is thus this number divided by 4, or we can count the number of lines starting with the header
 
 ```shell
-zgrep "@HWI" /home/data/fastq/${FILE} -c
+zgrep "@HWI" ${FILE} -c
 ```
 
 We might think that we could have just counted the number of "@".
 ```shell
-zgrep "@" /home/data/fastq/${FILE} -c
+zgrep "@" ${FILE} -c
 ```
 However, we see that this does not give us the same number. The reason is that @ is also a quality score and thus some quality score lines were also counted.
 
@@ -38,28 +39,24 @@ To assess the read quality, we use fastqc which is extremely easy to run and tak
 
 To get help on fastqc:
 ```shell
-fastqc -h
+fastqc -h | less
 ```
 
 Let's run fastqc on our read subsets:
 ```shell
-fastqc 10558.PunPundMak.R1.subsampled.fastq.gz
-fastqc 10558.PunPundMak.R2.subsampled.fastq.gz
+fastqc $FILE
 ```
 
-In addition, we will get subsets of reads from two RAD datasets that have been single-end sequenced. As we do not need copies of these files in all of your personal directories, we want to find out if fastqc allows specifying an output path. As with most tools, we can get help on the possible arguments with the -h flag:
-```shell
-fastqc -h | less
-```
-
-We see that fastqc indeed allows an output directory with -o. We will thus just work in the personal directory and run fastqc giving the file name with its path and specifying the output folder as the current directory (-o ./).
+We can also run it on three other files. As we do not need copies of these files in all of your personal directories, we will just write the file names with the paths.
+fastqc allows an output directory with -o. We will thus just work in the personal directory and run fastqc giving the file name with its path and specifying the output folder as the current directory (-o ./).
 
 ```shell
-fastqc -o ./ /home/data/RAD1.fastq.gz
+fastqc -o ./ /home/data/10558.PunPundMak.R1.subsampled.fastq.gz
+fastqc -o ./ /home/data/10558.PunPundMak.R2.subsampled.fastq.gz
 fastqc -o ./ /home/data/RAD2.fastq.gz
 ```
 
-Now, we need to download the html or all files to the local computer for visualization. You can open the html file with any internet browser.
+Now, we need to download the html or all files to the local computer for visualization. To download files, mac and linux users can use the command scp, Windows users can use FileZilla. You can open the html file with any internet browser.
 
 
 ### Challenging exercises for the bash wizards and those with extra time left
@@ -69,7 +66,9 @@ In RAD2 there are some reads with very low GC content. Find the 10 reads with th
 
 Here one very condensed solution: Try to find your own solution first!
 ```shell
-file=RAD2
+FILE=RAD2
+
+cp /home/data/fastq/${FILE} ./
 
 #Add GC content to each read in fastq file to check reads with highest or lowest GC contents:
 zcat ${FILE}.fastq.gz | awk 'NR%4==2' | awk '{split($1,seq,""); gc=0; at=0; n=0; for(base in seq){if(seq[base]=="A"||seq[base]=="T") at++; else if(seq[base]=="G"||seq[base]=="C") gc++; else n++}; print $0,gc/(at+gc+n)*100,n}' > ${FILE}.gc
