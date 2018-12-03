@@ -48,7 +48,7 @@ pages:
       - title: "Using PCA"
         url: /pca/
       - title: "Detecting structure with ADMIXTURE"
-        url: /child-2-page-url/
+        url: /ADMIXTURE/
 
   - title: "Genome scans"
     children:
