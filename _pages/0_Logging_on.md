@@ -22,7 +22,7 @@ cp mark.pem ~
 Then you should be able to log in with `ssh` whatever your working directory is. You need to provide `ssh` with the path to your key, which you can do with the `-i` flag. This basically points to your identity file or keyfile. For example:
 
 ```shell
-ssh -i "~/mark.pem" mark@ec2-54-187-95-186.us-west-2.compute.amazonaws.com
+ssh -i "~/mark.pem" mark@ec2-54-201-93-114.us-west-2.compute.amazonaws.com
 ```
 
 Of course you will need to change the log in credentials shown here (i.e. the username and keyfile name) with your own. **Also be aware that the cluster DNS address will change everyday**. We will update you on this each day.
@@ -37,7 +37,7 @@ Occassionally, we will need to shift files between the cluster and our local mac
 # make a file
 touch test_file
 # upload to cluster
-scp -i "~/mark.pem" test_file mark@ec2-54-187-95-186.us-west-2.compute.amazonaws.com:~/
+scp -i "~/mark.pem" test_file mark@ec2-54-201-93-114.us-west-2.compute.amazonaws.com:~/
 ```
 Just to break this down a little we are simply copying a file, `test_file` in this case to the cluster. After the `:` symbol, we are specifying where on the cluster we are placing the file, here we use `~/` to specify the home directory.
 
@@ -45,7 +45,7 @@ Copying files back on to our local machine is just as straightforward. You can d
 
 ```shell
 # download to local
-scp -i "~/mark.pem" mark@ec2-54-187-95-186.us-west-2.compute.amazonaws.com:~/test_file ./
+scp -i "~/mark.pem" mark@mark@ec2-54-201-93-114.us-west-2.compute.amazonaws.com:~/test_file ./
 ```
 Where here all we did was use `scp` with cluster address first and the the location (our working directory) second - i.e. `./`
 

@@ -546,6 +546,7 @@ With all the skills we have learned in this tutorial, it is now time for you to 
 <details><summary>Click here to see a possible solution.</summary>
 <p>
 
+
 ```shell
 #!/bin/sh
 
