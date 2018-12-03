@@ -9,25 +9,25 @@ permalink: /readsExploration/
 Let's have a look at the first sequence: As we saw in the lecture, each DNA sequence is composed of four lines. Therefore, we need to visualize the first four lines to have a look at the first sequence.
 
 ```shell
-file="RAD1.fastq.gz"
-zcat /home/data/fastq/$file | head -4
+FILE="RAD1.fastq.gz"
+zcat /home/data/fastq/ | head -4
 ```
 
 Let's count the number of lines in the file:
 
 ```shell
-zcat /home/data/fastq/$file | wc -l
+zcat /home/data/fastq/${FILE} | wc -l
 ```
 
 The number of sequences is thus this number divided by 4, or we can count the number of lines starting with the header
 
 ```shell
-zgrep "@HWI" /home/data/fastq/$file -c
+zgrep "@HWI" /home/data/fastq/${FILE} -c
 ```
 
-We might think that we could have just counted the number of "@". 
+We might think that we could have just counted the number of "@".
 ```shell
-zgrep "@" /home/data/fastq/$file -c
+zgrep "@" /home/data/fastq/${FILE} -c
 ```
 However, we see that this does not give us the same number. The reason is that @ is also a quality score and thus some quality score lines were also counted.
 
@@ -59,7 +59,7 @@ fastqc -o ./ /home/data/RAD1.fastq.gz
 fastqc -o ./ /home/data/RAD2.fastq.gz
 ```
 
-Now, we need to download the html or all files to the local computer for visualization. You can open the html file with any internet browser. 
+Now, we need to download the html or all files to the local computer for visualization. You can open the html file with any internet browser.
 
 
 ### Challenging exercises for the bash wizards and those with extra time left
@@ -72,23 +72,23 @@ Here one very condensed solution: Try to find your own solution first!
 file=RAD2
 
 #Add GC content to each read in fastq file to check reads with highest or lowest GC contents:
-zcat $file.fastq.gz | awk 'NR%4==2' | awk '{split($1,seq,""); gc=0; at=0; n=0; for(base in seq){if(seq[base]=="A"||seq[base]=="T") at++; else if(seq[base]=="G"||seq[base]=="C") gc++; else n++}; print $0,gc/(at+gc+n)*100,n}' > $file.gc
+zcat ${FILE}.fastq.gz | awk 'NR%4==2' | awk '{split($1,seq,""); gc=0; at=0; n=0; for(base in seq){if(seq[base]=="A"||seq[base]=="T") at++; else if(seq[base]=="G"||seq[base]=="C") gc++; else n++}; print $0,gc/(at+gc+n)*100,n}' > ${FILE}.gc
 
 #Lowest GC content:
-sort -k 2 -t " " $file.gc | head
+sort -k 2 -t " " ${FILE}.gc | head
 
 #Highest GC content:
-sort -k 2 -t " " $file.gc | tail
+sort -k 2 -t " " ${FILE}.gc | tail
 
 #Get the worst 10 sequences with all information:
-zcat $file.fastq.gz | grep -f <(sort -k 2 -t " " $file.gc | tail | cut -d" " -f 1) -A 2 -B 1 > $file.lowGC
+zcat ${FILE}.fastq.gz | grep -f <(sort -k 2 -t " " ${FILE}.gc | tail | cut -d" " -f 1) -A 2 -B 1 > ${FILE}.lowGC
 
 # Make a new fastq file with these reads:
-grep -v "^--" $file.lowGC | gzip > $file.lowGC.fastq.gz
+grep -v "^--" ${FILE}.lowGC | gzip > ${FILE}.lowGC.fastq.gz
 ```
 
 ### Subsampling reads
-Generate a new file from the fastqz file containing every 1000th read. 
+Generate a new file from the fastqz file containing every 1000th read.
 
 ```shell
 # Forward (R1) reads
