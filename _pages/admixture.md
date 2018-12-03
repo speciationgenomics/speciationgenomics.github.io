@@ -7,7 +7,7 @@ ADMIXTURE is a clustering software similar to STRUCTURE with the aim to infer po
 You can find the manual here: http://software.genetics.ucla.edu/admixture/admixture-manual.pdf
 
 ## Generating the input file
-ADMIXTURE requires unlinked (i.e. LD-pruned) SNPs in plink format. It is very easy to generate the input file from a VCF file containing such SNPs. This time we are using a RAD dataset of the same Pundamilia species which includes more than 4 individuals per population and some putative hybrid individuals. Linked sites, monomorphic or multiallelic sites, or sites with more than 25% missing data have already been filtered out. Also sites with maf smaller than 0.05 or quality lower than 30 were removed. We can use plink to generate the .bed file which can be read by ADMIXTURE (and other files we do not need):
+ADMIXTURE requires unlinked (i.e. LD-pruned) SNPs in plink format. It is very easy to generate the input file from a VCF file containing such SNPs. This time we are using a RAD dataset of the same *Pundamilia* species which includes more than 4 individuals per population and some putative hybrid individuals. Linked sites, monomorphic or multiallelic sites, or sites with more than 25% missing data have already been filtered out. Also sites with maf smaller than 0.05 or quality lower than 30 were removed. We can use plink to generate the .bed file which can be read by ADMIXTURE (and other files we do not need):
 
 ```shell
 plink --vcf $file.vcf.gz --make-bed --out $file --allow-extra-chr
@@ -28,10 +28,10 @@ To identify the best value of k clusters which is the value with lowest cross-va
 grep "CV" *out | awk '{print $3,$4}' | sed -e 's/(//;s/)//;s/://;s/K=//'  > $file.cv.error
 ```
 Now we are ready to plot the results:
-```{r}
+```r
 R
 library("stringr")
-prefix="Pundamilia.RAD.12"
+prefix="*Pundamilia*.RAD.12"
 # Get individual names in the correct order
 labels<-read.table(paste0(prefix,".nosex"))
 names(labels)<-c("ind","pop")
