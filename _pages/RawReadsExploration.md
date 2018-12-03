@@ -86,15 +86,14 @@ zcat ${FILE}.fastq.gz | grep -f <(sort -k 2 -t " " ${FILE}.gc | tail | cut -d" "
 grep -v "^--" ${FILE}.lowGC | gzip > ${FILE}.lowGC.fastq.gz
 ```
 
-### Subsampling reads
-Generate a new file from the fastqz file containing every 1000th read.
+As a second exercis, try to generate a new file from the fastqz file containing every 1000th read.
 
 ```shell
 # Forward (R1) reads
 zcat /home/data/fastq/10558.PunPundMak.R1.fastq.gz | awk '{printf("%s",$0); n++; if(n%4==0){
-printf("\n");}else{printf("\t");} }' | awk 'NR == 1 || NR % 1000 == 0' | tr "\t" "\n" | gzip > 10558.PunPundMak.R1.subsampled.fastq.gz &
+printf("\n")}else{printf("\t")} }' | awk 'NR == 1 || NR % 1000 == 0' | tr "\t" "\n" | gzip > 10558.PunPundMak.R1.subsampled.fastq.gz &
 
 # Reverse (R2) reads
 zcat /home/data/10558.PunPundMak.R1.fastq.gz | awk '{printf("%s",$0); n++; if(n%4==0){
-printf("\n");}else{printf("\t");} }' | awk 'NR == 1 || NR % 1000 == 0' | tr "\t" "\n" | gzip > 10558.PunPundMak.R1.subsampled.fastq.gz &
+printf("\n")}else{printf("\t")} }' | awk 'NR == 1 || NR % 1000 == 0' | tr "\t" "\n" | gzip > 10558.PunPundMak.R1.subsampled.fastq.gz &
 ```
