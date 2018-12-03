@@ -27,11 +27,10 @@ To identify the best value of k clusters which is the value with lowest cross-va
 ```shell
 grep "CV" *out | awk '{print $3,$4}' | sed -e 's/(//;s/)//;s/://;s/K=//'  > $file.cv.error
 ```
-Now we are ready to plot the results:
+Now we are ready to plot the results in R:
 ```r
-R
 library("stringr")
-prefix="*Pundamilia*.RAD.12"
+prefix="Pundamilia.RAD.12"
 # Get individual names in the correct order
 labels<-read.table(paste0(prefix,".nosex"))
 names(labels)<-c("ind","pop")
