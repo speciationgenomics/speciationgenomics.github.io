@@ -9,6 +9,7 @@ permalink: /readsExploration/
 Let's have a look at the first sequence: As we saw in the lecture, each DNA sequence is composed of four lines. Therefore, we need to visualize the first four lines to have a look at the first sequence.
 
 ```shell
+file="RAD1.fastq.gz"
 zcat /home/data/fastq/$file | head -4
 ```
 
