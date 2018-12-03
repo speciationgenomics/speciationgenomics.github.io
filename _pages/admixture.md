@@ -12,11 +12,11 @@ ADMIXTURE requires unlinked (i.e. LD-pruned) SNPs in plink format. It is very ea
 ```shell
 plink --vcf $file.vcf.gz --make-bed --out $file --allow-extra-chr
 ```
-Now, we are ready to run ADMIXTURE. We will run it with cross-validation (5-fold CV):
+Now, we are ready to run ADMIXTURE. We will run it with cross-validation (default=5-fold CV, for higher, choose e.g. cv=10):
 ```shell
 for i in {2..5}
 do
- admixture --cv $file.bed $i -j2 | tee log${i}.out
+ admixture --cv $file.bed $i | tee log${i}.out
 done
 ```
 Note, piping the stdout into tee allows us to see what admixture writes into the terminal while also saving a copy of that output into the file log$i.out.
@@ -30,7 +30,7 @@ grep "CV" *out | awk '{print $3,$4}' | sed -e 's/(//;s/)//;s/://;s/K=//'  > $fil
 Now we are ready to plot the results in R:
 ```r
 library("stringr")
-prefix="Pundamilia.RAD.12"
+prefix="Pundamilia.RAD"
 # Get individual names in the correct order
 labels<-read.table(paste0(prefix,".nosex"))
 names(labels)<-c("ind","pop")
