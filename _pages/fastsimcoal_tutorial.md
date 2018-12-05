@@ -57,7 +57,7 @@ MaxEstLhood: is the maximum likelihood estimated according to the model paramete
 
 The better the fit, the smaller the difference between MaxObsLhood and MaxEstLhood.
 
-## Finding the best parameter estimates
+### Finding the best parameter estimates
 
 Fastsimcoal2 should not just be run once because it might not find the global optimum of the best combination of parameter estimates right away. It is better to run it 100 times or more. Of these runs, select the one with the highest likelihood which is the run with the best fitting parameter estimates for this model.
 
@@ -94,7 +94,7 @@ cd bestrun/
 calculateAIC.sh early_geneflow
 ```
 
-## Visualize the model fit
+### Visualize the model fit
 To visualize the fit of the simulated SFS to the data, we can use an R script that David Marques wrote (SFStools.r from https://github.com/marqueda/SFS-scripts/).
 To visualize the model with the best parameter estimates, we can use one of my R scripts (plotModel.r).
 ```shell
@@ -134,7 +134,7 @@ do
 done
 
 ```
-## Model comparison
+
 We would now repeat this for different models: ongoing gene flow, a model without gene flow, a model of secondary contact (recent gene flow) and a model with different amounts of gene flow in the past and in recent times.
 
 Due to time constraints, I will now give you the results of these models. They are in the same format as the folder we generated for the model with early gene flow. Load them into your modeling folder. Note, the -r flag stands for "recursive" and allows to also copy directories and their contents.
