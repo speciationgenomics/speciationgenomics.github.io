@@ -51,6 +51,8 @@ pages:
         url: /ADMIXTURE/
       - title: "Detecting hybridization with ADMIXTOOLS"
         url: /ADMIXTOOLS/
+      - title: "Detecting hybridization with treemix"
+        url: /Treemix/
 
   - title: "Genome scans"
     children:
