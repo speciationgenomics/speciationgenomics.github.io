@@ -12,7 +12,8 @@ ADMIXTURE requires unlinked (i.e. LD-pruned) SNPs in plink format. It is very ea
 ```shell
 FILE=Pundamilia.RAD
 
-# Make a directory, go into it and copy the RAD vcf file into the new directory
+# Make a directory in the home directory, go into it and copy the RAD vcf file into the new directory
+cd ~
 mkdir ADMIXTURE
 cd ADMIXTURE
 cp /home/ADMIXTURE/Pundamilia.RAD.vcf.gz ./
