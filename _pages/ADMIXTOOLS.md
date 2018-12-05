@@ -70,7 +70,7 @@ echo "Basenji Dingo ChineseWolf GoldenJackal" >> Dstat_quadruples
 
 Finally, we need to generate the par file which tells ADMIXTOOLS which input files to use.
 ```shell
-echo "genotypename:dogs.eigenstratgeno" > par.dogs
+echo "genotypename: dogs.eigenstratgeno" > par.dogs
 echo "snpname:      dogs.snp" >> par.dogs
 echo "indivname:    dogs.pop" >> par.dogs
 echo "popfilename:  Dstat_quadruples" >> par.dogs
@@ -101,9 +101,9 @@ Let's try this with the following test:
 
 ```shell
 echo "Basenji Dingo CroatianWolf ChineseWolf" >> f4_quadruples
-echo "genotypename: "dogs".eigenstratgeno" > par.f4tests
-echo "snpname:      "dogs".snp" >> par.f4tests
-echo "indivname:    "dogs".pop" >> par.f4tests
+echo "genotypename: dogs.eigenstratgeno" > par.f4tests
+echo "snpname:      dogs.snp" >> par.f4tests
+echo "indivname:    dogs.pop" >> par.f4tests
 echo "popfilename:  f4_quadruples" >> par.f4tests
 echo "f4mode: YES" >> par.f4tests
 ```
