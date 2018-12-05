@@ -49,6 +49,8 @@ pages:
         url: /pca/
       - title: "Detecting structure with ADMIXTURE"
         url: /ADMIXTURE/
+      - title: "Detecting hybridization with ADMIXTOOLS"
+        url: /ADMIXTOOLS/
 
   - title: "Genome scans"
     children:
