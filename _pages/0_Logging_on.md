@@ -22,7 +22,7 @@ cp mark.pem ~
 Then you should be able to log in with `ssh` whatever your working directory is. You need to provide `ssh` with the path to your key, which you can do with the `-i` flag. This basically points to your identity file or keyfile. For example:
 
 ```shell
-ssh -i "~/mark.pem" mark@34.222.145.64
+ssh -i "~/mark.pem" mark@54.245.175.86
 ```
 
 Of course you will need to change the log in credentials shown here (i.e. the username and keyfile name) with your own. **Also be aware that the cluster DNS address will change everyday**. We will update you on this each day.
@@ -37,7 +37,7 @@ Occassionally, we will need to shift files between the cluster and our local mac
 # make a file
 touch test_file
 # upload to cluster
-scp -i "~/mark.pem" test_file mark@34.222.145.64:~/
+scp -i "~/mark.pem" test_file mark@54.245.175.86:~/
 ```
 Just to break this down a little we are simply copying a file, `test_file` in this case to the cluster. After the `:` symbol, we are specifying where on the cluster we are placing the file, here we use `~/` to specify the home directory.
 
@@ -45,7 +45,7 @@ Copying files back on to our local machine is just as straightforward. You can d
 
 ```shell
 # download to local
-scp -i "~/mark.pem" mark@34.222.145.64:~/test_file ./
+scp -i "~/mark.pem" mark@54.245.175.86:~/test_file ./
 ```
 Where here all we did was use `scp` with cluster address first and the the location (our working directory) second - i.e. `./`
 
