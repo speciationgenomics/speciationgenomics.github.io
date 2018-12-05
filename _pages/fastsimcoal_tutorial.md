@@ -169,6 +169,6 @@ no_geneflow<-read.table("no_geneflow.lhoods")
 boxplot(range = 0,early_geneflow$V1,ongoing_geneflow$V1,
 diff_geneflow$V1,recent_geneflow$V1,no_geneflow$V1,
 ylab="Likelihood",xaxt="n")
-axis(side=1,at=1:5, labels=c("early","ongoing","diff", "recent","no")
+axis(side=1,at=1:5, labels=c("early","ongoing","diff", "recent","no"))
 
 ```
