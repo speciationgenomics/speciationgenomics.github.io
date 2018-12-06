@@ -90,6 +90,13 @@ result:    Basenji      Dingo ChineseWolf GoldenJackal     -0.0346     -6.318  2
 
 The number of SNPs differs for different combinations of four taxa because only SNPs covered by all four taxa are used. We find that the first test is not significant (|z|<3), whereas the second test suggests that the Chinese Wolf shows excess allele sharing with the Dingo (nABBA > nBABA). The standard error used to compute the z-score is estimated with a block-jackknife procedure taking linkage among markers into account.
 
+Let's add a header and get a nicer file with just the results:
+
+```shell
+awk 'BEGIN{print "P1\tP2\tP3\tP4\tD\tz\tnBABA\tnABBA\tnSNPs"}/result/{print $2,$3,$4,$5,$6,$7}' dogs.Dstats
+```
+
+
 
 ## Unfortunately, we do not have enough time for the f4 tests and f4 ratio tests during the course, but feel free to try it on your own:
 

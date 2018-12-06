@@ -166,7 +166,7 @@ diff_geneflow<-read.table("diff_geneflow.lhoods")
 recent_geneflow<-read.table("recent_geneflow.lhoods")
 no_geneflow<-read.table("no_geneflow.lhoods")
 
-#Plot the likelihoods
+# Plot the likelihoods
 
 par(mfrow=c(1,1))
 boxplot(range = 0,diff_geneflow$V1,recent_geneflow$V1,early_geneflow$V1,ongoing_geneflow$V1,
