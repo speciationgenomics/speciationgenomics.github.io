@@ -78,7 +78,7 @@ Due to time constraints, we will only run this model 5 times. Note, I added the 
 To find the best run, i.e. the run with the highest likelihood, or better the smallest difference between the maximum possible likelihood (MaxObsLhood) and the obtained likelihood (MaxEstLhood), we can check at the .bestlhoods. It will be a different run for each of you.
 
 ```shell
-cat run{1..10}/${PREFIX}/${PREFIX}.bestlhoods | grep -v MaxObsLhood | awk '{print NR,$8}' | sort -k 2
+cat run{1..5}/${PREFIX}/${PREFIX}.bestlhoods | grep -v MaxObsLhood | awk '{print NR,$8}' | sort -k 2
 ```
 
 I wrote a script for you that automatically extracts the files of the best run and copies them into a new folder which it calls bestrun. Just run it in the directory where all the folders run* are located:
