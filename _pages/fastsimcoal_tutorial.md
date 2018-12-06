@@ -39,6 +39,7 @@ mkdir fastsimcoal
 cd fastsimcoal
 mkdir early_geneflow
 cd early_geneflow
+cp /home/fastsimcoal/early_geneflow/* ./
 fsc -t ${PREFIX}.tpl -e ${PREFIX}.est -m -0 -C 10 -n 10000 -L 40 -s0 -M
 ```
 
