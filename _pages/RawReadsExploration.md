@@ -35,7 +35,7 @@ However, we see that this does not give us the same number. The reason is that @
 
 ### Assessing read quality with fastqc
 
-To assess the read quality, we use fastqc which is extremely easy to run and takes only a single argument, the name of the fastq file. It can handle gzipped files.
+To assess the read quality, we use fastqc which is extremely easy to run and can be run with the name of the fastq file as the only argument. It can handle gzipped files.
 
 To get help on fastqc:
 ```shell
@@ -86,7 +86,7 @@ zcat ${FILE}.fastq.gz | grep -f <(sort -k 2 -t " " ${FILE}.gc | tail | cut -d" "
 grep -v "^--" ${FILE}.lowGC | gzip > ${FILE}.lowGC.fastq.gz
 ```
 
-As a second exercis, try to generate a new file from the fastqz file containing every 1000th read.
+As a second exercise, try to generate a new file from the fastqz file containing every 1000th read.
 
 ```shell
 # Forward (R1) reads
