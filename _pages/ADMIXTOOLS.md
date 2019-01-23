@@ -7,7 +7,7 @@ permalink: /ADMIXTOOLS/
 ADMIXTOOLS is a software package developed by the David Reich group. You can find more information here: https://github.com/DReichLab/AdmixTools.
 
 ### Generating the input files
-ADMIXTOOLS requires eigenstrat input files. To convert a vcf file to eigenstrat, you can use my conversion script. That script just requires the name of the vcf file which can be gzipped or not.
+ADMIXTOOLS requires eigenstrat input files. To convert a vcf file to eigenstrat, you can use my conversion script. That script just requires the name of the vcf file which can be gzipped or not. We are going to use a dataset of dogs that originally stems comes from here: https://datadryad.org/resource/doi:10.5061/dryad.sk3p7.
 
 ```shell
 # move to your home directory
