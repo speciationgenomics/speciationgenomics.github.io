@@ -4,10 +4,10 @@ layout: archive
 permalink: /ADMIXTOOLS/
 ---
 
-ADMIXTOOLS is a software package developed by the David Reich group. You can find more information here: https://github.com/DReichLab/AdmixTools.
+ADMIXTOOLS is a software package developed by the David Reich group. You can find more information [here](https://github.com/DReichLab/AdmixTools).
 
 ### Generating the input files
-ADMIXTOOLS requires eigenstrat input files. To convert a vcf file to eigenstrat, you can use my conversion script. That script just requires the name of the vcf file which can be gzipped or not. We are going to use a dataset of dogs that originally stems comes from here: https://datadryad.org/resource/doi:10.5061/dryad.sk3p7.
+ADMIXTOOLS requires eigenstrat input files. To convert a vcf file to eigenstrat, you can use my conversion script. That script just requires the name of the vcf file which can be gzipped or not. We are going to use a dataset of dogs that originally stems comes from [here](https://datadryad.org/resource/doi:10.5061/dryad.sk3p7).
 
 ```shell
 # move to your home directory
@@ -25,7 +25,7 @@ cp /home/data/vcf/dogs.vcf.gz ./
 convertVCFtoEigenstrat.sh dogs.vcf.gz
 ```
 
-Next, we need to make a file that tells ADMIXTOOLS which individuals belong to the same taxa. My script automatically generates dogs.ind which we can use as template for this file by just modifying the third column to indicate the taxon the individual belongs to. If multiple individuals are used per taxon, the same taxon code would be given for each of them. The format is one line per individual, tab-delimited. The first column is the individual namesThe second column indicates the sex and can be M for male, F for female or U for unknown. We do not know or care about the sex here and thus just leave it as U. The third column is the taxon codes. Let's generate a new dogs.pop from the dogs.ind:
+Next, we need to make a file that tells ADMIXTOOLS which individuals belong to the same taxa. My script "convertVCFtoEigenstrat.sh" automatically generates dogs.ind which we can use as template for this file by just modifying the third column to indicate the taxon the individual belongs to. If multiple individuals are used per taxon, the same taxon code would be given for each of them. The format is one line per individual, tab-delimited. The first column is the individual names. The second column indicates the sex and can be M for male, F for female or U for unknown. We do not know or care about the sex here and thus just leave it as U. The third column is the taxon codes. Let's generate a new dogs.pop from the dogs.ind:
 
 ```shell
 awk '{split($1,pop,"."); print $1"\tU\t"pop[2]}' dogs.ind > dogs.pop
@@ -44,20 +44,20 @@ den = (w + x − 2wx)(y + z − 2yz )
 
 Summed across all SNPs:
 ```math
-D = \sum_{num} / \sum_{den}
+D = sum(num) / sum(den)
 ```
 
 If a single sequence (haploid individual) is used per population, this formula equals to:
 ```math
-D = (n~BABA~ - n~ABBA~) / (n~BABA~+n~ABBA~)
+D = (nBABA - nABBA) / (nBABA+nABBA)
 ```
 
 Note, that D statistics are often calculated as ABBA-BABA, whereas ADMIXTOOLS computes BABA-ABBA. It is thus very important to check which formula is used to correctly interpret the results.
 
 ADMIXTOOLS also outputs z-scores which are the number of standard errors that D deviates from 0. An absolute z score of 3 is generally accepted as significant. If W and X share equal amounts of alleles with Y, D will be 0, or at least the absolute z-score will be below 3. If the D statistic is positive and z>3, W and Y show excess allele sharing. If the D statistic is negative and z<(-3), X and Y show excess allele sharing.
 
-Using ADMIXTOOLS to get a whole-genome point estimate of the D statistic is particularly useful to test multiple different populations for hybridization and to get an overview who hybridized with whom. If it is already known which populations are hybridizing, I would recommend to directly do genome-scans of introgression using fd. Whole-genome estimates of the D statistic work do not require  whole-genome sequencing but work well with RAD data and UCEs. However, I would recommend to not trust results with less than 50 ABBA or 50 BABA patterns. For this tutorial, we will use a dataset of dog species from Freedman et al., 2014, Plos Genetics.
-https://journals.plos.org/plosgenetics/article?id=10.1371/journal.pgen.1004016
+Using ADMIXTOOLS to get a whole-genome point estimate of the D statistic is particularly useful to test multiple different populations for hybridization and to get an overview who hybridized with whom. If it is already known which populations are hybridizing, I would recommend to directly do genome-scans of introgression using fd. Whole-genome estimates of the D statistic work do not require  whole-genome sequencing but work well with RAD data and UCEs. However, I would recommend to not trust results with less than 50 ABBA or 50 BABA patterns. For this tutorial, we will use a dataset of dog species from Freedman et al., 2014, [PloS Genetics](https://journals.plos.org/plosgenetics/article?id=10.1371/journal.pgen.1004016).
+
 
 Next, we need to make a file that tells ADMIXTOOLS which combinations of four taxa it should test. This is a simple text file with one combination of 4 taxa per line. You can use blanks or tabs to separate the taxon codes.
 ```shell
