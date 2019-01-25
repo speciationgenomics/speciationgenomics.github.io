@@ -87,7 +87,7 @@ The results have the following format
 
 result:   Pop1 (W)  Pop2 (X) : Pop3 (Y)  Pop4 (Z)  D-stat	z-score	nBABA	nABBA nSNPs
 
-The number of SNPs differs for different combinations of four taxa because only SNPs covered by all four taxa are used. We find that the first test is not significant (|z|<3), whereas the second test suggests that the Chinese Wolf shows excess allele sharing with the Dingo (nABBA > nBABA) and the third test suggests that the Israeli Wolf and the Basenji experienced gene flow. The standard error used to compute the z-score is estimated with a block-jackknife procedure taking linkage among markers into account.
+The number of SNPs differs for different combinations of four taxa because only SNPs covered by all four taxa are used. We find that the first test is not significant (\|z\|<3), whereas the second test suggests that the Chinese Wolf shows excess allele sharing with the Dingo (nABBA > nBABA) and the third test suggests that the Israeli Wolf and the Basenji experienced gene flow. The standard error used to compute the z-score is estimated with a block-jackknife procedure taking linkage among markers into account.
 
 Let's add a header and get a nicer file with just the results. Piping it into 'columns' makes it a bit more readable as 'columns' aligns the columns nicely.
 
@@ -121,10 +121,12 @@ qpDstat -p par.f4tests  | \
 ```
 
 This file then contains:
-W	X	Y	D	Z.value	nBABA nABBA nSNPs
-Basenji      Dingo CroatianWolf ChineseWolf      0.001968      4.661  215047 201721 6772673
 
-Given that the z-score is above 3, we interpret this result as evidence for excess allele sharing between either Dingo and Chinese Wolf or Basenji and Croatian Wolf. The f4 test can be useful if no outgroup is available. It can also be used to test for subtle excess allele sharing between two pairs with parallel selection. In the Pundamilia case, we could use it to test for excess allele sharing between the two red and the two blue species. D statistics can be biased if the outgroup is not a real outgroup but shows excess allele sharing with either W or X. In that case, Any taxon used as Y will result in signficant D statistics. Ideally, one would thus run each test with different outgroups and also run some control tests with taxa used as Y that are unlikely to have hybridized with W or X. If that is not possible, f4 tests might help to make sure that the D statistic results are robust.
+W	X	Y	D	Z.value	nBABA nABBA nSNPs
+
+Basenji Dingo CroatianWolf ChineseWolf 0.001968 4.661 215047 201721 6772673
+
+Given that the z-score is above 3, we interpret this result as evidence for excess allele sharing between either Dingo and Chinese Wolf or Basenji and Croatian Wolf. The f4 test can be useful if no outgroup is available. It can also be used to test for subtle excess allele sharing between two pairs with parallel selection. In the Pundamilia case, we could use it to test for excess allele sharing between the two red and the two blue species. D statistics can be biased if the outgroup is not a real outgroup but shows excess allele sharing with either W or X. In that case, Any taxon used as Y will result in significant D statistics. Ideally, one would thus run each test with different outgroups and also run some control tests with taxa used as Y that are unlikely to have hybridized with W or X. If that is not possible, f4 tests might help to make sure that the D statistic results are robust.
 
 ### f4 ratio test
 F4 tests can also be used to estimate the admixture proportion if combined in a smart way. ADMIXTOOLS has a separate tool for computing f4 ratio tests to estimate admixture proportions. To perform an f4 ratio test, we need five taxa: A, B, X, C, O. The introgressed taxon "X", its sister taxon "C", the source of introgression "B" and its sister taxon "A", and an outgroup "O". The ancestry proportion of B in X is then computed as the ratio of these two f4 tests.
@@ -161,5 +163,5 @@ result: A O X C:  A O B C alpha std.err Z(null=0)
 
 We get the following result which we interpret as that the Basenji got a 34% ancestry contribution of the Israeli Wolf.
 ```shell
-result: ChineseWolf GoldenJackal    Basenji      Dingo  : ChineseWolf GoldenJackal IsraeliWolf      Dingo     0.660327     0.092472      7.141
+result: ChineseWolf GoldenJackal Basenji Dingo : ChineseWolf GoldenJackal IsraeliWolf Dingo 0.660327 0.092472 7.141
 ```
