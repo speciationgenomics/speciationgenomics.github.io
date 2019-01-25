@@ -83,7 +83,8 @@ Now, we are ready to run qpDstat which is the tool of ADMIXTOOLS that computes t
 ```shell
 qpDstat -p par.dogs
 ```
-The results have the following format -
+The results have the following format
+
 result:   Pop1 (W)  Pop2 (X) : Pop3 (Y)  Pop4 (Z)  D-stat	z-score	nBABA	nABBA nSNPs
 
 The number of SNPs differs for different combinations of four taxa because only SNPs covered by all four taxa are used. We find that the first test is not significant (|z|<3), whereas the second test suggests that the Chinese Wolf shows excess allele sharing with the Dingo (nABBA > nBABA) and the third test suggests that the Israeli Wolf and the Basenji experienced gene flow. The standard error used to compute the z-score is estimated with a block-jackknife procedure taking linkage among markers into account.
@@ -91,7 +92,7 @@ The number of SNPs differs for different combinations of four taxa because only 
 Let's add a header and get a nicer file with just the results. Piping it into 'columns' makes it a bit more readable as 'columns' aligns the columns nicely.
 
 ```shell
-awk 'BEGIN{print "P1\tP2\tP3\tP4\tD\tz\tnBABA\tnABBA\tnSNPs"}/result/{print $2,$3,$4,$5,$6,$7,$8,$9,$10}' dogs.Dstats | columns -t
+awk 'BEGIN{print "P1\tP2\tP3\tP4\tD\tz\tnBABA\tnABBA\tnSNPs"}/result/{print $2,$3,$4,$5,$6,$7,$8,$9,$10}' dogs.Dstats | column -t
 ```
 
 
@@ -116,7 +117,7 @@ qpDstat -p par.f4tests
 To make the result more informative, we can modify the output a bit with awk and write it into a file:
 ```shell
 qpDstat -p par.f4tests  | \
- awk 'BEGIN{print "W X Y Z D Z.value nBABA nABBA nSNPs"}/result/{print $2,$3,$4,$5,$6,$7,$8,$9,$10}'  > f4.results | columns -t
+ awk 'BEGIN{print "W X Y Z D Z.value nBABA nABBA nSNPs"}/result/{print $2,$3,$4,$5,$6,$7,$8,$9,$10}'  > f4.results | column -t
 ```
 
 This file then contains:
@@ -129,7 +130,7 @@ Given that the z-score is above 3, we interpret this result as evidence for exce
 F4 tests can also be used to estimate the admixture proportion if combined in a smart way. ADMIXTOOLS has a separate tool for computing f4 ratio tests to estimate admixture proportions. To perform an f4 ratio test, we need five taxa: A, B, X, C, O. The introgressed taxon "X", its sister taxon "C", the source of introgression "B" and its sister taxon "A", and an outgroup "O". The ancestry proportion of B in X is then computed as the ratio of these two f4 tests.
 
 ```shell
-\alpha = f4(A,O; X,C)/ f4(A,O; B, C)
+alpha = f4(A,O; X,C)/ f4(A,O; B, C)
 ```
 As an example, if we want to estimate the Israeli Wolf ancestry proportion of the Basenji, we can compute it using the Basenji as X, the Dingo as C, the Israeli Wolf as B and the Chinese Wolf as A.
 
@@ -142,9 +143,9 @@ echo "ChineseWolf GoldenJackal : Basenji Dingo :: ChineseWolf GoldenJackal : Isr
 As always, we need to make a par file for ADMIXTOOLS specifying that file as popfilename.
 
 ```shell
-echo "genotypename: "dogs".eigenstratgeno" > par.f4ratio
-echo "snpname:      "dogs".snp" >> par.f4ratio
-echo "indivname:    "dogs".pop" >> par.f4ratio
+echo "genotypename: dogs.eigenstratgeno" > par.f4ratio
+echo "snpname:      dogs.snp" >> par.f4ratio
+echo "indivname:    dogs.pop" >> par.f4ratio
 echo "popfilename:  f4ratio.test" >> par.f4ratio
 
 ```
