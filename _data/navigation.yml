@@ -67,8 +67,8 @@ pages:
 
   - title: "Demographic inference"
     children:
-      - title: "Generating a site-frequency spectrum"
-        url: /child-1-page-url/
+      - title: "Estimating the site-frequency-spectrum"
+        url: /easysfs/
       - title: "Demographic history with fastsimcoal2"
         url: /fastsimcoal2/
       - title: "Estimating past effective population size with PSMC"
