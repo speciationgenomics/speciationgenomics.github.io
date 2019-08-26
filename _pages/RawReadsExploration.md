@@ -1,12 +1,14 @@
 ---
-title: "Raw read explorations"
+title: "Raw read exploration"
 layout: archive
 permalink: /readsExploration/
 ---
 
 ### fastq format
 
-Let's have a look at the first sequence: As we saw in the lecture, each DNA sequence is composed of four lines. Therefore, we need to visualize the first four lines to have a look at the first sequence. First we set the name of the fastq file that we will work with as the variable FILE. Then, we copy that file to our directory. Finally, we get the first 4 lines. However, we cannot just directly write head -4 $FILE because the fastq file is actually compressed. It is thus a binary file which cannot just be read. Luckily, there are many commands that can directly read binary files. Instead of cat, we use zcat, instead of grep, we use zgrep. If we want to use any other command, we need to read the file with zcat and then pipe the output into our command of joyce such as head.
+Let's have a look at the first sequence from our raw read files which are stored in the [fastq format](https://en.wikipedia.org/wiki/FASTQ_format). As we saw in the [lecture](https://github.com/speciationgenomics/presentations/blob/master/NGS_introduction_JM.pdf), each DNA sequence is composed of four lines. Therefore, we need to visualize the first four lines to have a look at the information stored for the first sequence.
+
+First we set the name of the fastq file that we will work with as the variable `FILE`. Then, we copy that file to our directory. Finally, we will examine the first 4 lines. However, we cannot just directly write `head -4 $FILE` like we might with a normal text file because the fastq file is actually compressed. It is thus a binary file which cannot just be read. Luckily, there are many commands that can directly read binary files. Instead of `cat`, which we saw in the [Unix introduction](https://speciationgenomics.github.io/getting_used_to_unix/), we use `zcat`, instead of `grep`, we use `zgrep`. If we want to use any other command, we need to read the file with `zcat` and then pipe the output into our command of choice such as `head` or `tail`.
 
 ```shell
 FILE="RAD1.fastq.gz"
@@ -14,7 +16,7 @@ cp /home/data/fastq/${FILE} ./
 zcat ${FILE} | head -4
 ```
 
-Let's count the number of lines in the file:
+These are the four lines which make up the information for each read. You can learn more about what they each mean [here](https://en.wikipedia.org/wiki/FASTQ_format). Now the file is in our directory and readable, let's count the number of lines:
 
 ```shell
 zcat ${FILE} | wc -l
@@ -26,29 +28,33 @@ The number of sequences is thus this number divided by 4, or we can count the nu
 zgrep "@HWI" ${FILE} -c
 ```
 
-We might think that we could have just counted the number of "@".
+We might think that we could have just counted the number of `@` - i.e. the first symbols for each header.
+
 ```shell
 zgrep "@" ${FILE} -c
 ```
-However, we see that this does not give us the same number. The reason is that @ is also a quality score and thus some quality score lines were also counted.
 
+However, we see that this does not give us the same number. The reason is that `@` is also used as a symbol for encoding [quality scores](https://en.wikipedia.org/wiki/Phred_quality_score) and thus some quality score lines were also counted.
 
 ### Assessing read quality with fastqc
 
-To assess the read quality, we use fastqc which is extremely easy to run and can be run with the name of the fastq file as the only argument. It can handle gzipped files.
+To assess the read quality, we use `fastqc` which is extremely easy to run and can be run with the name of the fastq file as the only argument. It can aslo handle gzipped files.
 
-To get help on fastqc:
+To get help on `fastqc`:
+
 ```shell
 fastqc -h | less
 ```
 
-Let's run fastqc on our read subsets:
+Let's run `fastqc` on our read subsets:
+
 ```shell
 fastqc $FILE
 ```
 
 We can also run it on three other files. As we do not need copies of these files in all of your personal directories, we will just write the file names with the paths.
-fastqc allows an output directory with -o. We will thus just work in the personal directory and run fastqc giving the file name with its path and specifying the output folder as the current directory (-o ./).
+
+`fastqc` allows an output directory with the `-o` flag. We will thus just work in our home directories and run `fastqc` giving the file name with its path and specifying the output folder as the current directory (i.e. `-o ./`).
 
 ```shell
 fastqc -o ./ /home/data/10558.PunPundMak.R1.subsampled.fastq.gz
@@ -56,12 +62,11 @@ fastqc -o ./ /home/data/10558.PunPundMak.R2.subsampled.fastq.gz
 fastqc -o ./ /home/data/RAD2.fastq.gz
 ```
 
-Now, we need to download the html or all files to the local computer for visualization. To download files, mac and linux users can use the command scp, Windows users can use FileZilla. You can open the html file with any internet browser.
-
+Now, we need to download the html or all files to the local computer for visualization. To download files, mac and linux users can use the command `scp`, Windows users can use `FileZilla`. You can open the html file with any internet browser.
 
 ### Challenging exercises for the bash wizards and those with extra time left
 
-In RAD2 there are some reads with very low GC content. Find the 10 reads with the lowest GC content and check what they are.
+In the `RAD2.fastq.gz `there are some reads with very low GC content. Find the 10 reads with the lowest GC content and check what they are.
 
 
 Here one very condensed solution: Try to find your own solution first!
