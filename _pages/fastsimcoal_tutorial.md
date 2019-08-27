@@ -128,9 +128,10 @@ scp -i c.pem user@<ip>:~/fastsimcoal/early_geneflow/bestrun/*pdf ./
 
 ### Model comparison with Likelihood distributions
 
-One drawback of the composite likelihoods in model tests based on AIC is that it can overestimate the support for the most likely model if the SNPs are not independent (here they are not LD-pruned). Another way to infer if the models are really different and do not just differ because of stochasticity in the likelihood approximation, is to get likelihood distributions for each model. This is done by running each model with the best parameter values multple times (ideally about 100 times). The likelihoods will differ because fastsimcoal does not compute the likelihood but rather approximate it with simulations. If the ranges of likelihoods of two models overlap, it means that they do not differ significantly, i.e. provide an equally good fit to the observed data.
+One drawback of the composite likelihoods in model tests based on AIC is that it can overestimate the support for the most likely model if the SNPs are not independent (here they are not LD-pruned). Another way to infer if the models are really different and do not just differ because of stochasticity in the likelihood approximation, is to get likelihood distributions for each model. This is done by running each model with the best parameter values multple times (ideally about 100 times). The likelihoods will differ because `fastsimcoal` does not compute the likelihood but rather approximates it with simulations. If the ranges of likelihoods of two models overlap, it means that they do not differ significantly, i.e. provide an equally good fit to the observed data.
 
-Let's recompute the likelihood for the best run for the early_geneflow model.
+Let's recompute the likelihood for the best run for the `early_geneflow` model.
+
 ```shell
 
 model="early_geneflow"
@@ -156,7 +157,7 @@ done
 
 We would now repeat this for different models: ongoing gene flow, a model without gene flow, a model of secondary contact (recent gene flow) and a model with different amounts of gene flow in the past and in recent times.
 
-Due to time constraints, I will now give you the results of these models. They are in the same format as the folder we generated for the model with early gene flow. Load them into your modeling folder. Note, the -r flag stands for "recursive" and allows to also copy directories and their contents.
+Due to time constraints, we will give you the results of these models. They are in the same format as the folder we generated for the model with early gene flow. Load them into your modeling folder. Note, the `-r` flag stands for "recursive" and allows to also copy directories and their contents.
 
 ```shell
 cp -r /home/fastsimcoal/extramodels/* ./
@@ -166,12 +167,13 @@ cp -r /home/fastsimcoal/lhoods/* ./
 cp ../early_geneflow/bestrun/early_geneflow.lhoods ./
 ```
 
-Now, let's download the likelihoods and plot them:
+Now, let's download the likelihoods and plot them: (NB: Windows users must use `Filezilla`)
+
 ```shell
 scp -i c.pem user@<ip>:~/fastsimcoal/lhoods/* ./
 ```
 
-On the local computer, we can plot the likelihoods as boxplots
+On the local computer, we can plot the likelihoods as boxplots.
 
 ```r
 
