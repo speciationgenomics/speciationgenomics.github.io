@@ -57,8 +57,8 @@ We can also run it on three other files. As we do not need copies of these files
 `fastqc` allows an output directory with the `-o` flag. We will thus just work in our home directories and run `fastqc` giving the file name with its path and specifying the output folder as the current directory (i.e. `-o ./`).
 
 ```shell
-fastqc -o ./ /home/data/10558.PunPundMak.R1.subsampled.fastq.gz
-fastqc -o ./ /home/data/10558.PunPundMak.R2.subsampled.fastq.gz
+fastqc -o ./ /home/data/wgs.R1.fastq.gz
+fastqc -o ./ /home/data/wgs.R2.fastq.gz
 fastqc -o ./ /home/data/RAD.fastq.gz
 ```
 
@@ -91,14 +91,14 @@ zcat ${FILE}.fastq.gz | grep -f <(sort -k 2 -t " " ${FILE}.gc | tail | cut -d" "
 grep -v "^--" ${FILE}.lowGC | gzip > ${FILE}.lowGC.fastq.gz
 ```
 
-As a second exercise, try to generate a new file from the fastqz file containing every 1000th read.
+As a second exercise, try to generate a new file from the fastqz file containing every 1000th read. This is useful as subsampling is often needed to test software. Fastqc will take very long and a lot of memory if it needs to read in a giant file. It is thus better to subsample if you have large fastq files.
 
 ```shell
 # Forward (R1) reads
-zcat /home/data/fastq/10558.PunPundMak.R1.fastq.gz | awk '{printf("%s",$0); n++; if(n%4==0){
-printf("\n")}else{printf("\t")} }' | awk 'NR == 1 || NR % 1000 == 0' | tr "\t" "\n" | gzip > 10558.PunPundMak.R1.subsampled.fastq.gz &
+zcat /home/data/fastq/wgs.R1.fastq.gz | awk '{printf("%s",$0); n++; if(n%4==0){
+printf("\n")}else{printf("\t")} }' | awk 'NR == 1 || NR % 1000 == 0' | tr "\t" "\n" | gzip > wgs.R1.subsampled.fastq.gz &
 
 # Reverse (R2) reads
-zcat /home/data/10558.PunPundMak.R1.fastq.gz | awk '{printf("%s",$0); n++; if(n%4==0){
-printf("\n")}else{printf("\t")} }' | awk 'NR == 1 || NR % 1000 == 0' | tr "\t" "\n" | gzip > 10558.PunPundMak.R1.subsampled.fastq.gz &
+zcat /home/data/wgs.R2.fastq.gz | awk '{printf("%s",$0); n++; if(n%4==0){
+printf("\n")}else{printf("\t")} }' | awk 'NR == 1 || NR % 1000 == 0' | tr "\t" "\n" | gzip > wgs.R2.subsampled.fastq.gz &
 ```
