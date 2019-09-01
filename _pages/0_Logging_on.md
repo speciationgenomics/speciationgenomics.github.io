@@ -71,7 +71,7 @@ Then save your key and click on YES to dismiss the Warning as shown below.
 
 ![](/images/putty/fig3.png)
 
-Great, now your key file is ready and we can start Putty. In Putty, enter your user name and the DNS in the format \<user_name\>@\<IP adress\>. Make sure to add your user name and the IP address that we give to you. Enter 22 as Port and make sure that SSH is selected.
+Great, now your key file is ready and we can start Putty. In Putty, enter your user name and the IP address in the format \<user_name\>@\<IP adress\>. Make sure that 22 is given as Port and that SSH is selected.
 
 ![](/images/putty/fig4.png)
 
