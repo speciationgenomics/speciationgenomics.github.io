@@ -75,25 +75,25 @@ Great, now your key file is ready and we can start Putty. In Putty, enter your u
 
 ![](/images/putty/fig4.png)
 
-Next, on the menu on the left, expand the "SSH" panel by clicking on the + and select "Auth". Then, select your new putty format key file (.ppk) with Browse.
+Next, on the menu on the left, expand the "SSH" panel by clicking on the + and select "Auth". Then, select your new putty format key file (.ppk) with Browse. Do NOT click on Open yet.
 
 ![](/images/putty/fig5.png)
 
-To make sure that you will not get logged out if you are inactive for a while, you can configure PuTTY to automatically send 'keepalive' signals at regular intervals to keep the session active. Click on Connection, then insert 180 to send keepalive signals every 3 minutes.
+To make sure that you will not get logged out if you are inactive for a while, you can configure PuTTY to automatically send 'keepalive' signals at regular intervals to keep the session active. Click on Connection, then insert 180 to send keepalive signals every 3 minutes. Do NOT click on Open yet.
 
 ![](/images/putty/fig6.png)
 
-To avoid having to change the settings each time you log in, you can save the PuTTY session. Once you are happy with all settings, give the session a name and click Save. Now you are ready to start the session with "Open". The first time PuTTY will display a security alert dialog box that asks whether you trust the host you are connecting to. Click yes.
+To avoid having to change the settings each time you log in, you can save the PuTTY session. Click on Session to get back to the basic options window. Once you are happy with all settings, give the session a name and click Save. Now you are ready to start the session with "Open". The first time PuTTY will display a security alert dialog box that asks whether you trust the host you are connecting to. Click yes.
 
 ![](/images/putty/fig7.png)
 
 When you log in the next time, you can just click on the saved session and click load. If the DNS changed in the mean time (e.g. because we stopped the Amazon instance over night), you will need to replace the DNS by the new one. I would then recommend to Save the changed settings. Then simply click Open to start the session.
 
-![](/images/putty/fig7.png)
+![](/images/putty/fig8.png)
 
 If the DNS did not change and you just want to login again, you can also right-click on the putty symbol in the taskbar (provided that you have pinned it to the taskbar) and select the session.
 
-![](/images/putty/fig8.png)
+![](/images/putty/fig9.png)
 
 #### Downloading and uploading files with Filezilla
 
