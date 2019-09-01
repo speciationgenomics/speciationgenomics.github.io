@@ -11,7 +11,7 @@ Let's have a look at the first sequence from our raw read files which are stored
 First we set the name of the fastq file that we will work with as the variable `FILE`. Then, we copy that file to our directory. Finally, we will examine the first 4 lines. However, we cannot just directly write `head -4 $FILE` like we might with a normal text file because the fastq file is actually compressed. It is thus a binary file which cannot just be read. Luckily, there are many commands that can directly read binary files. Instead of `cat`, which we saw in the [Unix introduction](https://speciationgenomics.github.io/getting_used_to_unix/), we use `zcat`, instead of `grep`, we use `zgrep`. If we want to use any other command, we need to read the file with `zcat` and then pipe the output into our command of choice such as `head` or `tail`.
 
 ```shell
-FILE="RAD1.fastq.gz"
+FILE="RAD.fastq.gz"
 cp /home/data/fastq/${FILE} ./
 zcat ${FILE} | head -4
 ```
@@ -59,19 +59,19 @@ We can also run it on three other files. As we do not need copies of these files
 ```shell
 fastqc -o ./ /home/data/10558.PunPundMak.R1.subsampled.fastq.gz
 fastqc -o ./ /home/data/10558.PunPundMak.R2.subsampled.fastq.gz
-fastqc -o ./ /home/data/RAD2.fastq.gz
+fastqc -o ./ /home/data/RAD.fastq.gz
 ```
 
 Now, we need to download the html or all files to the local computer for visualization. To download files, mac and linux users can use the command `scp`, Windows users can use `FileZilla`. You can open the html file with any internet browser.
 
 ### Challenging exercises for the bash wizards and those with extra time left
 
-In the `RAD2.fastq.gz `there are some reads with very low GC content. Find the 10 reads with the lowest GC content and check what they are.
+In the `RAD.fastq.gz `there are some reads with very low GC content. Find the 10 reads with the lowest GC content and check what they are.
 
 
 Here one very condensed solution: Try to find your own solution first!
 ```shell
-FILE=RAD2
+FILE=RAD
 
 cp /home/data/fastq/${FILE} ./
 
