@@ -21,7 +21,7 @@ This reduces our dogs dataset from 13,283,544 sites to 77,216 SNPs.
 ```shell
 awk '{print $1,$1,$3}' $FILE.pop > $FILE.clust
 ```
-With this `clust` file ready, we can run the (conversion script)[https://github.com/speciationgenomics/scripts/blob/master/vcf2treemix.sh]:
+With this `clust` file ready, we can run the [conversion script](https://github.com/speciationgenomics/scripts/blob/master/vcf2treemix.sh):
 
 ```shell
 vcf2treemix.sh $FILE.vcf.gz $FILE.clust
