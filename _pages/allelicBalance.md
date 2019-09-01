@@ -14,7 +14,7 @@ In contrast, if PCR errors present in multiple PCR duplicates are the main reaso
 
 This is because if the reads supporting the underrepresented allele come from another individual, they should also be found in that individual and thus not be singletons in the dataset. However, if the unbalanced heterozygotes are due to PCR errors in PCR duplicates, they should be most pronounced in singletons. This is because when PCR errors are randomly distributed across the genome, they are most likely to hit a monomorphic site because monomorphic sites are most frequent in the genome.
 
-To check the heterozygotes, you can use the script written by [David Marques](https://davidalexandermarques.com/) and [Joana Meier](https://www.zoo.cam.ac.uk/directory/joana-meier) and apply it on a dataset of SNPs. Let's try it on a few samples that were RAD-sequenced:
+To check the heterozygotes, you can use the script written by [David Marques](https://davidalexandermarques.com/) and apply it on a dataset of SNPs. Let's try it on a few samples that were RAD-sequenced:
 
 ```shell
 FILE=Pundamilia.RAD.subset
