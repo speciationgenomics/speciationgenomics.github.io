@@ -103,11 +103,11 @@ Open Filezilla and choose Edit -> Settings.
 
 ![](/images/putty/fig10.png)
 
-Next, choose SFTP and Add the .pem key file as indicated below.
+Next, choose SFTP and Add the .pem key file as indicated below and click OK.
 
 ![](/images/putty/fig11.png)
 
-Finally, enter the DNS and the user name and when you hit enter, it should connect you. Next, time, you can use the Quickconnect dropdown menu, provided the DNS has not changed in the meantime.
+Finally, enter the IP address and the user name and when you hit enter, it should connect you. Next, time, you can use the Quickconnect dropdown menu, provided the DNS has not changed in the meantime.
 
 ![](/images/putty/fig12.png)
 
