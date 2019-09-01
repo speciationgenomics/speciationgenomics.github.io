@@ -44,3 +44,5 @@ checkHetsIndvVCF.sh $FILE.mac1.vcf.gz
 ```
 
 If the sites with highly unbalanced read counts disappear, this is evidence for PCR errors and against cross-contamination.
+
+If there is evidence for low levels of contamination, it is possible to call genotypes with GATK HaplotypeCaller specifying --contamination_fraction_to_filter. Alternatively, heterozygote genotypes with highly unbalanced read counts can be filtered out e.g. with the [script](https://github.com/joanam/scripts/blob/master/allelicBalance.py) of [Joana Meier](https://www.zoo.cam.ac.uk/directory/joana-meier).
