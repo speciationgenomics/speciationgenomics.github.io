@@ -109,6 +109,6 @@ Next, choose SFTP and Add the .pem key file as indicated below.
 
 Finally, enter the DNS and the user name and when you hit enter, it should connect you. Next, time, you can use the Quickconnect dropdown menu, provided the DNS has not changed in the meantime.
 
-![](/images/putty/fig11.png)
+![](/images/putty/fig12.png)
 
-Now you will see the file directory system (folders) on your local computer on the left and your folders on the amazon cloud on the rigth. You can now just drag and drop files from one side to the other.
+Now you will see the file directory system (folders) on your local computer on the left and your folders on the amazon cloud on the right. You can now just drag and drop files from one side to the other.
