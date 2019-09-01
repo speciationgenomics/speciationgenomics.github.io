@@ -23,9 +23,24 @@ checkHetsIndvVCF.sh $FILE.vcf.gz
 
 This script will generate an output called `$FILE.hetIndStats.pdf` that visualizes the allelic balance at heterozygote positions in a separate page for each individual. This file can then be used to detect contaminated individuals or barcode switching problems.
 
-To distinguish if the heterozygotes with strongly unbalanced read counts are due to cross-contamination or PCR errors in PCR duplicates, we will extracts singleton sites and run the script a second time on this subset:
+Here an example of a well-sequenced individual without evidence of contamination:
+
+![](/images/contamination/good.jpg)
+
+The plot on the left shows that most heterozygous positions have more or less equal number of reads for both alleles. The plot on the right shows the distribution of percentage of the proportion of the reads for the minor allele (i.e. the allele that has less reads in that individuals).
+
+Here an example of a badly contaminated individual
+
+![](/images/contamination/bad.png)
+
+You can see that many heterozygote sites one allele is covered by much less reads than the other allele. These heterozygote positions with strong imbalance of reads supporting the two alleles indicate contamination. Alternatively, if you are using a PCR-based library preparation method (e.g. RADseq), PCR duplicates may cause large variation in the number of reads supporting each allele. We would expect both alleles to be represented by more or less equal numbers of reads, particularly if sequencing depth is high. However, if multiple reads actually stem from the same PCR fragment, the variance in number of reads per allele increases and can be highly biased if some PCR fragments are smaller and thus amplified more during the PCR. In addition, the PCR enzymes make mistakes and PCR errors will look like alleles supported by fewer reads than the real allele.
+
+
+To distinguish if strongly unbalanced read counts are due to cross-contamination or PCR errors in PCR duplicates, we will extracts singleton sites and run the script a second time on this subset:
 
 ```shell
 vcftools --gzvcf $FILE.vcf.gz --max-mac 1 --mac 1 --recode --stdout | gzip > $FILE.mac1.vcf.gz
 checkHetsIndvVCF.sh $FILE.mac1.vcf.gz
 ```
+
+If the sites with highly unbalanced read counts disappear, this is evidence for PCR errors and against cross-contamination.
