@@ -61,7 +61,7 @@ fastqc -o ./ /home/data/wgs.R1.fastq.gz
 fastqc -o ./ /home/data/wgs.R2.fastq.gz
 ```
 
-Now, we need to download the html or all files to the local computer for visualization. To download files, mac and linux users can use the command `scp`, Windows users can use `FileZilla`. You can open the html file with any internet browser.
+Now, we need to download the html or all files to the local computer for visualization. To download files, mac and linux users can use the command `scp`, Windows users can use `FileZilla` [(see instructions here)](https://speciationgenomics.github.io/logging_on/). You can then open the html file with any internet browser.
 
 ### Challenging exercises for the bash wizards and those with extra time left
 
