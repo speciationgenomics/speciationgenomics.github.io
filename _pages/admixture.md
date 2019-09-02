@@ -59,7 +59,14 @@ awk '{split($1,name,"."); print $1,name[2]}' ${FILE}.nosex > $FILE.list
 
 Now we are ready to plot the results in `R`. To make it a bit easier, Joana Meier has written an `R` script for you that generates the plot. It requires four arguments, the prefix for the `ADMIXTURE` output files (-p <prefix>), the file with the species information (-i <file.list>), the maximum number of K to be plotted (-k 5), and a list with the populations or species separated by commas (-l <pop1,pop2...>). The list of populations provided with -l gives the order in which the populations or species shall be plotted.
 
-You can get it from [here](https://github.com/speciationgenomics/scripts/blob/master/plotADMIXTURE.r) and run it like so:
+You can get it from [here](https://github.com/speciationgenomics/scripts/blob/master/plotADMIXTURE.r) or download it with wget:
+
+```shell
+wget https://github.com/speciationgenomics/scripts/raw/master/plotADMIXTURE.r
+chmod +x plotADMIXTURE.r
+```
+
+Now, let's run it like so: 
 
 ```shell
 plotADMIXTURE.r -p $FILE -i $FILE.list -k 5 -l PunNyerMak,PunPundMak,PunNyerPyt,PunHybrPyt,PunPundPyt
