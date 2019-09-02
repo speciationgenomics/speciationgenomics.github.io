@@ -52,7 +52,7 @@ Let's run `fastqc` on our read subsets:
 fastqc $FILE
 ```
 
-We can also run it whole-genome data files. As we do not need copies of these files in all of your personal directories, we will just write the file names with the paths.
+We can also run it on the whole-genome data files. As we do not need copies of these files in all of your personal directories, we will just write the file names with the paths.
 
 `fastqc` allows an output directory with the `-o` flag. We will thus just work in our home directories and run `fastqc` giving the file name with its path and specifying the output folder as the current directory (i.e. `-o ./`).
 

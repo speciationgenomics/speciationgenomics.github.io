@@ -66,7 +66,7 @@ wget https://github.com/speciationgenomics/scripts/raw/master/plotADMIXTURE.r
 chmod +x plotADMIXTURE.r
 ```
 
-Now, let's run it like so: 
+Now, let's run it like so:
 
 ```shell
 plotADMIXTURE.r -p $FILE -i $FILE.list -k 5 -l PunNyerMak,PunPundMak,PunNyerPyt,PunHybrPyt,PunPundPyt
