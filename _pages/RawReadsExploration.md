@@ -52,14 +52,13 @@ Let's run `fastqc` on our read subsets:
 fastqc $FILE
 ```
 
-We can also run it on three other files. As we do not need copies of these files in all of your personal directories, we will just write the file names with the paths.
+We can also run it whole-genome data files. As we do not need copies of these files in all of your personal directories, we will just write the file names with the paths.
 
 `fastqc` allows an output directory with the `-o` flag. We will thus just work in our home directories and run `fastqc` giving the file name with its path and specifying the output folder as the current directory (i.e. `-o ./`).
 
 ```shell
 fastqc -o ./ /home/data/wgs.R1.fastq.gz
 fastqc -o ./ /home/data/wgs.R2.fastq.gz
-fastqc -o ./ /home/data/RAD.fastq.gz
 ```
 
 Now, we need to download the html or all files to the local computer for visualization. To download files, mac and linux users can use the command `scp`, Windows users can use `FileZilla`. You can open the html file with any internet browser.
