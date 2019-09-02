@@ -57,12 +57,14 @@ To make plotting easier, we can make a file with the individual names in one col
 awk '{split($1,name,"."); print $1,name[2]}' ${FILE}.nosex > $FILE.list
 ```
 
-Now we are ready to plot the results in `R`. To make it a bit easier, We have written an `R` script for you that generates the plot. It requires two arguments, the prefix for the `ADMIXTURE` output files and the file with the species information.
+Now we are ready to plot the results in `R`. To make it a bit easier, Joana Meier has written an `R` script for you that generates the plot. It requires four arguments, the prefix for the `ADMIXTURE` output files (-p <prefix>), the file with the species information (-i <file.list>), the maximum number of K to be plotted (-k 5), and a list with the populations or species separated by commas (-l <pop1,pop2...>). The list of populations provided with -l gives the order in which the populations or species shall be plotted.
 
-You can get it from [here](https://github.com/speciationgenomics/scripts/blob/master/ADMIXTURE_plot.r) and run it like so:
+You can get it from [here](https://github.com/speciationgenomics/scripts/blob/master/plotADMIXTURE.r) and run it like so:
 
 ```shell
-plotADMIXTURE.r $FILE $FILE.list
+plotADMIXTURE.r -p $FILE -i $FILE.list -k 5 -l PunNyerMak,PunPundMak,PunNyerPyt,PunHybrPyt,PunPundPyt
 ```
+
+By default, the script generates a $FILE.png file. This can be changed with -o <output prefix>.
 
 Now we just need to download the `.png` file to our local machine to look at it, either using `scp` (Mac/Linux) or `Filezilla` (Windows).
