@@ -43,27 +43,26 @@ Inside the screen, declare a variable for the reference genome.
 REF=~/reference/P_nyererei_v2.fasta
 ```
 
-Next we run the `samtools mpileup` and `bcftools` command. We will break it down after.
+Next we run the `bcftools mpileup` and `bcftools call` command. We will break it down after.
 
 ```shell
 cd ~
-samtools mpileup -ug -t DP,AD -f $REF \
+bcftools mpileup -a AD,DP,SP -Ou -f $REF \
 ./align/*_sort.bam | bcftools call -f GQ,GP \
--vmO z -o ./cichlid.vcf.gz
+-mO z -o ./cichlid.vcf.gz
 ```
 
 While this is running, let's go through the options and get an idea of what we did.
 
-For `samtools mpileup`:
+For `bcftools mpileup`:
 
-* `-u` - Do not compress the output
-* `-g` - Generate genotype likelihoods in BCF format (don't worry too much about this)
-* `-t` - output tags - here we are telling `mpileup` to output depth and depth per variant data (this will be clearer later)
-* `-f` - the location of the reference sequence
+* `-a` - Annotate the vcf - here we add allelic depth (`AD`), genotype depth (`DP`) and strand bias (`SP`).
+* `-O` - the output type. Here it is `u` which means we do not compress the output.
+* `-f` - specify the reference genome to call variants against.
 
 For `bcftools call`:
 
-* `-f` - format fields for the vcf - here they are genotype quality and genotype probability
+* `-f` - format fields for the vcf - here they are genotype quality (`GQ`) and genotype probability (`GP`).
 * `-v` - output variant sites only - i.e. ignore non-variant parts of the reads
 * `-m`- use bcftools multiallelic caller
 * `-O`- specify the output type, here it is `z` - i.e. gzipped (compressed) vcf
@@ -72,19 +71,6 @@ For `bcftools call`:
 In essence, we have piled up each read against each genome position and then called variants where there are enough alternative reads to support the presence of a variant.
 
 If the command is still running (it takes some time), detach your screen using `ctrl + a + d`. We will return to our VCF later.
-
-##### Update for bcftools 1.9
-
-Note that with the latest version of `bcftools`, we can now achieve the same step as above but using the `bcftools mpileup` utility, meaning we no longer need to use `samtools`. We will not use this command in the class but we show it below here:
-
-```shell
-cd ~
-bcftools mpileup -Ou -f $REF \
-./align/*_sort.bam | bcftools call -f GQ,GP \
--vmO z -o ./cichlid.vcf.gz
-```
-You can read more about the updated `bcftools` workflow [here](http://www.htslib.org/workflow/#mapping_to_variant).
-
 
 #### Exploring vcf files
 
