@@ -98,6 +98,6 @@ zcat /home/data/fastq/wgs.R1.fastq.gz | awk '{printf("%s",$0); n++; if(n%4==0){
 printf("\n")}else{printf("\t")} }' | awk 'NR == 1 || NR % 1000 == 0' | tr "\t" "\n" | gzip > wgs.R1.subsampled.fastq.gz &
 
 # Reverse (R2) reads
-zcat /home/data/wgs.R2.fastq.gz | awk '{printf("%s",$0); n++; if(n%4==0){
+zcat /home/data/fastq/wgs.R2.fastq.gz | awk '{printf("%s",$0); n++; if(n%4==0){
 printf("\n")}else{printf("\t")} }' | awk 'NR == 1 || NR % 1000 == 0' | tr "\t" "\n" | gzip > wgs.R2.subsampled.fastq.gz &
 ```
