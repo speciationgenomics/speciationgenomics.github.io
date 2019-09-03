@@ -6,12 +6,20 @@ permalink: /Treemix/
 
 `treemix` was written by Joseph K. Pickrell and Jonathan K. Pritchard and is available [here](https://bitbucket.org/nygcresearch/treemix/wiki/Home). If given a set of allele frequencies from a number of populations, it will return the maximum likelihood tree for the set of populations, and optionally attempt to infer a number of admixture events.
 
-It assumes unlinked SNPs and we are thus first going to prune the file for SNPs in high LD. We learned how to do this previously in more detail in the [PCA tutorial](https://speciationgenomics.github.io/pca/), but we will repeat it again here. One could also account for linkage in `treemix` by setting `-k 1000` - i.e setting a large blocksize for the jacknife resampling. However, our current SNP dataset is too large for us anyway. Furthermore, `treemix` does not like missing data. We can therefore remove sites with missing data and perform linkage pruning all in one go. We will use an [LD-pruning script](https://github.com/speciationgenomics/scripts/blob/master/ldPruning.sh) as you already know how to linkage prune.
+It assumes unlinked SNPs and we are thus first going to prune the file for SNPs in high LD. We learned how to do this previously in more detail in the [PCA tutorial](https://speciationgenomics.github.io/pca/), but we will repeat it again here. One could also account for linkage in `treemix` by setting `-k 1000` - i.e setting a large blocksize for the jacknife resampling. However, our current SNP dataset is too large for us anyway. Furthermore, `treemix` does not like missing data. We will therefore remove sites with missing data and perform linkage pruning.
 
 ```shell
 FILE=dogs
-vcftools --gzvcf $FILE.vcf.gz --max-missing 1.0 --recode --stdout | gzip > $FILE.noN.vcf.gz
-ldPruning.sh $FILE.0.1N.vcf.gz
+mkdir treemix
+cd treemix
+vcftools --gzvcf /home/data/vcf/$FILE.vcf.gz --max-missing 1 --recode --stdout | gzip > $FILE.noN.vcf.gz
+```
+ For LD-pruning, will use an [LD-pruning script](https://github.com/speciationgenomics/scripts/blob/master/ldPruning.sh) as you already know how to linkage prune.
+
+```shell
+wget https://github.com/joanam/scripts/raw/master/ldPruning.sh
+chmod +x ldPruning.sh
+./ldPruning.sh $FILE.noN.vcf.gz
 file=$FILE.ldPruned
 ```
 This reduces our dogs dataset from 13,283,544 sites to 77,216 SNPs.
@@ -19,7 +27,7 @@ This reduces our dogs dataset from 13,283,544 sites to 77,216 SNPs.
 `treemix` requires a special input format. We will use a script that generates this input file from a `vcf` and also a `clust` file - which is a file that provides the information on which sample belongs to which taxon (see [here](https://www.cog-genomics.org/plink/1.9/formats#cluster) for some further information). The `clust` file contains three columns, whereby the first and the second column indicate the name of the individual and the third column indicates the taxon name. We can thus easily generate the `clust` file from our `.pop` file that we generated previously for `ADMIXTOOLS`:
 
 ```shell
-awk '{print $1,$1,$3}' $FILE.pop > $FILE.clust
+awk '{split($1,pop,"."); print $1"\t"$1"\t"pop[2]}' dogs.ind > dogs.clust
 ```
 With this `clust` file ready, we can run the [conversion script](https://github.com/speciationgenomics/scripts/blob/master/vcf2treemix.sh):
 
@@ -36,7 +44,7 @@ do
 done
 ```
 
-Now we need to download all output files `treemix` has produced to our local machines for visualization of the results in `R`. You should also download the `plotting_funcs.R` script which allows you to plot `treemix` results.
+Now we need to download all output files `treemix` has produced to our local machines for visualization of the results in `R`. You should also download the `plotting_funcs.R` script which allows you to plot `treemix` results. This R script is provided with [`treemix`](/usr/local/apps/treemix/1.12/bin/plotting_funcs.R).
 
 In `R`, we need to load the following packages:
 
@@ -49,7 +57,7 @@ Next, we need to set the working directory and give a prefix for the file names:
 
 ```R
 setwd("~/treemix/") # of course this needs to be adjusted
-prefix="dogs.dp10.max0.25N.LDpruned."
+prefix="dogs.noN.LDpruned."
 ```
 Now, we can plot the 6 runs of `treemix` side-by-side:
 
