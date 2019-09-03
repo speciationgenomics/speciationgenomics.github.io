@@ -17,7 +17,7 @@ FILE=Pundamilia.RAD
 cd ~
 mkdir ADMIXTURE
 cd ADMIXTURE
-cp /home/ADMIXTURE/Pundamilia.RAD.vcf.gz ./
+cp /home/data/vcf/Pundamilia.RAD.vcf.gz ./
 
 # Generate the input file in plink format
 plink --vcf $FILE.vcf.gz --make-bed --out $FILE --allow-extra-chr
@@ -69,9 +69,9 @@ chmod +x plotADMIXTURE.r
 Now, let's run it like so:
 
 ```shell
-plotADMIXTURE.r -p $FILE -i $FILE.list -k 5 -l PunNyerMak,PunPundMak,PunNyerPyt,PunHybrPyt,PunPundPyt
+Rscript plotADMIXTURE.r -p $FILE -i $FILE.list -k 5 -l PunNyerMak,PunPundMak,PunNyerPyt,PunHybrPyt,PunPundPyt
 ```
 
-By default, the script generates a $FILE.png file. This can be changed with -o <output prefix>.
+By default, the script generates a tiff file that uses the same prefix as the one provided with -p. In our case $FILE.tiff. This can be changed with -o <output prefix>.
 
-Now we just need to download the `.png` file to our local machine to look at it, either using `scp` (Mac/Linux) or `Filezilla` (Windows).
+Now we just need to download the `.tiff` file to our local machine to look at it, either using `scp` (Mac/Linux) or `Filezilla` (Windows).
