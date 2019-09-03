@@ -54,10 +54,10 @@ pages:
       - title: "Detecting hybridization with treemix"
         url: /Treemix/
 
-  # - title: "Genome scans"
-  #   children:
-  #     - title: "Calculating genome-wide statistics"
-  #       url: /child-1-page-url/
+  - title: "Genome scans"
+    children:
+      - title: "Performing a simple genome scan"
+        url: /simple_genome_scan/
   #     - title: "Population genomic statistics and the divergence landscape"
   #       url: /child-2-page-url/
   #     - title: "Long-range haplotype tests of selection"
