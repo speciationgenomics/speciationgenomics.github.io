@@ -57,8 +57,8 @@ We can also run it on the whole-genome data files. As we do not need copies of t
 `fastqc` allows an output directory with the `-o` flag. We will thus just work in our home directories and run `fastqc` giving the file name with its path and specifying the output folder as the current directory (i.e. `-o ./`).
 
 ```shell
-fastqc -o ./ /home/data/wgs.R1.fastq.gz
-fastqc -o ./ /home/data/wgs.R2.fastq.gz
+fastqc -o ./ /home/data/fastq/wgs.R1.fastq.gz
+fastqc -o ./ /home/data/fastq/wgs.R2.fastq.gz
 ```
 
 Now, we need to download the html or all files to the local computer for visualization. To download files, mac and linux users can use the command `scp`, Windows users can use `FileZilla` [(see instructions here)](https://speciationgenomics.github.io/logging_on/). You can then open the html file with any internet browser.
