@@ -5,6 +5,7 @@ permalink: /sliding_windows/
 ---
 
 As SNP Fst values are very noisy, it is better to compute Fst estimates for entire regions. Selection is expected to not only affect a single SNP and the power to detect a selective sweep is thus higher for genomic regions. How large the genomic region should be depends on the SNP density, how fast linkage disequilibrium decays, how recent the sweep is and other factors. It is thus advisable to try different window sizes. Here, we will use 20 kb windows. An alternative is to use windows of fixed number of sites instead of fixed size. We will use scripts written by [Simon Martin](https://simonmartinlab.org/) which you can download [here](https://github.com/simonhmartin/genomics_general).
+Note, that the scripts by Simon are written in Python2 (not Python3 which may be standard in your working environment). If the scripts do not run, you may have to adjust the first line "#!/usr/bin/env python" to your Python2 path.
 
 First, let's convert the vcf file into Simon Martin's geno file. You can download the script [here](https://github.com/simonhmartin/genomics_general/raw/master/VCF_processing/parseVCF.py).
 
@@ -17,8 +18,8 @@ parseVCF.py -i $FILE.vcf.gz -o $FILE.geno.gz
 
 First, we will calculate pi for each species and Fst and dxy for each pair of species all in one go.
 ```shell
-popgenWindows.py -w 20000 -m 10000 -g $FILE.geno.gz -o $FILE \
-   -f phased \
+popgenWindows.py -g $FILE.geno.gz -o $FILE.Fst.Dxy.pi.csv.gz \
+   -f phased -w 20000 -m 10000 -s 20000 \
    -p PundPyt 11725.PunPundPyt,11727.PunPundPyt,11728.PunPundPyt,11729.PunPundPyt \
    -p NyerPyt 11719.PunNyerPyt,11986.PunNyerPyt,11992.PunNyerPyt,11546.PunNyerPyt \
    -p NyerMak 11591.PunNyerMak,11593.PunNyerMak,11595.PunNyerMak,11598.PunNyerMak \
@@ -26,18 +27,21 @@ popgenWindows.py -w 20000 -m 10000 -g $FILE.geno.gz -o $FILE \
    -p kivu 64253
 ```
 
-Note that -w 20000 tells popgenWindows to make windows of 20 kb with a minimum number of 10kb sites in each window (-m 10000),
+Note that -w 20000 specifies a window size of 20 kb that is sliding by 20kb (-s 20000) and -m 10000 requests these windows to have a minimum number of 10kb sites covered. The way we have encoded the genotypes (e.g. A/T) in our geno.gz file is called "phased" and we specify that with "-f phased" even though our data is actually not phased.
 
 Next, we calculate fd to test for introgression from the original Pundamilia nyererei (NyerMak)  into P. sp. "nyererei-like" (NyerPyt) using the Lake Kivu cichlid as outgroup. fd is a measure of introgression suitable for small windows. As the output file will not retain any information on which combination of species was used for the test, I like to add this information to the file name.
 
 ```shell
-ABBABABAwindows.py -w 20000 -m 10000 -s 20000 -g $FILE.geno.gz -o $FILE.PundP.NyerP.NyerM.Kivu \
-   -f phased --minData 0.5 --writeFailedWindows\
+ABBABABAwindows.py -w 20000 -m 10 -s 20000 -g $FILE.geno.gz \
+   -o $FILE.PundP.NyerP.NyerM.Kivu.fd.csv.gz \
+   -f phased --minData 0.5 --writeFailedWindows \
    -P1 PundPyt 11725.PunPundPyt,11727.PunPundPyt,11728.PunPundPyt,11729.PunPundPyt \
    -P2 NyerPyt 11719.PunNyerPyt,11986.PunNyerPyt,11992.PunNyerPyt,11546.PunNyerPyt \
    -P3 NyerMak 11591.PunNyerMak,11593.PunNyerMak,11595.PunNyerMak,11598.PunNyerMak \
    -O kivu 64253
 ```
+
+For this script we need specify that at least 50% of the individuals of each population need to have data for a site to be considered (--minData 0.5) and we reduce m to 10 as it only considers polymorphic sites.
 
 To plot the results, we need to download the output files that the two scripts produced to plot it on our local computers with R. Please download all files found in the genome_scan folder: /home/data/genome_scan/*
 
