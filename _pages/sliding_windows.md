@@ -1,5 +1,5 @@
 ---
-title: "Sliding window Fst, pi, dxy, fd"
+title: "Sliding window differentiation, variance and introgression"
 layout: archive
 permalink: /sliding_windows/
 ---
