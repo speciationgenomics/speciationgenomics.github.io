@@ -46,19 +46,21 @@ done
 
 Now we need to download all output files `treemix` has produced to our local machines for visualization of the results in `R`. You should also download the `plotting_funcs.R` script which allows you to plot `treemix` results. This R script is provided with [`treemix`](/usr/local/apps/treemix/1.12/bin/plotting_funcs.R). In addition, you need to download /home/data/vcf/dogs.list which just contains all the populations/breeds (one per line).
 
-In `R`, we need to load the following packages:
+First, we need to set the working directory and give a prefix for the file names:
+
+```R
+setwd("~/treemix/") # of course this needs to be adjusted
+prefix="dogs.LDpruned"
+```
+
+We also need to load the following packages:
 
 ```R
 library(RColorBrewer)
 library(R.utils)
 source("plotting_funcs.R") # here you need to add the path
 ```
-Next, we need to set the working directory and give a prefix for the file names:
 
-```R
-setwd("~/treemix/") # of course this needs to be adjusted
-prefix="dogs.LDpruned"
-```
 Now, we can plot the 6 runs of `treemix` side-by-side:
 
 ```R
