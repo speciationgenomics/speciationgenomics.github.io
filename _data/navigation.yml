@@ -31,7 +31,7 @@ pages:
         url: /variant_calling/
       - title: "Filtering and handling VCFs"
         url: /filtering_vcfs/
-      - title: "Checking for contamination, PCR errors etc."
+      - title: "Checking for PCR duplication problems, contamination, etc."
         url: /allelicBalance/
 
   - title: "Learning R"
