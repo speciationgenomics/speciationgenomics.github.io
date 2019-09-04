@@ -10,7 +10,7 @@ However, if you cannot do that because you did single-end sequencing, PCR duplic
 
 If levels of PCR duplication are low, we expect that with increasing numbers of reads for a given individual, more and more loci are sequenced as the reads are distributed randomly among loci. At some threshold of number of reads all loci should be present in an individual. Adding more reads will only increase sequencing depth but not number of loci as all loci are already sequenced. If levels of PCR duplication are very high, the number of loci does not increase as quickly with the number of reads as expected. This is because the reads are not random samples of the different loci but are pseudo-replicates of a limited number of starting fragments.
 
-To check this, we can plot the number of reads against the number of RAD loci. Joana Meier wrote a [script](https://github.com/joanam/scripts/raw/master/createRADmappingReport.sh) to do this.
+To check this, we can plot the number of reads against the number of RAD loci. Note, this does not work with whole-genome data. Joana Meier wrote a [script](https://github.com/joanam/scripts/raw/master/createRADmappingReport.sh) to do this on RAD data.
 
 You can run it without any arguments in your folder where you have the bam files. It will generate a mapping report which contains the number of reads and RAD loci found in each individual.
 
@@ -29,7 +29,7 @@ I would then plot for each individual the number of loci with at least 10 reads 
 In this example figure, each dot is an individual and the colour and symbol indicates to which library it belongs. Some libraries performed very well which can be seen as a fast increase of number of loci with number of reads. At about 1 million reads, most individuals reach the total number of RAD loci and therefore the number of loci does not increase anymore with increasing number of reads. However, an individual in the bad libraries highlighted on the bottom with 1 million reads has way less loci. This is because a large proportion of the reads represent PCR duplicates of only a few DNA fragments. The intermediate circle shows individuals that are well-sequenced but they have less loci because they are divergent from the reference genome. Some of their RAD loci are too divergent to map to the reference and are thus missing. If these samples were equally divergent from the reference as the other samples, their position in the plot would indicate high PCR duplication levels.
 
 
-## allelic balance
+## Using allelic balance at heterozygotes to detect contamination
 
 Heterozygote positions can be very useful to detect contamination, high PCR error prevalence, Illumina index switching or other issues generating erroneous heterozygotes such as paralogous regions. Without PCR duplicates and other issues, the reads at any genotype should reflect independent copies of the maternal and paternally inherited genes.
 
