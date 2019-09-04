@@ -10,21 +10,23 @@ First, let's convert the vcf file into Simon Martin's geno file. You can downloa
 
 ```shell
 cd ~/genome_scans
-cp /home/data/vcf/Pundamilia.outgroups.chr20.vcf.gz ./
-FILE="Pundamilia.outgroups.chr20"
+FILE="Pundamilia.Kivu.chr20"
+cp /home/data/vcf/Pundamilia.Kivu.chr20.vcf.gz ./
 parseVCF.py -i $FILE.vcf.gz -o $FILE.geno.gz
 ```
 
 First, we will calculate pi for each species and Fst and dxy for each pair of species all in one go.
 ```shell
-popgenWindows.py -w 20000 -m 10000 -s 20000 -g $FILE.geno.gz -o $FILE \
-   -f phased -minData 0.5 \
+popgenWindows.py -w 20000 -m 10000 -g $FILE.geno.gz -o $FILE \
+   -f phased \
    -p PundPyt 11725.PunPundPyt,11727.PunPundPyt,11728.PunPundPyt,11729.PunPundPyt \
    -p NyerPyt 11719.PunNyerPyt,11986.PunNyerPyt,11992.PunNyerPyt,11546.PunNyerPyt \
    -p NyerMak 11591.PunNyerMak,11593.PunNyerMak,11595.PunNyerMak,11598.PunNyerMak \
    -p PundMak 13069.PunPundMak,10558.PunPundMak,10560.PunPundMak,11297.PunPundMak \
    -p kivu 64253
 ```
+
+Note that -w 20000 tells popgenWindows to make windows of 20 kb with a minimum number of 10kb sites in each window (-m 10000),
 
 Next, we calculate fd to test for introgression from the original Pundamilia nyererei (NyerMak)  into P. sp. "nyererei-like" (NyerPyt) using the Lake Kivu cichlid as outgroup. fd is a measure of introgression suitable for small windows. As the output file will not retain any information on which combination of species was used for the test, I like to add this information to the file name.
 
