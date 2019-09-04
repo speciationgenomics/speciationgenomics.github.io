@@ -49,8 +49,8 @@ pages:
         url: /pca/
       - title: "Detecting structure with ADMIXTURE"
         url: /ADMIXTURE/
-      - title: "Detecting hybridization with ADMIXTOOLS"
-        url: /ADMIXTOOLS/
+      - title: "Detecting hybridization with ADMIXTOOLS & admixr"
+        url: /ADMIXTOOLS_admixr/
       - title: "Detecting hybridization with treemix"
         url: /Treemix/
 
