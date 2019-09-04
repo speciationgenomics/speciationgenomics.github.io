@@ -14,7 +14,7 @@ mkdir treemix
 cd treemix
 vcftools --gzvcf /home/data/vcf/$FILE.vcf.gz --max-missing 1 --recode --stdout | gzip > $FILE.noN.vcf.gz
 ```
- For LD-pruning, will use an [LD-pruning script](https://github.com/speciationgenomics/scripts/blob/master/ldPruning.sh) as you already know how to linkage prune.
+ For LD-pruning, you can use the [LD-pruning script](https://github.com/speciationgenomics/scripts/blob/master/ldPruning.sh) as you already know how to linkage prune.
 
 ```shell
 wget https://github.com/joanam/scripts/raw/master/ldPruning.sh
@@ -57,7 +57,7 @@ Next, we need to set the working directory and give a prefix for the file names:
 
 ```R
 setwd("~/treemix/") # of course this needs to be adjusted
-prefix="dogs" # or "dogs.noN.LDpruned"
+prefix="dogs.LDpruned"
 ```
 Now, we can plot the 6 runs of `treemix` side-by-side:
 
