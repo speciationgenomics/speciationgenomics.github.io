@@ -30,14 +30,14 @@ mv $FILE.bim.tmp $FILE.bim
 Now, we are ready to run `ADMIXTURE`. We will run it with cross-validation (the default is 5-fold CV, for higher, choose e.g. `cv=10`) and `K=2`.
 
 ```shell
-admixture --cv $FILE.bed 2
+admixture --cv $FILE.bed 2 > log2.out
 ```
  `ADMIXTURE` produced 2 files: `.Q` which contains cluster assignments for each individual and `.P` which contains for each SNP the population allele frequencies.
 
-Let's run it in a for loop with `K=2` to `K=5` and direct the output into log files
+Let's now run it in a for loop with `K=2` to `K=5` and direct the output into log files
 
 ```shell
-for i in {3..5}
+for i in {2..5}
 do
  admixture --cv $FILE.bed $i > log${i}.out
 done
