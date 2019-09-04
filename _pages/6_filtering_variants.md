@@ -93,10 +93,10 @@ OUT=~/vcftools/cichlid_subset
 
 #### Calculate allele frequency
 
-First we will calculate the allele frequency for each variant. The `--freq2` just outputs the frequencies without information about the alleles, `--freq` would return their identity.
+First we will calculate the allele frequency for each variant. The `--freq2` just outputs the frequencies without information about the alleles, `--freq` would return their identity. We need to add max-alleles 2 to exclude sites that have more than two alleles.
 
 ```shell
-vcftools --gzvcf $SUBSET_VCF --freq2 --out $OUT
+vcftools --gzvcf $SUBSET_VCF --freq2 --out $OUT --max-alleles 2
 ```
 
 #### Calculate mean depth per individual
