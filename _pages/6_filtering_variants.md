@@ -96,7 +96,7 @@ OUT=~/vcftools/cichlid_subset
 First we will calculate the allele frequency for each variant. The `--freq2` just outputs the frequencies without information about the alleles, `--freq` would return their identity.
 
 ```shell
-vcftools --gzvcf SUBSET_VCF --freq2 --out $OUT
+vcftools --gzvcf $SUBSET_VCF --freq2 --out $OUT
 ```
 
 #### Calculate mean depth per individual
@@ -104,21 +104,21 @@ vcftools --gzvcf SUBSET_VCF --freq2 --out $OUT
 Next we calculate the mean depth of coverage per individual.
 
 ```shell
-vcftools --gzvcf SUBSET_VCF --depth --out $OUT
+vcftools --gzvcf $SUBSET_VCF --depth --out $OUT
 ```
 #### Calculate mean depth per variant
 
 Similarly, we also estimate the mean depth of coverage for each variant.
 
 ```shell
-vcftools --gzvcf SUBSET_VCF --site-mean-depth --out $OUT
+vcftools --gzvcf $SUBSET_VCF --site-mean-depth --out $OUT
 ```
 #### Calculate site quality
 
 We additionaly extract the site quality score for each variant.
 
 ```shell
-vcftools --gzvcf SUBSET_VCF --site-quality --out $OUT
+vcftools --gzvcf $SUBSET_VCF --site-quality --out $OUT
 ```
 
 #### Calculate proportion of missing data per individual
@@ -126,7 +126,7 @@ vcftools --gzvcf SUBSET_VCF --site-quality --out $OUT
 Another individual level statistic - we calculate the proportion of missing data per sample.
 
 ```shell
-vcftools --gzvcf SUBSET_VCF --missing-indv --out $OUT
+vcftools --gzvcf $SUBSET_VCF --missing-indv --out $OUT
 ```
 
 #### Calculate proportion of missing data per site
@@ -134,7 +134,7 @@ vcftools --gzvcf SUBSET_VCF --missing-indv --out $OUT
 And more missing data, just this time per site rather than per individual.
 
 ```shell
-vcftools --gzvcf SUBSET_VCF --missing-site --out $OUT
+vcftools --gzvcf $SUBSET_VCF --missing-site --out $OUT
 ```
 ---
 
