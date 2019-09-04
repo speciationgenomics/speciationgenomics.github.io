@@ -62,8 +62,6 @@ pages:
          url: /sliding_windows/
   #     - title: "Long-range haplotype tests of selection"
   #       url: /REHH/
-  #     - title: "Introgression statistics"
-  #       url: /child-3-page-url/
 
   - title: "Demographic inference"
     children:
