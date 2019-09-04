@@ -44,7 +44,7 @@ do
 done
 ```
 
-Now we need to download all output files `treemix` has produced to our local machines for visualization of the results in `R`. You should also download the `plotting_funcs.R` script which allows you to plot `treemix` results. This R script is provided with [`treemix`](/usr/local/apps/treemix/1.12/bin/plotting_funcs.R).
+Now we need to download all output files `treemix` has produced to our local machines for visualization of the results in `R`. You should also download the `plotting_funcs.R` script which allows you to plot `treemix` results. This R script is provided with [`treemix`](/usr/local/apps/treemix/1.12/bin/plotting_funcs.R). In addition, you need to download /home/data/vcf/dogs.list which just contains all the populations/breeds (one per line).
 
 In `R`, we need to load the following packages:
 
