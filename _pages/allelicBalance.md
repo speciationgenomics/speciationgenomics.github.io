@@ -1,8 +1,35 @@
 ---
-title: "Checking for contamination, PCR errors etc."
+title: "Checking for PCR duplication problems, contamination, etc."
 layout: archive
 permalink: /allelicBalance/
 ---
+
+## Checking for levels of PCR duplication
+Any protocol that uses a PCR step can have problems with PCR duplication. If one does paired-end sequencing, the fragment end position may allow us to filter PCR duplicates out. For that you can use tools such as Picard tools' [MarkDuplicates](https://software.broadinstitute.org/gatk/documentation/tooldocs/4.0.4.0/picard_sam_markduplicates_MarkDuplicates.php).
+However, if you cannot do that because you did single-end sequencing, PCR duplicates may be a problem. The usual expectation is that different reads covering a site stem from different cells. However, if some of the reads actually go back to the same fragment that was amplified by PCR, the reads are not independent samples. If a genotype has 20 reads that all support the same allele, one would be certain that it is homozygous. Missing the second allele with 15 reads is unlikely. However, if in fact the 15 reads stem from the same original DNA fragment that was amplified by PCR, i.e. the reads represent different PCR duplicates, missing the second allele is highly likely. We cannot trust genotypes with high PCR duplication levels.
+
+If levels of PCR duplication are low, we expect that with increasing numbers of reads for a given individual, more and more loci are sequenced as the reads are distributed randomly among loci. At some threshold of number of reads all loci should be present in an individual. Adding more reads will only increase sequencing depth but not number of loci as all loci are already sequenced. If levels of PCR duplication are very high, the number of loci does not increase as quickly with the number of reads as expected. This is because the reads are not random samples of the different loci but are pseudo-replicates of a limited number of starting fragments.
+
+To check this, we can plot the number of reads against the number of RAD loci. Joana Meier wrote a [script](https://github.com/joanam/scripts/raw/master/createRADmappingReport.sh) to do this.
+
+You can run it without any arguments in your folder where you have the bam files. It will generate a mapping report which contains the number of reads and RAD loci found in each individual.
+
+```shell
+createRADmappingReport.sh
+```
+
+The mapping report has the following columns:
+sample sampleLib mappedReads lociN meanDepth lociNmin10reads meanDepthMin10reads
+
+As I call the samples as 123.PunNyer.lib1, the first column will give the sample name (123.PunNyer) and the second column gives the full name. If you have a different naming scheme without "." in the sample name, the two columns will likely be the same. The next column gives you the number of mapped reads per individual, then the number of RAD loci sequenced, and the mean depth at all of these loci. The last two columns give the number of loci with at least 10 reads and the mean depth at those loci.
+
+I would then plot for each individual the number of loci with at least 10 reads against the number of reads:
+![](/images/PCRduplicates/Fig1.png)
+
+In this example figure, each dot is an individual and the colour and symbol indicates to which library it belongs. Some libraries performed very well which can be seen as a fast increase of number of loci with number of reads. At about 1 million reads, most individuals reach the total number of RAD loci and therefore the number of loci does not increase anymore with increasing number of reads. However, an individual in the bad libraries highlighted on the bottom with 1 million reads has way less loci. This is because a large proportion of the reads represent PCR duplicates of only a few DNA fragments. The intermediate circle shows individuals that are well-sequenced but they have less loci because they are divergent from the reference genome. Some of their RAD loci are too divergent to map to the reference and are thus missing. If these samples were equally divergent from the reference as the other samples, their position in the plot would indicate high PCR duplication levels.
+
+
+## allelic balance
 
 Heterozygote positions can be very useful to detect contamination, high PCR error prevalence, Illumina index switching or other issues generating erroneous heterozygotes such as paralogous regions. Without PCR duplicates and other issues, the reads at any genotype should reflect independent copies of the maternal and paternally inherited genes.
 
