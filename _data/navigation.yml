@@ -58,8 +58,8 @@ pages:
     children:
       - title: "Performing a simple genome scan"
         url: /simple_genome_scan/
-  #     - title: "Population genomic statistics and the divergence landscape"
-  #       url: /child-2-page-url/
+      - title: "Sliding window Fst, dxy, pi, fd"
+         url: /sliding_windows/
   #     - title: "Long-range haplotype tests of selection"
   #       url: /REHH/
   #     - title: "Introgression statistics"
