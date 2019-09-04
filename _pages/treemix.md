@@ -20,16 +20,16 @@ vcftools --gzvcf /home/data/vcf/$FILE.vcf.gz --max-missing 1 --recode --stdout |
 wget https://github.com/joanam/scripts/raw/master/ldPruning.sh
 chmod +x ldPruning.sh
 ./ldPruning.sh $FILE.noN.vcf.gz
-file=$FILE.ldPruned
+gzip $FILE.noN.LDpruned.vcf
+FILE=$FILE.LDpruned
 ```
-This reduces our dogs dataset from 13,283,544 sites to 77,216 SNPs.
 
 `treemix` requires a special input format. We will use a script that generates this input file from a `vcf` and also a `clust` file - which is a file that provides the information on which sample belongs to which taxon (see [here](https://www.cog-genomics.org/plink/1.9/formats#cluster) for some further information). The `clust` file contains three columns, whereby the first and the second column indicate the name of the individual and the third column indicates the taxon name. We can thus easily generate the `clust` file from our `.pop` file that we generated previously for `ADMIXTOOLS`:
 
 ```shell
-awk '{split($1,pop,"."); print $1"\t"$1"\t"pop[2]}' dogs.ind > dogs.clust
+bcftools query -l $FILE.vcf.gz | awk '{split($1,pop,"."); print $1"\t"$1"\t"pop[2]}' > dogs.clust
 ```
-With this `clust` file ready, we can run the [conversion script](https://github.com/speciationgenomics/scripts/blob/master/vcf2treemix.sh):
+With this `clust` file ready, we can run the [conversion script](https://github.com/speciationgenomics/scripts/blob/master/vcf2treemix.sh). This script requires plink2treemix.py from [here](https://bitbucket.org/nygcresearch/treemix/downloads/plink2treemix.py):
 
 ```shell
 vcf2treemix.sh $FILE.vcf.gz $FILE.clust
@@ -57,14 +57,14 @@ Next, we need to set the working directory and give a prefix for the file names:
 
 ```R
 setwd("~/treemix/") # of course this needs to be adjusted
-prefix="dogs.noN.LDpruned."
+prefix="dogs" # or "dogs.noN.LDpruned"
 ```
 Now, we can plot the 6 runs of `treemix` side-by-side:
 
 ```R
 par(mfrow=c(2,3))
 for(edge in 0:5){
-  plot_tree(cex=0.8,paste0(prefix,edge))
+  plot_tree(cex=0.8,paste0(prefix,".",edge))
   title(paste(edge,"edges"))
 }
 ```
@@ -73,6 +73,6 @@ To check which parts of the tree are not well modelled for the different runs, w
 
 ```R
 for(edge in 0:5){
- plot_resid(stem=paste0(prefix,edge),pop_order="dogs.list")
+ plot_resid(stem=paste0(prefix,".",edge),pop_order="dogs.list")
 }
 ```
