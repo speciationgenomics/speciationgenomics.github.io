@@ -51,8 +51,8 @@ mkdir fastsimcoal
 cd fastsimcoal
 mkdir early_geneflow
 cd early_geneflow
-cp /home/fastsimcoal/early_geneflow/* ./
-fsc -t ${PREFIX}.tpl -e ${PREFIX}.est -m -0 -C 10 -n 10000 -L 40 -s 0 -M
+cp /home/data/fastsimcoal2/early_geneflow/* ./
+fsc26 -t ${PREFIX}.tpl -e ${PREFIX}.est -m -0 -C 10 -n 10000 -L 40 -s 0 -M
 ```
 
 This command runs `fastsimcoal` using a MAF (`-m`) while ignoring monomorphic sites (`-0`) and SFS entries with less than 10 SNPs (`-C`). This means that entries with less than 10 SNPs are pooled together. This option is useful when there are many entries in the observed SFS with few SNPs and with a limited number of SNPS to avoid overfitting.
@@ -84,7 +84,7 @@ Due to time constraints, we will only run this model 5 times. Note, I added the 
    mkdir run$i
    cp ${PREFIX}.tpl ${PREFIX}.est ${PREFIX}_jointMAFpop1_0.obs run$i"/"
    cd run$i
-   fsc -t ${PREFIX}.tpl -e ${PREFIX}.est -m -0 -C 10 -n 10000 -L 40 -s0 -M -q
+   fsc26 -t ${PREFIX}.tpl -e ${PREFIX}.est -m -0 -C 10 -n 10000 -L 40 -s0 -M -q
    cd ..
  done
 ```
@@ -95,7 +95,7 @@ To find the best run, i.e. the run with the highest likelihood, or better the sm
 cat run{1..5}/${PREFIX}/${PREFIX}.bestlhoods | grep -v MaxObsLhood | awk '{print NR,$8}' | sort -k 2
 ```
 
-I wrote a script for you that automatically extracts the files of the best run and copies them into a new folder which it calls `bestrun`. Just run it in the directory where all the folders run are located:
+Joana wrote a [script](https://github.com/speciationgenomics/scripts/raw/master/fsc-selectbestrun.sh) for you that automatically extracts the files of the best run and copies them into a new folder which it calls `bestrun`. Just run it in the directory where all the folders run are located:
 
 ```shell
 fsc-selectbestrun.sh
@@ -103,22 +103,23 @@ fsc-selectbestrun.sh
 
 ### Model comparison with AIC
 
-In order to find the best model, the likelihoods of the best run of each model should be compared. Comparing raw likelihoods is problematic, because a model with more parameters will always tend to result in a better fit to the data. Therefore, the (Akaike information criterium)[https://en.wikipedia.org/wiki/Akaike_information_criterion] or AIC is typically calculated to determine if the models differ in their likelihoods accounting for the number of parameters in each model.
+In order to find the best model, the likelihoods of the best run of each model should be compared. Comparing raw likelihoods is problematic, because a model with more parameters will always tend to result in a better fit to the data. Therefore, the (Akaike information criterium)[https://en.wikipedia.org/wiki/Akaike_information_criterion] or AIC is typically calculated to determine if the models differ in their likelihoods accounting for the number of parameters in each model. Also for this you can use a [script](https://github.com/speciationgenomics/scripts/blob/master/calculateAIC.sh) that is mostly based on R code by [Vitor Sousa](http://ce3c.ciencias.ulisboa.pt/member/vitorsousa).
 
 ```shell
 cd bestrun/
 calculateAIC.sh early_geneflow
 ```
+This script generates a file ${PREFIX}.AIC which contains the delta likelihood and the AIC value for that run.
 
 ### Visualize the model fit
 
 To visualize the fit of the simulated SFS to the data, we can use an `R` script that David Marques wrote - `SFStools.r` - which you can download here)[https://github.com/marqueda/SFS-scripts/].
 
-To visualize the model with the best parameter estimates, we can use one of my R scripts - `plotModel.r`.
+To visualize the model with the best parameter estimates, we can use one of Joana Meier's R scripts - [`plotModel.r`]() .
 
 ```shell
 SFStools.r -t print2D -i early_geneflow
-plotModel.r -i early_geneflow -p NyerMak,PundMak
+plotModel.r -p early_geneflow -l NyerMak,PundMak
 ```
 Now, let's download the pdfs these scripts generated.
 
