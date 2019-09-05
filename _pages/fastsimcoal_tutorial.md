@@ -31,9 +31,9 @@ In this tutorial, we will first write a model of two species that diverged in th
 
 ### Estimation file
 
-All keywords introduced in the template file need to defined in the estimation file. For each keyword, the parameter distribution (uniform or log-uniform) and search range (min and max) are given on a single line. Each parameter can be an integer or a float, as specified by a first indicator variable.
+All keywords introduced in the template file need to be defined in the estimation file. For each keyword, the parameter distribution (uniform or log-uniform) and search range (min and max) are given on a single line. Each parameter can be an integer or a float, as specified by a first indicator variable.
 
-It is also possible to specify rules which limit the possible parameter values. Typically, they are used to restrict a parameter to be smaller than another one. As an example, the parameter specifying the size before the bottleneck may be restricted to be at least ten times as large than the population size at the bottleneck. In more complex models, you might use rules to specify that a species pair may be required to split before another species pair.
+It is also possible to specify rules which limit the possible parameter values. Typically, they are used to restrict a parameter to be smaller than another one. As an example, the parameter specifying the size before the bottleneck may be restricted to be at least ten times as large as the population size at the bottleneck. In more complex models, you might use rules to specify that a species pair may be required to split before another species pair.
 
 Lastly, complex parameters can be used to compute parameter values with simple operations such as computing the ratio between two simple parameters or specifying a parameter as the minimum of two parameters. In addition, for each simple or complex parameter, one needs to specify if the parameter value should be written into an output file or not.
 
@@ -89,7 +89,7 @@ Due to time constraints, we will only run this model 5 times. Note, I added the 
  done
 ```
 
-To find the best run, i.e. the run with the highest likelihood, or better the smallest difference between the maximum possible likelihood (`MaxObsLhood`) and the obtained likelihood (`MaxEstLhood`), we can check at the `.bestlhoods`. It will be a different run for each of you.
+To find the best run, i.e. the run with the highest likelihood, or better the smallest difference between the maximum possible likelihood (`MaxObsLhood`) and the obtained likelihood (`MaxEstLhood`), we can check the `.bestlhoods` files.
 
 ```shell
 cat run{1..5}/${PREFIX}/${PREFIX}.bestlhoods | grep -v MaxObsLhood | awk '{print NR,$8}' | sort -k 2
