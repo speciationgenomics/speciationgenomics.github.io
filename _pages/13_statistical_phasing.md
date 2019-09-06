@@ -4,11 +4,11 @@ layout: archive
 permalink: /phasing/
 ---
 
-There are several applications in speciation genomics where we require **phased data**. For example for selection scans or some demographic analyses. The most accurate way to phase is to sequence (**parent-offspring trios**)[https://genome.cshlp.org/content/23/1/142.full.html]. However this is simply not possible for a large number of study systems. As an alternative, we can instead (statistically phase)[https://www.ncbi.nlm.nih.gov/pmc/articles/PMC3217888/] using computational methods.
+There are several applications in speciation genomics where we require **phased data**. For example for selection scans or some demographic analyses. The most accurate way to phase is to sequence [**parent-offspring trios**](https://genome.cshlp.org/content/23/1/142.full.html). However this is simply not possible for a large number of study systems. As an alternative, we can instead [statistically phase](https://www.ncbi.nlm.nih.gov/pmc/articles/PMC3217888/) using computational methods.
 
-There are several different packages available for phasing such as (BEAGLE)[https://faculty.washington.edu/browning/beagle/beagle.html] and (fastPHASE)[http://scheet.org/software.html]. For this tutorial, we will use (shapeit2)[http://mathgen.stats.ox.ac.uk/genetics_software/shapeit/shapeit.html]. Note that there are more (recent versions of shapeit)[https://jmarchini.org/shapeit3/] available but these typically only offer significant improvements if you have very large sample sizes (i.e. 100s or 1000s of individuals).
+There are several different packages available for phasing such as [BEAGLE](https://faculty.washington.edu/browning/beagle/beagle.html) and [fastPHASE](http://scheet.org/software.html). For this tutorial, we will use [shapeit2](http://mathgen.stats.ox.ac.uk/genetics_software/shapeit/shapeit.html). Note that there are more [recent versions of shapeit](https://jmarchini.org/shapeit3/) available but these typically only offer significant improvements if you have very large sample sizes (i.e. 100s or 1000s of individuals).
 
-Our aim in this tutorial is to phase whole genome resequencing data from house sparrows (*Passer domesticus domesticus*) and a wild subspecies, the Bactrianius sparrow (*Passer domesticus bactrianus*). The dataset is taken from (Ravinet *et al* (2018))[https://royalsocietypublishing.org/doi/full/10.1098/rspb.2018.1246]. We will ultimately use this phased data to perform a selection scan using extended haplotype statistics.
+Our aim in this tutorial is to phase whole genome resequencing data from house sparrows (*Passer domesticus domesticus*) and a wild subspecies, the Bactrianius sparrow (*Passer domesticus bactrianus*). The dataset is taken from [Ravinet *et al* (2018)](https://royalsocietypublishing.org/doi/full/10.1098/rspb.2018.1246). We will ultimately use this phased data to perform a selection scan using extended haplotype statistics.
 
 ### Getting the data
 
@@ -44,7 +44,7 @@ bcftools index -n $VCF
 
 ### Phasing the data
 
-As we mentioned previously, `shapeit` is a tool for (statistically estimating haplotype phase from genotypes)[https://en.wikipedia.org/wiki/Haplotype_estimation]. Phasing is actually quite easy to do - what is much harder is knowing whether you did it correctly...
+As we mentioned previously, `shapeit` is a tool for [statistically estimating haplotype phase from genotypes](https://en.wikipedia.org/wiki/Haplotype_estimation). Phasing is actually quite easy to do - what is much harder is knowing whether you did it correctly...
 
 Before we run our phasing, let's create an output environmental variable using string manipulation. Here is a little reminder:
 
