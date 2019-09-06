@@ -10,6 +10,7 @@ Note, that the scripts by Simon are written in Python2 (not Python3 which may be
 First, let's convert the vcf file into Simon Martin's geno file. You can download the script [here](https://github.com/simonhmartin/genomics_general/raw/master/VCF_processing/parseVCF.py).
 
 ```shell
+mkdir ~/genome_scans
 cd ~/genome_scans
 FILE="Pundamilia.Kivu.chr20"
 cp /home/data/vcf/Pundamilia.Kivu.chr20.vcf.gz ./
@@ -40,7 +41,7 @@ ABBABABAwindows.py -w 20000 -m 10 -s 20000 -g $FILE.geno.gz \
    -P3 NyerMak 11591.PunNyerMak,11593.PunNyerMak,11595.PunNyerMak,11598.PunNyerMak \
    -O kivu 64253
 ```
-
+-T
 For this script we need specify that at least 50% of the individuals of each population need to have data for a site to be considered (--minData 0.5) and we reduce m to 10 as it only considers polymorphic sites.
 
 To plot the results, we need will use the full dataset and read it into R. You can download all files found in the genome_scan folder: /home/data/genome_scan/*
