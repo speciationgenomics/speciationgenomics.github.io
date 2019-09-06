@@ -60,6 +60,8 @@ pages:
         url: /simple_genome_scan/
       - title: "Sliding window differentiation, variance and introgression"
         url: /sliding_windows/
+      - title: "Statistical phasing with shapeit2"
+        url: /phasing/
   #     - title: "Long-range haplotype tests of selection"
   #       url: /REHH/
 
