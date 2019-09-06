@@ -144,7 +144,7 @@ cp ${model}_jointMAFpop1_0.obs ${model}_maxL_jointMAFpop1_0.obs
 # Run fastsimcoal 20 times (in reality better 100 times) to get the likelihood of the observed SFS under the best parameter values with 1 mio simulated SFS.
 for iter in {1..20}
 do
- fsc -i ${model}_maxL.par -n1000000 -m -q -0
+ fsc26 -i ${model}_maxL.par -n1000000 -m -q -0
  # Fastsimcoal will generate a new folder called ${model}_maxL and write files in there
 
  # collect the lhood values
@@ -161,11 +161,7 @@ We would now repeat this for different models: ongoing gene flow, a model withou
 Due to time constraints, we will give you the results of these models. They are in the same format as the folder we generated for the model with early gene flow. Load them into your modeling folder. Note, the `-r` flag stands for "recursive" and allows to also copy directories and their contents.
 
 ```shell
-cp -r /home/data/fastsimcoal/extramodels/* ./
-mkdir lhoods
-cd lhoods 
-cp -r /home/data/fastsimcoal/lhoods/* ./
-cp ../early_geneflow/bestrun/early_geneflow.lhoods ./
+cp -r /home/data/fastsimcoal2/extramodels/* ~/fastsimcoal/
 ```
 
 Now, let's download the likelihoods and plot them: (NB: Windows users must use `Filezilla`)
@@ -181,18 +177,17 @@ On the local computer, we can plot the likelihoods as boxplots.
 setwd()
 
 # Read in the likelihoods
-early_geneflow<-read.table("early_geneflow.lhoods")
-ongoing_geneflow<-read.table("ongoing_geneflow.lhoods")
-diff_geneflow<-read.table("diff_geneflow.lhoods")
-recent_geneflow<-read.table("recent_geneflow.lhoods")
-no_geneflow<-read.table("no_geneflow.lhoods")
+early_geneflow<-scan("early_geneflow.lhoods")
+ongoing_geneflow<-scan("ongoing_geneflow.lhoods")
+diff_geneflow<-scan("diff_geneflow.lhoods")
+recent_geneflow<-scan("recent_geneflow.lhoods")
+no_geneflow<-scan("no_geneflow.lhoods")
 
 # Plot the likelihoods
 
 par(mfrow=c(1,1))
-boxplot(range = 0,diff_geneflow$V1,recent_geneflow$V1,early_geneflow$V1,ongoing_geneflow$V1,
-        no_geneflow$V1,
-        ylab="Likelihood",xaxt="n")
+boxplot(range = 0,diff_geneflow,recent_geneflow,early_geneflow,ongoing_geneflow,
+        no_geneflow, ylab="Likelihood",xaxt="n")
 axis(side=1,at=1:5, labels=c("early+recent","recent","early","constant","no"))
 
 ```
