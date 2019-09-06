@@ -62,8 +62,8 @@ pages:
         url: /sliding_windows/
       - title: "Statistical phasing with shapeit2"
         url: /phasing/
-  #     - title: "Long-range haplotype tests of selection"
-  #       url: /REHH/
+     - title: "Identifying selection with haplotype statistics"
+        url: /haplotypes/
 
   - title: "Demographic inference"
     children:
