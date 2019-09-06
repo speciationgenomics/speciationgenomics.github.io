@@ -94,6 +94,7 @@ To find the best run, i.e. the run with the highest likelihood, or better the sm
 ```shell
 cat run{1..5}/${PREFIX}/${PREFIX}.bestlhoods | grep -v MaxObsLhood | awk '{print NR,$8}' | sort -k 2
 ```
+Note that `NR` in awk prints out the line number which here corresponds to the run number. $8 is the `MaxEstLhood` column and thus the likelihood we want to compare across different runs.
 
 Joana wrote a [script](https://github.com/speciationgenomics/scripts/raw/master/fsc-selectbestrun.sh) for you that automatically extracts the files of the best run and copies them into a new folder which it calls `bestrun`. Just run it in the directory where all the folders run are located:
 
