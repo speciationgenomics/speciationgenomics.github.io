@@ -135,23 +135,23 @@ Let's recompute the likelihood for the best run for the `early_geneflow` model.
 
 ```shell
 
-model="early_geneflow"
-cd ~/fastsimcoal/$model/bestrun
+PREFIX="early_geneflow"
+cd ~/fastsimcoal/$PREFIX/bestrun
 
 # create temporary obs file with name _maxL_MSFS.obs
-cp ${model}_jointMAFpop1_0.obs ${model}_maxL_jointMAFpop1_0.obs
+cp ${PREFIX}_jointMAFpop1_0.obs ${PREFIX}_maxL_jointMAFpop1_0.obs
 
 # Run fastsimcoal 20 times (in reality better 100 times) to get the likelihood of the observed SFS under the best parameter values with 1 mio simulated SFS.
 for iter in {1..20}
 do
- fsc26 -i ${model}_maxL.par -n1000000 -m -q -0
+ fsc26 -i ${PREFIX}_maxL.par -n1000000 -m -q -0
  # Fastsimcoal will generate a new folder called ${model}_maxL and write files in there
 
- # collect the lhood values
- sed -n '2,3p' < ./${model}_maxL/${model}_maxL.lhoods  >> ./${model}.lhoods
+ # collect the lhood values (Note that >> appends to the file, whereas > would overwrite it)
+ sed -n '2,3p' ${PREFIX}_maxL/${PREFIX}_maxL.lhoods  >> ${PREFIX}.lhoods
 
  # delete the folder with results
- rm -r ${model}_maxL/
+ rm -r ${PREFIX}_maxL/
 done
 
 ```
