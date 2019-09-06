@@ -161,10 +161,10 @@ We would now repeat this for different models: ongoing gene flow, a model withou
 Due to time constraints, we will give you the results of these models. They are in the same format as the folder we generated for the model with early gene flow. Load them into your modeling folder. Note, the `-r` flag stands for "recursive" and allows to also copy directories and their contents.
 
 ```shell
-cp -r /home/fastsimcoal/extramodels/* ./
+cp -r /home/data/fastsimcoal/extramodels/* ./
 mkdir lhoods
-cd lhoods
-cp -r /home/fastsimcoal/lhoods/* ./
+cd lhoods 
+cp -r /home/data/fastsimcoal/lhoods/* ./
 cp ../early_geneflow/bestrun/early_geneflow.lhoods ./
 ```
 
