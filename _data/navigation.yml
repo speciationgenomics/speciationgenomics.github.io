@@ -62,9 +62,9 @@ pages:
         url: /sliding_windows/
       - title: "Statistical phasing with shapeit2"
         url: /phasing/
-     - title: "Identifying selection with haplotype statistics"
+      - title: "Identifying selection with haplotype statistics"
         url: /haplotypes/
-     - title: "Identifying candidate genes"
+      - title: "Identifying candidate genes"
         url: /candidate_genes/
 
   - title: "Demographic inference"
