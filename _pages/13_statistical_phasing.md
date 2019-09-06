@@ -141,7 +141,7 @@ Note we used the `-v` flag to do an inverse `grep` - i.e. extract the opposite o
 
 ```shell
 bcftools view -S house -O z -o house_chr8.vcf.gz $VCF
-bcftools view -S bac -O z -o bac_chr8.vcf.gz
+bcftools view -S bac -O z -o bac_chr8.vcf.gz $VCF
 ```
 
 What did we do here? We used the `bcftools index` command to extract the samples for each population. The `-S` flag extracts the samples listed in each file. `-O z` specifies that we want a compressed vcf. Finally `-o` tells `bcftools` where to write the output. Now all we need to do is index the vcfs.
