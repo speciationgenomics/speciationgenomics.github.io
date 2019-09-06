@@ -27,14 +27,14 @@ popgenWindows.py -g $FILE.geno.gz -o $FILE.Fst.Dxy.pi.csv.gz \
    -p kivu 64253
 ```
 
-Note that -w 20000 specifies a window size of 20 kb that is sliding by 20kb (-s 20000) and -m 10000 requests these windows to have a minimum number of 10kb sites covered. The way we have encoded the genotypes (e.g. A/T) in our geno.gz file is called "phased" and we specify that with "-f phased" even though our data is actually not phased.
+Note that -w 20000 specifies a window size of 20 kb that is sliding by 20 kb (-s 20000) and -m 10000 requests these windows to have a minimum number of 10 kb sites covered. The way we have encoded the genotypes (e.g. A/T) in our geno.gz file is called "phased" and we specify that with "-f phased" even though our data is actually not phased.
 
-Next, we calculate fd to test for introgression from the original Pundamilia nyererei (NyerMak)  into P. sp. "nyererei-like" (NyerPyt) using the Lake Kivu cichlid as outgroup. fd is a measure of introgression suitable for small windows. As the output file will not retain any information on which combination of species was used for the test, I like to add this information to the file name.
+Next, we calculate fd to test for introgression from the original Pundamilia nyererei (NyerMak) into P. sp. "nyererei-like" (NyerPyt) using the Lake Kivu cichlid as outgroup. fd is a measure of introgression suitable for small windows. As the output file will not retain any information on which combination of species was used for the test, I like to add this information to the file name. We thus have quite a long file name.
 
 ```shell
 ABBABABAwindows.py -w 20000 -m 10 -s 20000 -g $FILE.geno.gz \
-   -o $FILE.PundP.NyerP.NyerM.Kivu.fd.csv.gz \
-   -f phased --minData 0.5 --writeFailedWindows \
+   -o $FILE.fd.PundP.NyerP.NyerM.Kivu.csv.gz \
+   -f phased --minData 0.5 --writeFailedWindow \
    -P1 PundPyt 11725.PunPundPyt,11727.PunPundPyt,11728.PunPundPyt,11729.PunPundPyt \
    -P2 NyerPyt 11719.PunNyerPyt,11986.PunNyerPyt,11992.PunNyerPyt,11546.PunNyerPyt \
    -P3 NyerMak 11591.PunNyerMak,11593.PunNyerMak,11595.PunNyerMak,11598.PunNyerMak \
@@ -43,7 +43,7 @@ ABBABABAwindows.py -w 20000 -m 10 -s 20000 -g $FILE.geno.gz \
 
 For this script we need specify that at least 50% of the individuals of each population need to have data for a site to be considered (--minData 0.5) and we reduce m to 10 as it only considers polymorphic sites.
 
-To plot the results, we need to download the output files that the two scripts produced to plot it on our local computers with R. Please download all files found in the genome_scan folder: /home/data/genome_scan/*
+To plot the results, we need will use the full dataset and read it into R. You can download all files found in the genome_scan folder: /home/data/genome_scan/*
 
 Then we can start plotting:
 
@@ -51,7 +51,7 @@ Then we can start plotting:
 # Prepare input files:
 
 # Read in the file with sliding window estimates of FST, pi and dxy
-windowStats<-read.table("Pundamilia_kivu_div_stats.csv",header=T,sep=",")
+windowStats<-read.table("Pundamilia_kivu.Fst.Dxy.pi.csv.gz",header=T,sep=",")
 
 # Remove windows with less than 10 kb covered
 windowStats<-windowStats[windowStats$sites>10000,]
