@@ -192,3 +192,50 @@ boxplot(range = 0,diff_geneflow,recent_geneflow,early_geneflow,ongoing_geneflow,
 axis(side=1,at=1:5, labels=c("early+recent","recent","early","constant","no"))
 
 ```
+
+Similarly, we should compare the AIC values and see if AIC suggests that the second-best model is significantly less good than the best model. Given that we already used the calculateAIC.r script to compute AIC values, this can easily be done.
+
+```shell
+for i in */bestrun/*AIC
+do
+echo -e `basename $i`"\t"`tail -n $i` >> allmodels.AIC
+done
+
+```
+
+Now that we know which of the models is the best one, we can do some bootstrapping to figure out how certain we are in our parameter estimates. We will use block-bootstrapping to account for linkage between SNPs:
+
+```shell
+
+# Get all lines with genomic data
+zgrep -v "^#" $FILE.vcf > $FILE.allSites
+
+# Get the header
+zgrep "^#" $FILE.vcf > header
+
+# get 100 files with 4338 sites each (number 101 removed due to only 90 sites)
+split -l 4338 $FILE.allSites $FILE.sites.
+
+# Generate 50 files each with randomly concatenated blocks and compute the SFS for each:
+for i in {1..50}
+do
+  # Add the header to our new bootstrapped vcf file
+  cat header > $FILE.bs.$i.vcf
+  # Randomly add 100 blocks
+  for r in {1..100}
+  do
+    cat `shuf -n1 -e $FILE.sites.*` >> ${FILE}.bs.$i.vcf
+  done
+  # Compress the vcf file again
+  gzip ${FILE}.bs.$i.vcf
+
+  # Make an SFS from the new bootstrapped file
+  easySFS.py -i ${FILE}.bs.$i.vcf.gz -p pop_file -a -f --proj 8,8
+
+  # Say that it is finished with iteration $i
+  echo $i" done"
+done
+
+```
+
+As the observed file needs to be called the same 
