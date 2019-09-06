@@ -18,7 +18,7 @@ library(tidyverse)
 ```
 That's it! Just the tidyverse for this section.
 
-We'll also read in the data we created in the [haplotype scan]().
+We'll also read in the data we created in the [haplotype scan](https://speciationgenomics.github.io/haplotypes/).
 
 ```r
 # read in the selection scan data
@@ -98,4 +98,4 @@ gene_hits <- gene_hits %>% select(chr, start,end, attribute,hit_dist)
 gene_hits %>% pull(attribute)
 ```
 
-So here we have [COL11A1](https://www.genecards.org/cgi-bin/carddisp.pl?gene=COL11A1) and [AMY2A](https://www.genecards.org/cgi-bin/carddisp.pl?gene=AMY2A). 
+So here we have [COL11A1](https://www.genecards.org/cgi-bin/carddisp.pl?gene=COL11A1) and [AMY2A](https://www.genecards.org/cgi-bin/carddisp.pl?gene=AMY2A).
