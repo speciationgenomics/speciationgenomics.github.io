@@ -16,22 +16,22 @@ main:
 pages:
   - title: "Learning Unix"
     children:
-      - title: "Getting used to Unix"
+      - title: "- Getting used to Unix"
         url: /getting_used_to_unix/
-      - title: "Going further with Unix"
+      - title: "- Going further with Unix"
         url: /going_further_unix/
 
   - title: "Handling NGS data"
     children:
-      - title: "Understanding NGS data"
+      - title: "- Understanding NGS data"
         url: /readsExploration/
-      - title: "Mapping to a reference genome"
+      - title: "- Mapping to a reference genome"
         url: /mapping_reference/
-      - title: "Variant calling"
+      - title: "- Variant calling"
         url: /variant_calling/
-      - title: "Filtering and handling VCFs"
+      - title: "- Filtering and handling VCFs"
         url: /filtering_vcfs/
-      - title: "Checking for PCR duplication problems, contamination, etc."
+      - title: "- Checking for PCR duplication problems, contamination, etc."
         url: /allelicBalance/
 
   - title: "Learning R"
@@ -56,8 +56,8 @@ pages:
 
   - title: "Genome scans"
     children:
-      - title: "Performing a simple genome scan"
-        url: /simple_genome_scan/
+      - title: "Computing per site Fst"
+        url: /per_site_Fst/
       - title: "Sliding window differentiation, variance and introgression"
         url: /sliding_windows/
       - title: "Statistical phasing with shapeit2"
