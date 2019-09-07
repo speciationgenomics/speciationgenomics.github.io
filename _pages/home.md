@@ -3,7 +3,7 @@ layout: archive
 permalink: /
 ---
 
-Welcome to the Physalia September 2019 course run by Mark Ravinet & Joana Meier.
+Welcome to the [Physalia](https://www.physalia-courses.org/) September 2019 course run by Mark Ravinet & Joana Meier.
 
 Follow the links on the lefthand side to take part in the course modules.
 
