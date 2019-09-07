@@ -1,7 +1,7 @@
 ---
-title: "Performing a simple genome scan"
+title: "Computing per site Fst"
 layout: archive
-permalink: /simple_genome_scan/
+permalink: /per_site_Fst/
 ---
 
 In the previous sessions, we investigated population structure and learned how to detect admixture and introgression between populations. Now we will return to our filtered, high-quality variant set stored in our VCF and learn how to calculate population differentiation.
