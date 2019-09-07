@@ -4,6 +4,15 @@ layout: archive
 permalink: /sliding_windows/
 ---
 
+There are many different ways to detect regions under divergent selection or that confer barriers to gene flow. In this tutorial, we are going to compute four of them in genomic windows:
+- pi, a measure of genetic variation
+- Fst, a measure of genomic differentiation
+- dxy, a measure of absolute divergence
+- fd, a measure of gene flow/introgression
+For a tutorial on long-range haplotype statistics, see [here](https://speciationgenomics.github.io/haplotypes/).
+
+Note that dxy and pi require monomorphic sites to be present in the dataset, whereas Fst and fd are only computed on bi-allelic sites. It is thus important to filter out indels and multi-allelic sites and to keep monomorphic sites (no maf filter).
+
 As SNP Fst values are very noisy, it is better to compute Fst estimates for entire regions. Selection is expected to not only affect a single SNP and the power to detect a selective sweep is thus higher for genomic regions. How large the genomic region should be depends on the SNP density, how fast linkage disequilibrium decays, how recent the sweep is and other factors. It is thus advisable to try different window sizes. Here, we will use 20 kb windows. An alternative is to use windows of fixed number of sites instead of fixed size. We will use scripts written by [Simon Martin](https://simonmartinlab.org/) which you can download [here](https://github.com/simonhmartin/genomics_general).
 Note, that the scripts by Simon are written in Python2 (not Python3 which may be standard in your working environment). If the scripts do not run, you may have to adjust the first line "#!/usr/bin/env python" to your Python2 path.
 
@@ -41,7 +50,8 @@ ABBABABAwindows.py -w 20000 -m 10 -s 20000 -g $FILE.geno.gz \
    -P3 NyerMak 11591.PunNyerMak,11593.PunNyerMak,11595.PunNyerMak,11598.PunNyerMak \
    -O kivu 64253
 ```
--T
+To speed up the calculation of these statistics, the script can be run on multiple threads by specifying -T <thread number>.
+
 For this script we need specify that at least 50% of the individuals of each population need to have data for a site to be considered (--minData 0.5) and we reduce m to 10 as it only considers polymorphic sites.
 
 To plot the results, we need will use the full dataset and read it into R. You can download all files found in the genome_scan folder: /home/data/genome_scan/*
