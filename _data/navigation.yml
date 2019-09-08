@@ -65,7 +65,7 @@ pages:
     children:
       - title: "- Estimating the site-frequency-spectrum"
         url: /easysfs/
-      - title: "- Demographic history with fastsimcoal2"
+      - title: "- Demographic modeling with fastsimcoal2"
         url: /fastsimcoal2/
       # - title: "Estimating past effective population size with PSMC"
       #   url: /child-3-page-url/
