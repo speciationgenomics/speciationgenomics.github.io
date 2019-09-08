@@ -208,34 +208,65 @@ Now that we know which of the models is the best one, we can do some bootstrappi
 ```shell
 
 # Get all lines with genomic data
-zgrep -v "^#" $FILE.vcf > $FILE.allSites
+zgrep -v "^#" $PREFIX.vcf > $PREFIX.allSites
 
 # Get the header
-zgrep "^#" $FILE.vcf > header
+zgrep "^#" $PREFIX.vcf > header
 
 # get 100 files with 4338 sites each (number 101 removed due to only 90 sites)
-split -l 4338 $FILE.allSites $FILE.sites.
+split -l 4338 $PREFIX.allSites $PREFIX.sites.
 
 # Generate 50 files each with randomly concatenated blocks and compute the SFS for each:
 for i in {1..50}
 do
+  # Make a new folder for each bootstrapping iteration:
+  mkdir bs$i
+  cd bs$i
+
   # Add the header to our new bootstrapped vcf file
-  cat header > $FILE.bs.$i.vcf
+  cat ../header > $PREFIX.bs.$i.vcf
   # Randomly add 100 blocks
   for r in {1..100}
   do
-    cat `shuf -n1 -e $FILE.sites.*` >> ${FILE}.bs.$i.vcf
+    cat `shuf -n1 -e ../$PREFIX.sites.*` >> ${PREFIX}.bs.$i.vcf
   done
   # Compress the vcf file again
-  gzip ${FILE}.bs.$i.vcf
+  gzip ${PREFIX}.bs.$i.vcf
 
   # Make an SFS from the new bootstrapped file
-  easySFS.py -i ${FILE}.bs.$i.vcf.gz -p pop_file -a -f --proj 8,8
+  easySFS.py -i ${PREFIX}.bs.$i.vcf.gz -p pop_file -a -f --proj 8,8
+
+  # Copy the observed SFS file into this folder renaming it to match the .tpl prefix
+  cp ../${PREFIX}_jointDAFpop1_0.obs  ${PREFIX}.bs.${i}_jointDAFpop1_0.obs
 
   # Say that it is finished with iteration $i
-  echo $i" done"
+  echo bs$i" ready"
+
+  cd ..
 done
 
 ```
 
-As the observed file needs to be called the same 
+Now we would run the parameter estimation under the best model 100 times with each of these boostrapped SFS. This would take very long.
+
+```shell
+for bs in {1..50}
+do
+  cd bs$bs
+  # Run fastsimcoal 100 times:
+  for i in {1..100}
+  do
+    mkdir run$i
+    cd run$i
+    cp ${PREFIX}.bs.$bs.* ./
+    fsc26 -t ${PREFIX}.bs.$bs.tpl -e ${PREFIX}.bs.$bs.est -m -0 -C 10 -n 10000 -L 40 -s0 -M -q
+    cd ..
+  done
+  # Find the best run:
+  fsc-selectbestrun.sh
+
+  cd ..
+done
+```
+
+Now we can compute the confidence interval, e.g. with the R package [`boot`](https://www.google.com/url?sa=t&rct=j&q=&esrc=s&source=web&cd=1&ved=2ahUKEwjZtbO087_kAhXOtVkKHSgmB-cQFjAAegQIBBAC&url=https%3A%2F%2Fcran.r-project.org%2Fweb%2Fpackages%2Fboot%2Fboot.pdf&usg=AOvVaw0NgCb6RfcuLsLuwPxxnwzU).
