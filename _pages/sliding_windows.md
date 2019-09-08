@@ -53,7 +53,7 @@ ABBABABAwindows.py -w 20000 -m 10 -s 20000 -g $FILE.geno.gz \
 ```
 To speed up the calculation of these statistics, the script can be run on multiple threads by specifying -T <thread number>.
 
-For this script we need specify that at least 50% of the individuals of each population need to have data for a site to be considered (--minData 0.5) and we reduce m to 10 as it only considers polymorphic sites.
+For this script we need to specify that at least 50% of the individuals of each population need to have data for a site to be considered (-\-minData 0.5) and we reduce m to 10 as it only considers polymorphic sites.
 
 To plot the results, we need will use the full dataset and read it into R. You can download all files found in the genome_scan folder: /home/data/genome_scan/*
 
