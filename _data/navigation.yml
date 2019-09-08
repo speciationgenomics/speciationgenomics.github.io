@@ -6,12 +6,6 @@ main:
     url: https://speciationgenomics.github.io/about/
   - title: "How to log in"
     url: https://speciationgenomics.github.io/logging_on/
-  # - title: "Sample Posts"
-  #   url: /year-archive/
-  # - title: "Sample Collections"
-  #   url: /collection-archive/
-  # - title: "Sitemap"
-  #   url: /sitemap/
 
 pages:
   - title: "Learning Unix"
