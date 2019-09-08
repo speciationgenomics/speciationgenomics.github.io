@@ -16,9 +16,9 @@ main:
 pages:
   - title: "Learning Unix"
     children:
-      - title: * Getting used to Unix
+      - title: "- Getting used to Unix"
         url: /getting_used_to_unix/
-      - title: * Going further with Unix
+      - title: "- Going further with Unix"
         url: /going_further_unix/
 
   - title: "Handling NGS data"
