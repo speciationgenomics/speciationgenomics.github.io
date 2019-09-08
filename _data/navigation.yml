@@ -56,15 +56,15 @@ pages:
 
   - title: "Genome scans"
     children:
-      - title: "- Computing per site Fst"
+      - title: "* Computing per site Fst"
         url: /per_site_Fst/
-      - title: "- Sliding window differentiation, variance and introgression"
+      - title: "* Sliding window differentiation, variance and introgression"
         url: /sliding_windows/
-      - title: "- Statistical phasing with shapeit2"
+      - title: "* Statistical phasing with shapeit2"
         url: /phasing/
-      - title: "- Identifying selection with haplotype statistics"
+      - title: "* Identifying selection with haplotype statistics"
         url: /haplotypes/
-      - title: "- Identifying candidate genes"
+      - title: "* Identifying candidate genes"
         url: /candidate_genes/
 
   - title: "Demographic inference"
