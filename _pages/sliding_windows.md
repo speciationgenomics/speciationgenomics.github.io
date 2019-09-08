@@ -9,6 +9,7 @@ There are many different ways to detect regions under divergent selection or tha
 - Fst, a measure of genomic differentiation
 - dxy, a measure of absolute divergence
 - fd, a measure of gene flow/introgression
+
 For a tutorial on long-range haplotype statistics, see [here](https://speciationgenomics.github.io/haplotypes/).
 
 Note that dxy and pi require monomorphic sites to be present in the dataset, whereas Fst and fd are only computed on bi-allelic sites. It is thus important to filter out indels and multi-allelic sites and to keep monomorphic sites (no maf filter).
