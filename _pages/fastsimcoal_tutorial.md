@@ -63,9 +63,9 @@ Once `fastsimcoal` is finished, we can have a look at the output files.
 It produced a folder called `${PREFIX}` which contains a number of new files. The most relevant files are the following:
 
 * `${PREFIX}.bestlhoods:` file with the Maximum likelihood estimates for each parameter specified "output" in the `est` file and the model likelihoods.
-* `${PREFIX}.\_jointMAFpop1\_0.txt`: file with the expected SFS obtained with the parameters that maximized the likelihood during optimization. This is needed to visually check the fit of the expected SFS to the observed SFS. This file has the same suffix as the observed SFS provided.
+* `${PREFIX}._jointMAFpop1_0.txt`: file with the expected SFS obtained with the parameters that maximized the likelihood during optimization. This is needed to visually check the fit of the expected SFS to the observed SFS. This file has the same suffix as the observed SFS provided.
 * `${PREFIX}.simparam`: file with an example of the settings to run the simulations. This is useful to check when you have errors. Many times errors in specification of models can be detected in this file.
-* `${PREFIX}\_maxL.par`: Model specification file with the best parameter estimates. It is basically the tpl file with the keywords replaced by estimated values. This file is useful if you want to simulate data under the best model using Arlequin.
+* `${PREFIX}_maxL.par`: Model specification file with the best parameter estimates. It is basically the tpl file with the keywords replaced by estimated values. This file is useful if you want to simulate data under the best model using Arlequin.
 
 Note, the bestlhoods file contains two different likelihoods: `MaxObsLhood`: is the maximum possible value for the likelihood if there was a perfect fit of the expected to the observed SFS, i.e. if the expected SFS was the relative observed SFS.
 `MaxEstLhood`: is the maximum likelihood estimated according to the model parameters.
@@ -116,7 +116,7 @@ This script generates a file ${PREFIX}.AIC which contains the delta likelihood a
 
 To visualize the fit of the simulated SFS to the data, we can use an `R` script that David Marques wrote - `SFStools.r` - which you can download here)[https://github.com/marqueda/SFS-scripts/].
 
-To visualize the model with the best parameter estimates, we can use one of Joana Meier's R scripts - [`plotModel.r`]() .
+To visualize the model with the best parameter estimates, we can use one of Joana Meier's R scripts - [plotModel.r](https://github.com/speciationgenomics/scripts/blob/master/plotModel.r).
 
 ```shell
 SFStools.r -t print2D -i early_geneflow
@@ -200,7 +200,6 @@ for i in */bestrun/*AIC
 do
 echo -e `basename $i`"\t"`tail -n $i` >> allmodels.AIC
 done
-
 ```
 
 Now that we know which of the models is the best one, we can do some bootstrapping to figure out how certain we are in our parameter estimates. We will use block-bootstrapping to account for linkage between SNPs:
@@ -244,7 +243,6 @@ do
 
   cd ..
 done
-
 ```
 
 Now we would run the parameter estimation under the best model 100 times with each of these boostrapped SFS. This would take very long.
@@ -269,4 +267,4 @@ do
 done
 ```
 
-Now we can compute the confidence interval, e.g. with the R package [`boot`](https://www.google.com/url?sa=t&rct=j&q=&esrc=s&source=web&cd=1&ved=2ahUKEwjZtbO087_kAhXOtVkKHSgmB-cQFjAAegQIBBAC&url=https%3A%2F%2Fcran.r-project.org%2Fweb%2Fpackages%2Fboot%2Fboot.pdf&usg=AOvVaw0NgCb6RfcuLsLuwPxxnwzU).
+Now we can compute the confidence interval using the parameter estimates of the bestrun files of all bootstrapping replicates, e.g. with the R package [boot](https://www.google.com/url?sa=t&rct=j&q=&esrc=s&source=web&cd=1&ved=2ahUKEwjZtbO087_kAhXOtVkKHSgmB-cQFjAAegQIBBAC&url=https%3A%2F%2Fcran.r-project.org%2Fweb%2Fpackages%2Fboot%2Fboot.pdf&usg=AOvVaw0NgCb6RfcuLsLuwPxxnwzU).
