@@ -10,7 +10,7 @@ Using alignment software, we essentially find where in the genome our reads orig
 
 ### Getting access to the reference genome
 
-We will be aligning our sequence data to the *Pundamilia nyereri* reference genome, first published by [Brawand *et al.* (2014)](https://www.nature.com/articles/nature13726) and more recently updated using a linkage map by [Feulner *et al.* (2018)](http://www.g3journal.org/content/8/7/2411).
+We will be aligning our sequence data to the *Pundamilia nyererei* reference genome, first published by [Brawand *et al.* (2014)](https://www.nature.com/articles/nature13726) and more recently updated using a linkage map by [Feulner *et al.* (2018)](http://www.g3journal.org/content/8/7/2411).
 
 You will find a copy of the reference genome in the `/home/data/reference/` directory. Make a `reference` directory in your own home directory and then copy the reference genome like so:
 
