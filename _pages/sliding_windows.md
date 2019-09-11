@@ -10,7 +10,7 @@ There are many different ways to detect regions under divergent selection or tha
 - dxy, a measure of absolute divergence
 - fd, a measure of gene flow/introgression
 
-For a tutorial on long-range haplotype statistics, see [here](https://speciationgenomics.github.io/haplotypes/).
+For a tutorial on long-range haplotype statistics to infer selective sweeps, see [here](https://speciationgenomics.github.io/haplotypes/).
 
 Note that dxy and pi require monomorphic sites to be present in the dataset, whereas Fst and fd are only computed on bi-allelic sites. It is thus important to filter out indels and multi-allelic sites and to keep monomorphic sites (no maf filter).
 
@@ -38,7 +38,7 @@ popgenWindows.py -g $FILE.geno.gz -o $FILE.Fst.Dxy.pi.csv.gz \
    -p kivu 64253
 ```
 
-Note that -w 20000 specifies a window size of 20 kb that is sliding by 20 kb (-s 20000) and -m 10000 requests these windows to have a minimum number of 10 kb sites covered. The way we have encoded the genotypes (e.g. A/T) in our geno.gz file is called "phased" and we specify that with "-f phased" even though our data is actually not phased.
+Note that -w 20000 specifies a window size of 20 kb that is sliding by 20 kb (-s 20000) and -m 10000 requests these windows to have a minimum number of 10 kb sites covered. The way we have encoded the genotypes (e.g. A/T) in our geno.gz file is called "phased" and we specify that with "-f phased" even though our data is actually not phased. Instead of writing all the individual names into the command, we could give only the species names in the code (e.g. -p pundPyt -p NyerPyt) and with `--popsFile` specify a file that contains a line for each individual with its name and species in a text file.
 
 Next, we calculate fd to test for introgression from the original Pundamilia nyererei (NyerMak) into P. sp. "nyererei-like" (NyerPyt) using the Lake Kivu cichlid as outgroup. fd is a measure of introgression suitable for small windows. As the output file will not retain any information on which combination of species was used for the test, I like to add this information to the file name. We thus have quite a long file name.
 
