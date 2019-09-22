@@ -4,7 +4,7 @@ layout: archive
 permalink: /reading_list/
 ---
 
-Throughout the course, we have mentioned some key papers that might be of interest for those wanting to learn more about the key concepts and tools we used. Here we have collated a reading list that includes those papers. * * Note - this list is not meant to be definitive, there are many other great ones available!* *
+Throughout the course, we have mentioned some key papers that might be of interest for those wanting to learn more about the key concepts and tools we used. Here we have collated a reading list that includes those papers. ** Note - this list is not meant to be definitive, there are many other great ones available!**
 
 ### Speciation genomics - general introduction
 
