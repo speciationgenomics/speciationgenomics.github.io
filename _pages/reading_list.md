@@ -25,7 +25,6 @@ Throughout the course, we have mentioned some key papers that might be of intere
 * [Burri et al 2015 Genome Research](http://genome.cshlp.org/content/25/11/1656.short)
 * [Meier et al 2017 Molecular Ecology](https://onlinelibrary.wiley.com/doi/abs/10.1111/mec.13838?casa_token=-f7i6A7QEGQAAAAA:q3b2E8vu3fNicwEkYQcRCBGIDorb5fGCp7LOFrIBSuF-_zXfSFwIZKHn-ehPqZ1jVPPDllOJWtNhrg)
 * [Meier et al 2017 Nature Communications](https://www.nature.com/articles/ncomms14363)
-* [Meier et al 2018 Molecular Biology and Evolution](https://academic.oup.com/mbe/article-abstract/35/6/1489/4958411)
 * [Martin & Jiggins 2017 Current Biology](https://www.sciencedirect.com/science/article/pii/S0959437X17300357)
 
 # Genome assembly, alignment and variant calling
@@ -50,3 +49,5 @@ Throughout the course, we have mentioned some key papers that might be of intere
 ### Genome scans
 * [Martin et al 2015 Molecular Biology and Evolution](https://academic.oup.com/mbe/article-abstract/32/1/244/2925550)
 * [Martin & Van Belleghem 2017 Genetics](https://www.genetics.org/content/206/1/429.abstract)
+* [Meier et al 2018 Molecular Biology and Evolution](https://academic.oup.com/mbe/article-abstract/35/6/1489/4958411)
+* [Stankowski et al 2019 PloS Biology](https://journals.plos.org/plosbiology/article?id=10.1371/journal.pbio.3000391&rev=2)
