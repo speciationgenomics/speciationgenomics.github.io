@@ -57,7 +57,7 @@ echo ${VCF%_u*}_phased
 OUTPUT=${VCF%_u*}_phased
 ```
 
-With this taken care of, we are ready to run `shapeit`. Note that here we are running the program only for a single chromosome - this is the most practical (and sensible) way to phase - it makes it much easier to paralellise.
+With this taken care of, we are ready to run `shapeit`. Note that here we are running the program only for a single chromosome - this is the most practical (and sensible) way to phase - it makes it much easier to parallelise.
 
 We do this like so:
 
@@ -105,7 +105,7 @@ We can then compress and index the vcf, like so:
 
 ```shell
 bgzip ${OUTPUT}.vcf
-bcftools ${OUTPUT}.vcf.gz
+bcftools index ${OUTPUT}.vcf.gz
 ```
 
 Before moving on to the next step, let's have a quick look at our phased vcf to see how it is different from a standard vcf.
