@@ -25,7 +25,7 @@ Then you should be able to log in with `ssh` whatever your working directory is.
 ssh -i "~/mark.pem" mark@54.245.175.86
 ```
 
-Of course you will need to change the log in credentials shown here (i.e. the username and keyfile name) with your own. **Also be aware that the cluster DNS address will change everyday**. We will update you on this each day.
+Of course you will need to change the log in credentials shown here (i.e. the username and keyfile name) with your own. **Also be aware that the cluster IP address will change everyday**. We will update you on this each day.
 
 You might be prompted to accept an RSA key - if so just type yes and you will log in to the cluster!
 
@@ -51,7 +51,7 @@ Where here all we did was use `scp` with cluster address first and the the locat
 
 #### Making life a bit easier
 
-If you are logging in and copying from a cluster regularly, it is sometimes good to use an `ssh` alias. Because the cluster DNS changes everyday, we will not be using these during the course. However, if you would like some information on how to set them up, see [here](https://markravinet.github.io/CEES_tips_&_tricks.html)
+If you are logging in and copying from a cluster regularly, it is sometimes good to use an `ssh` alias. Because the cluster IP address changes everyday, we will not be using these during the course. However, if you would like some information on how to set them up, see [here](https://markravinet.github.io/CEES_tips_&_tricks.html)
 
 ### Windows users
 
@@ -87,11 +87,11 @@ To avoid having to change the settings each time you log in, you can save the Pu
 
 ![](/images/putty/fig7.png)
 
-When you log in the next time, you can just click on the saved session and click load. If the DNS changed in the mean time (e.g. because we stopped the Amazon instance over night), you will need to replace the DNS by the new one. I would then recommend to Save the changed settings. Then simply click Open to start the session.
+When you log in the next time, you can just click on the saved session and click load. If the IP address changed in the mean time (e.g. because we stopped the Amazon instance over night), you will need to replace the IP address by the new one. I would then recommend to Save the changed settings. Then simply click Open to start the session.
 
 ![](/images/putty/fig8.png)
 
-If the DNS did not change and you just want to login again, you can also right-click on the putty symbol in the taskbar (provided that you have pinned it to the taskbar) and select the session.
+If the IP address did not change and you just want to login again, you can also right-click on the putty symbol in the taskbar (provided that you have pinned it to the taskbar) and select the session.
 
 ![](/images/putty/fig9.png)
 
@@ -107,7 +107,7 @@ Next, choose SFTP and Add the .pem key file as indicated below and click OK.
 
 ![](/images/putty/fig11.png)
 
-Finally, enter the IP address and the user name and when you hit enter, it should connect you. Next, time, you can use the Quickconnect dropdown menu, provided the DNS has not changed in the meantime.
+Finally, enter the IP address and the user name and when you hit enter, it should connect you. Next, time, you can use the Quickconnect dropdown menu, provided the IP address has not changed in the meantime.
 
 ![](/images/putty/fig12.png)
 
