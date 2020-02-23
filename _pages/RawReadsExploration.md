@@ -6,12 +6,12 @@ permalink: /readsExploration/
 
 ### fastq format
 
-Let's have a look at the first sequence from our raw read files which are stored in the [fastq format](https://en.wikipedia.org/wiki/FASTQ_format). As we saw in the [lecture](https://github.com/speciationgenomics/presentations/blob/master/2019-3-NGS_introduction.pdf), each DNA sequence is composed of four lines. Therefore, we need to visualize the first four lines to have a look at the information stored for the first sequence.
+Let's have a look at the first sequence from our raw read files which are stored in the [fastq format](https://en.wikipedia.org/wiki/FASTQ_format). As we saw in the [lecture](https://github.com/speciationgenomics/presentations/blob/master/2020-3-NGS_introduction.pdf), each DNA sequence is composed of four lines. Therefore, we need to visualize the first four lines to have a look at the information stored for the first sequence.
 
 First we set the name of the fastq file that we will work with as the variable `FILE`. Then, we copy that file to our directory. Finally, we will examine the first 4 lines. However, we cannot just directly write `head -4 $FILE` like we might with a normal text file because the fastq file is actually compressed. It is thus a binary file which cannot just be read. Luckily, there are many commands that can directly read binary files. Instead of `cat`, which we saw in the [Unix introduction](https://speciationgenomics.github.io/getting_used_to_unix/), we use `zcat`, instead of `grep`, we use `zgrep`. If we want to use any other command, we need to read the file with `zcat` and then pipe the output into our command of choice such as `head` or `tail`.
 
 ```shell
-FILE="RAD.fastq.gz"
+FILE="wgs.R1.fastq.gz"
 cp /home/data/fastq/${FILE} ./
 zcat ${FILE} | head -4
 ```
@@ -52,12 +52,11 @@ Let's run `fastqc` on our read subsets:
 fastqc $FILE
 ```
 
-We can also run it on the whole-genome data files. As we do not need copies of these files in all of your personal directories, we will just write the file names with the paths.
+We should now also run fastqc on the file or reverse reads. As we do not need copies of these files in all of your personal directories, we will just write the file names with the paths.
 
 `fastqc` allows an output directory with the `-o` flag. We will thus just work in our home directories and run `fastqc` giving the file name with its path and specifying the output folder as the current directory (i.e. `-o ./`).
 
 ```shell
-fastqc -o ./ /home/data/fastq/wgs.R1.fastq.gz
 fastqc -o ./ /home/data/fastq/wgs.R2.fastq.gz
 ```
 
@@ -65,7 +64,7 @@ Now, we need to download the html or all files to the local computer for visuali
 
 ### Challenging exercises for the bash wizards and those with extra time left
 
-In the `RAD.fastq.gz `there are some reads with very low GC content. Find the 10 reads with the lowest GC content and check what they are.
+In the `RAD.fastq.gz `there are some reads with very low GC content which likely represent reads of contaminants. Find the 10 reads with the lowest GC content and check what they are by blasting them.
 
 
 Here one very condensed solution: Try to find your own solution first!
