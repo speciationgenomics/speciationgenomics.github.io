@@ -89,18 +89,19 @@ Now we are ready to align our sequences! To simplify matters, we will first try 
 ```shell
 cd ~
 mkdir align
+cd align
 ```
 As a side note, it is good practice to keep your data well organised like this, otherwise things can become confusing and difficult in the future.
 
 To align our individual we will use `bwa`. You might want to first have a look at the options available for it simply by calling `bwa`. We are actually going to use `bwa mem` which is the best option for short reads.
 
-As we mentioned above, we will use a single individual - `10558.PunPundMak` - there are two files for this individual - `R1` and `R2` which are forward and reverse reads respectively.
+As we mentioned above, we will use the individual - `10558.PunPundMak` which we have already trimmed. There are two files for this individual - `R1` and `R2` which are forward and reverse reads respectively.
 
 Let's go ahead and align our data, we will break down what we did shortly after. Note that we run this command from the home directory.
 
 ```shell
 bwa mem -M -t 4 $REF \
-./raw/10558.PunPundMak.R1.100k.fastq.gz ./raw/10558.PunPundMak.R2.100k.fastq.gz > ./align/10558.PunPundMak.sam
+../trimmed/10558.PunPundMak.R1.100k.trimmed.fastq.gz ../trimmed/10558.PunPundMak.R2.100k.trimmed.fastq.gz > 10558.PunPundMak.sam
 ```
 Since we are only using a shortened fastq file, with 100K reads in it, this should just take a couple of minutes. In the meantime, we can breakdown what we actually did here.
 
