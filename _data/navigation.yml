@@ -19,6 +19,8 @@ pages:
     children:
       - title: "- Understanding NGS data"
         url: /readsExploration/
+      - title: "- Trimming data"
+        url: /Trimmomatic/
       - title: "- Mapping to a reference genome"
         url: /mapping_reference/
       - title: "- Variant calling"
