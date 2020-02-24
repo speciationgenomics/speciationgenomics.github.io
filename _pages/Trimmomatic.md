@@ -18,7 +18,7 @@ The current processing steps are:
 * MINLEN: Drop the read if it is below a specified length
 
 In Trimmomatic, different processing steps take one or more settings, delimited by ':' (a colon):
-"ILLUMINACLIP:<fastaWithAdapters>:<seed mismatches>:<palindrome clip threshold>:<simple clip threshold>:<minAdapterLength>"
+ILLUMINACLIP:\<fastaWithAdapters\>:\<seed mismatches\>:\<palindrome clip threshold\>:\<simple clip threshold\>:\<minAdapterLength\>
 
 See the Trimmomatic [manual](http://www.usadellab.org/cms/uploads/supplementary/Trimmomatic/TrimmomaticManual_V0.32.pdf) for all other options.
 
@@ -26,7 +26,8 @@ See the Trimmomatic [manual](http://www.usadellab.org/cms/uploads/supplementary/
 java -jar /home/scripts/trimmomatic.jar PE \
  /home/data/wgs_100k/10558.PunPundMak.R1.100k.fastq.gz \
 /home/data/wgs_100k/10558.PunPundMak.R2.100k.fastq.gz \
-10558.PunPundMak.R1.100k.paired.fastq.gz 10558.PunPundMak.R1.100k.unpaired.fastq.gz \ 10558.PunPundMak.R2.100k.paired.fastq.gz 10558.PunPundMak.R2.100k.unpaired.fastq.gz \
+10558.PunPundMak.R1.100k.paired.fastq.gz 10558.PunPundMak.R1.100k.unpaired.fastq.gz \
+10558.PunPundMak.R2.100k.paired.fastq.gz 10558.PunPundMak.R2.100k.unpaired.fastq.gz \
 ILLUMINACLIP:/home/scripts/Trimmomatic-0.39/adapters/TruSeq3-PE.fa/:2:30:10 \
 LEADING:5 TRAILING:5 SLIDINGWINDOW:5:10 MINLEN:50
 ```
