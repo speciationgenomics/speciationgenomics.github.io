@@ -257,7 +257,7 @@ sh align_sort.sh
 
 You will now see the script running as the sequences align. Press `Ctrl + A + D` in order to leave the screen. Now is a good time to take a break as you wait for the job to complete.
 
-#### Advanced: simulataneously aligning using `parallel`
+#### Advanced: simultaneously aligning using `parallel`
 
 An alternative to mapping each individual one by one is to use `parallel`, a utility which lets you run commands in parallel. `parallel` is actually very easy to use.
 
@@ -310,3 +310,20 @@ parallel `sh parallel_align.sh {}` :::: inds
 ```
 
 This takes a few minutes but it is well worth learning how to use parallel in this way, it can significantly speed up your analyses.
+
+
+Finally, we need to remove duplicate reads from the dataset to avoid PCR duplicates and technical duplicates which inflate our sequencing depth and give us false certainty in the genotype calls. We can use [Picard Tools](https://broadinstitute.github.io/picard/) to do that. Again, we can parallelize this to process 10 bam files at once.
+
+```shell
+cat inds | parallel --verbose -j 10 \
+java -Xmx1g -jar /home/scripts/picard.jar \
+ MarkDuplicates REMOVE_DUPLICATES=true \
+ ASSUME_SORTED=true VALIDATION_STRINGENCY=SILENT \
+ MAX_FILE_HANDLES_FOR_READ_ENDS_MAP=1000 \
+ INPUT={}.bam \
+ OUTPUT={}.rmd.bam \
+ METRICS_FILE={}.rmd.bam.metrics
+
+# Now we need to index all bam files again and that's it!
+samtools index *.rmd.bam
+ ```
