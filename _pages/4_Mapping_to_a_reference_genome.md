@@ -101,7 +101,7 @@ Let's go ahead and align our data, we will break down what we did shortly after.
 
 ```shell
 bwa mem -M -t 4 $REF \
-../trimmed/10558.PunPundMak.R1.100k.trimmed.fastq.gz ../trimmed/10558.PunPundMak.R2.100k.trimmed.fastq.gz > 10558.PunPundMak.sam
+../trimmed/10558.PunPundMak.R1.100k.paired.fastq.gz ../trimmed/10558.PunPundMak.R2.100k.paired.fastq.gz > 10558.PunPundMak.sam
 ```
 Since we are only using a shortened fastq file, with 100K reads in it, this should just take a couple of minutes. In the meantime, we can breakdown what we actually did here.
 

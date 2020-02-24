@@ -23,6 +23,13 @@ ILLUMINACLIP:\<fastaWithAdapters\>:\<seed mismatches\>:\<palindrome clip thresho
 See the Trimmomatic [manual](http://www.usadellab.org/cms/uploads/supplementary/Trimmomatic/TrimmomaticManual_V0.32.pdf) for all other options.
 
 ```shell
+cd
+
+# Make a directory for the trimmed reads
+mkdir trimmed
+cd trimmed
+
+# Run Trimmomatic
 java -jar /home/scripts/trimmomatic.jar PE \
  /home/data/wgs_100k/10558.PunPundMak.R1.100k.fastq.gz \
 /home/data/wgs_100k/10558.PunPundMak.R2.100k.fastq.gz \
