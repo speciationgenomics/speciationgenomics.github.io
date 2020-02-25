@@ -101,7 +101,8 @@ Let's go ahead and align our data, we will break down what we did shortly after.
 
 ```shell
 bwa mem -M -t 4 $REF \
-../trimmed/10558.PunPundMak.R1.100k.paired.fastq.gz ../trimmed/10558.PunPundMak.R2.100k.paired.fastq.gz > 10558.PunPundMak.sam
+/home/data/wgs_raw/10558.PunPundMak.R1.fastq.gz \
+/home/data/wgs_raw/10558.PunPundMak.R2.fastq.gz > 10558.PunPundMak.sam
 ```
 Since we are only using a shortened fastq file, with 100K reads in it, this should just take a couple of minutes. In the meantime, we can breakdown what we actually did here.
 
@@ -109,7 +110,7 @@ Since we are only using a shortened fastq file, with 100K reads in it, this shou
 * `-t` tells `bwa` how many threads (cores) on a cluster to use - this effectively determines its speed.
 * Following these options, we then specify the reference genome, the forward reads and the reverse reads. Finally we write the output of the alignment to a **SAM file**.
 
-Once your alignment has ended, you will see some alignment statistcs written to the screen. We will come back to these later - first, we will learn about what a SAM file actually is.
+Once your alignment has ended, you will see some alignment statistics written to the screen. We will come back to these later - first, we will learn about what a SAM file actually is.
 
 #### SAM files
 
@@ -178,7 +179,7 @@ samtools sort 10558.PunPundMak.bam -o 10558.PunPundMak_sort.bam
 Once this is run, we will have a sorted bam. One point to note here, could we have done this is a more efficient manner? The answer is yes, actually we could have run all of these commands in a single line using pipes like so:
 
 ```shell
-bwa mem -M -t 4 $REF ./raw/10558.PunPundMak.R1.100k.fastq.gz ./raw/10558.PunPundMak.R2.100k.fastq.gz | samtools view -b | samtools sort -T 10558.PunPundMak > ./align/10558.PunPundMak_sort.bam
+bwa mem -M -t 4 $REF /home/data/wgs_raw/10558.PunPundMak.R1.fastq.gz /home/data/wgs_raw/10558.PunPundMak.R2.fastq.gz | samtools view -b | samtools sort -T 10558.PunPundMak > ./align/10558.PunPundMak_sort.bam
 ```
 
 However as you may have noticed, we have only performed this on a single individual so far... what if we want to do it on multiple individuals? Do we need to type all this everytime? The answer is no - we could do this much more efficiently using the bash scripting tools we learned earlier today.
