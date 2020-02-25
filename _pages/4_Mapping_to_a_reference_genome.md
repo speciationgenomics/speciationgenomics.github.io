@@ -205,7 +205,7 @@ REF=~/reference/P_nyererei_v2.fasta
 Next, we will declare an array to ensure that we have all our individuals
 
 ```shell
-INDS=($(for i in ./raw/*R1.100k.fastq.gz; do echo $(basename ${i%.R*}); done))
+INDS=($(for i in /home/data/wgs_raw/*R1.fastq.gz; do echo $(basename ${i%.R*}); done))
 ```
 As we learned before, this will create a list of individuals which we can then loop through in order to map each individual. Here we used bash substitution to take each forward read name, remove the directory and leave only the individual name.
 
@@ -217,8 +217,8 @@ Next we will add the actual `for` loop to our script. We will use the following:
 for IND in ${INDS[@]};
 do
 	# declare variables
-	FORWARD=~/raw/${IND}.R1.100k.fastq.gz
-	REVERSE=~/raw/${IND}.R2.100k.fastq.gz
+	FORWARD=/home/data/wgs_raw/${IND}.R1.fastq.gz
+	REVERSE=/home/data/wgs_raw/${IND}.R2.fastq.gz
 	OUTPUT=~/align/${IND}_sort.bam
 
 done
@@ -231,8 +231,8 @@ After we have tested the loop to make sure it is working properly, all we have t
 for IND in ${INDS[@]};
 do
 	# declare variables
-	FORWARD=~/raw/${IND}.R1.100k.fastq.gz
-	REVERSE=~/raw/${IND}.R2.100k.fastq.gz
+	FORWARD=/home/data/wgs_raw/${IND}.R1.fastq.gz
+	REVERSE=/home/data/wgs_raw/${IND}.R2.fastq.gz
 	OUTPUT=~/align/${IND}_sort.bam
 
 	# then align and sort
@@ -265,7 +265,7 @@ An alternative to mapping each individual one by one is to use `parallel`, a uti
 First we need to make a list of individuals. We can do that using similar code to that we used above to declare an array:
 
 ```shell
-for i in ./raw/*R1.100k.fastq.gz; do echo $(basename ${i%.R*}); done > inds
+for i in /home/data/wgs_raw/*R1.fastq.gz; do echo $(basename ${i%.R*}); done > inds
 ```
 So now we have created a file called `inds` with each individual on a separate line. Use `cat` to check it.
 
@@ -286,8 +286,8 @@ REF=~/reference/P_nyererei_v2.fasta
 
 # declare variables
 IND=$1
-FORWARD=~/raw/${IND}.R1.100k.fastq.gz
-REVERSE=~/raw/${IND}.R2.100k.fastq.gz
+FORWARD=/home/data/wgs_raw/${IND}.R1.fastq.gz
+REVERSE=/home/data/wgs_raw/${IND}.R2.fastq.gz
 OUTPUT=~/align/${IND}_sort.bam
 
 # then align and sort
