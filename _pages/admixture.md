@@ -13,14 +13,13 @@ You can find the manual [here](http://software.genetics.ucla.edu/admixture/admix
 ```shell
 FILE=Pundamilia.RAD
 
-# Make a directory in the home directory, go into it and copy the RAD vcf file into the new directory
+# Make a directory in the home directory
 cd ~
 mkdir ADMIXTURE
 cd ADMIXTURE
-cp /home/data/vcf/Pundamilia.RAD.vcf.gz ./
 
 # Generate the input file in plink format
-plink --vcf $FILE.vcf.gz --make-bed --out $FILE --allow-extra-chr
+plink --vcf /home/data/vcf/$FILE.vcf.gz --make-bed --out $FILE --allow-extra-chr
 
 # ADMIXTURE does not accept chromosome names that are not human chromosomes. We will thus just exchange the first column by 0
 awk '{$1=0;print $0}' $FILE.bim > $FILE.bim.tmp
