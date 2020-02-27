@@ -41,7 +41,7 @@ With `admixr` loaded, we are now ready to tell the package where to look for the
 
 ```r
 # set data prefix
-data_prefix <- "../admixtools/sparrows"
+data_prefix <- "./admixtools/sparrows"
 ```
 
 Once this is done, we can then load the data like so:
