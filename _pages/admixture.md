@@ -36,7 +36,7 @@ admixture --cv $FILE.bed 2 > log2.out
 Let's now run it in a for loop with `K=2` to `K=5` and direct the output into log files
 
 ```shell
-for i in {2..5}
+for i in {3..5}
 do
  admixture --cv $FILE.bed $i > log${i}.out
 done
