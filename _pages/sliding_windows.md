@@ -31,11 +31,8 @@ First, we will calculate pi for each species and Fst and dxy for each pair of sp
 ```shell
 popgenWindows.py -g $FILE.geno.gz -o $FILE.Fst.Dxy.pi.csv.gz \
    -f phased -w 20000 -m 10000 -s 20000 \
-   -p PundPyt 11725.PunPundPyt,11727.PunPundPyt,11728.PunPundPyt,11729.PunPundPyt \
-   -p NyerPyt 11719.PunNyerPyt,11986.PunNyerPyt,11992.PunNyerPyt,11546.PunNyerPyt \
-   -p NyerMak 11591.PunNyerMak,11593.PunNyerMak,11595.PunNyerMak,11598.PunNyerMak \
-   -p PundMak 13069.PunPundMak,10558.PunPundMak,10560.PunPundMak,11297.PunPundMak \
-   -p kivu 64253
+   -p PundPyt -p NyerPyt -p NyerMak -p PundMak -p kivu 64253 \
+   --popsFile pop_file
 ```
 
 Note that -w 20000 specifies a window size of 20 kb that is sliding by 20 kb (-s 20000) and -m 10000 requests these windows to have a minimum number of 10 kb sites covered. The way we have encoded the genotypes (e.g. A/T) in our geno.gz file is called "phased" and we specify that with "-f phased" even though our data is actually not phased. Instead of writing all the individual names into the command, we could give only the species names in the code (e.g. -p pundPyt -p NyerPyt) and with `--popsFile` specify a file that contains a line for each individual with its name and species in a text file.
@@ -46,11 +43,10 @@ Next, we calculate fd to test for introgression from the original Pundamilia nye
 ABBABABAwindows.py -w 20000 -m 10 -s 20000 -g $FILE.geno.gz \
    -o $FILE.fd.PundP.NyerP.NyerM.Kivu.csv.gz \
    -f phased --minData 0.5 --writeFailedWindow \
-   -P1 PundPyt 11725.PunPundPyt,11727.PunPundPyt,11728.PunPundPyt,11729.PunPundPyt \
-   -P2 NyerPyt 11719.PunNyerPyt,11986.PunNyerPyt,11992.PunNyerPyt,11546.PunNyerPyt \
-   -P3 NyerMak 11591.PunNyerMak,11593.PunNyerMak,11595.PunNyerMak,11598.PunNyerMak \
-   -O kivu 64253
+   -P1 PundPyt -P2 NyerPyt -P3 NyerMak -O kivu \
+   --popsFile pop_file
 ```
+
 To speed up the calculation of these statistics, the script can be run on multiple threads by specifying -T <thread number>.
 
 For this script we need to specify that at least 50% of the individuals of each population need to have data for a site to be considered (-\-minData 0.5) and we reduce m to 10 as it only considers polymorphic sites.

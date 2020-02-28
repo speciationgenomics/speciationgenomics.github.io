@@ -1,7 +1,7 @@
 ---
-#title: "ADMIXTOOLS and admixr"
-#layout: archive
-#permalink: /ADMIXTOOLS_admixr/
+title: "ADMIXTOOLS and admixr"
+layout: archive
+permalink: /ADMIXTOOLS_admixr/
 ---
 
 ADMIXTOOLS is a software package developed by the David Reich group. You can find more information [here](https://github.com/DReichLab/AdmixTools). It can be a little tricky to use for beginners (and indeed, more advanced users too!). A more straightforward way to use ADMIXTOOLS is using the `R` package `admixr` which is well [documented](https://github.com/bodkan/admixr) with clear [tutorials](https://bodkan.net/admixr/articles/tutorial.html). Note that `admixr` does not replace ADMIXTOOLS, but instead requires a local installation of the program to run - it is essentially an interface for the software. To run it for the course, we will be using an [RStudio Server](https://www.rstudio.com/products/rstudio/download-server/).
