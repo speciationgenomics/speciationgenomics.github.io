@@ -6,8 +6,7 @@ permalink: /reading_list/
 
 Throughout the course, we have mentioned some key papers that might be of interest for those wanting to learn more about the key concepts and tools we used. Here we have collated a reading list that includes those papers. ** Note - this list is not meant to be definitive, there are many other great ones available!**
 
-### Speciation genomics - general introduction
-
+# Speciation genomics - general introduction
 * [Turner et al 2005 PloS Biology](https://journals.plos.org/plosbiology/article?id=10.1371/journal.pbio.0030285)
 * [Turner & Hahn 2007 Molecular Biology and Evolution](https://academic.oup.com/mbe/article-abstract/24/9/2132/2925764)
 * [Wu 2001 Journal of Evolutionary Biology](https://onlinelibrary.wiley.com/doi/abs/10.1046/j.1420-9101.2001.00335.x)
@@ -38,16 +37,19 @@ Throughout the course, we have mentioned some key papers that might be of intere
 * [Patterson et al 2012 Genetics](https://www.genetics.org/content/192/3/1065.short)
 * [Peters 2016 Genetics](https://www.genetics.org/content/202/4/1485.abstract)
 * [Pickrell & Pritchard 2012 PloS Genetics](https://journals.plos.org/plosgenetics/article?id=10.1371/journal.pgen.1002967)
-* [Freedman et al 2014 PloS Genetics](https://journals.plos.org/plosgenetics/article?id=10.1371/journal.pgen.1004016)
+* [Freedman et al 2014 PLoS Genetics](https://journals.plos.org/plosgenetics/article?id=10.1371/journal.pgen.1004016)
 
-### Demographic inference
+# Demographic inference
 * [Sousa & Hey 2013 Nature Reviews Genetics](https://www.nature.com/articles/nrg3446)
 * [Schraiber & Akey 2015 Nature Reviews Genetics](https://www.nature.com/articles/nrg4005)
 * [Excoffier et al 2009 PloS Computational Biology](https://journals.plos.org/plosgenetics/article?id=10.1371/journal.pgen.1003905)
-* [Gutenkunst 2009 PloS Genetics](https://journals.plos.org/plosgenetics/article?id=10.1371/journal.pgen.1000695)
+* [Gutenkunst 2009 PLoS Genetics](https://journals.plos.org/plosgenetics/article?id=10.1371/journal.pgen.1000695)
+* [Meier et al 2017 Molecular Ecology](https://onlinelibrary.wiley.com/doi/full/10.1111/mec.13838?casa_token=zWbY6_L0yksAAAAA%3A94J8gHhn7SKVTTxuw1IborJCKNYZSSZ9GHIBuY4sXdTkvVIqsNKyvkL5aAn5N_aE25DCPu7SZwhm5Klf)
 
-### Genome scans
+# Genome scans to detect signatures of selection
 * [Martin et al 2015 Molecular Biology and Evolution](https://academic.oup.com/mbe/article-abstract/32/1/244/2925550)
 * [Martin & Van Belleghem 2017 Genetics](https://www.genetics.org/content/206/1/429.abstract)
 * [Meier et al 2018 Molecular Biology and Evolution](https://academic.oup.com/mbe/article-abstract/35/6/1489/4958411)
-* [Stankowski et al 2019 PloS Biology](https://journals.plos.org/plosbiology/article?id=10.1371/journal.pbio.3000391&rev=2)
+* [Stankowski et al 2019 PLoS Biology](https://journals.plos.org/plosbiology/article?id=10.1371/journal.pbio.3000391&rev=2)
+* [Moest et al 2020 PLoS Biology](https://journals.plos.org/plosbiology/article?id=10.1371/journal.pbio.3000597)
+* [Lee and Coop 2019 Philosophical Transactions of the Royal Society B](https://royalsocietypublishing.org/doi/full/10.1098/rstb.2018.0236)
