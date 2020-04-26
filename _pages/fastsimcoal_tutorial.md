@@ -3,7 +3,7 @@ title: "Demographic modeling with fastsimcoal2"
 layout: archive
 permalink: /fastsimcoal2/
 ---
-`fastsimcoal2` is an extremely flexible demographic modelling software developed by the group of [Laurent Excoffier at University of Bern](http://www.cmpg.iee.unibe.ch/about_us/team/researchers/prof_dr_excoffier_laurent/index_eng.html). It uses the site frequency spectrum (SFS) to fit model parameters to the observed data by performing coalescent simulations. You can find the manual and more information [here](http://cmpg.unibe.ch/software/fastsimcoal2/) and look at the [lecture slides](https://github.com/speciationgenomics/presentations/blob/master/2019-8-Demographic_modeling_JM.pdf).
+`fastsimcoal2` is an extremely flexible demographic modelling software developed by the group of [Laurent Excoffier at University of Bern](http://www.cmpg.iee.unibe.ch/about_us/team/researchers/prof_dr_excoffier_laurent/index_eng.html). It uses the site frequency spectrum (SFS) to fit model parameters to the observed data by performing coalescent simulations. You can find the manual and more information [here](http://cmpg.unibe.ch/software/fastsimcoal2/) and look at the [lecture slides](https://github.com/speciationgenomics/presentations/blob/master/2020-8-Demographic_modeling_JM.pdf).
 
 ### Preparing the input files
 
