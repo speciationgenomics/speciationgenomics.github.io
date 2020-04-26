@@ -10,7 +10,7 @@ However, if you cannot do that because you did single-end sequencing, PCR duplic
 
 If levels of PCR duplication are low, we expect that with increasing numbers of reads for a given individual, more and more loci are sequenced as the reads are distributed randomly among loci. At some threshold of number of reads all loci should be present in an individual. Adding more reads will only increase sequencing depth but not number of loci as all loci are already sequenced. If levels of PCR duplication are very high, the number of loci does not increase as quickly with the number of reads as expected. This is because the reads are not random samples of the different loci but are pseudo-replicates of a limited number of starting fragments.
 
-As explained in the [lecture](https://github.com/speciationgenomics/presentations/blob/master/2019-4-AllelicBalance_PCRduplication.pdf), we can plot the number of reads against the number of RAD loci. Note, this does not work with whole-genome data. Joana Meier wrote a [script](https://github.com/joanam/scripts/raw/master/createRADmappingReport.sh) to do this on RAD data.
+As explained in the [lecture](https://github.com/speciationgenomics/presentations/blob/master/2020-4-AllelicBalance_PCRduplication.pdf), we can plot the number of reads against the number of RAD loci. Note, this does not work with whole-genome data. Joana Meier wrote a [script](https://github.com/joanam/scripts/raw/master/createRADmappingReport.sh) to do this on RAD data.
 
 You can run it without any arguments in your folder where you have the bam files. It will generate a mapping report which contains the number of reads and RAD loci found in each individual.
 
