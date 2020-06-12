@@ -106,16 +106,16 @@ Next we calculate the mean depth of coverage per individual.
 ```shell
 vcftools --gzvcf $SUBSET_VCF --depth --out $OUT
 ```
-#### Calculate mean depth per variant
+#### Calculate mean depth per site
 
-Similarly, we also estimate the mean depth of coverage for each variant.
+Similarly, we also estimate the mean depth of coverage for each site.
 
 ```shell
 vcftools --gzvcf $SUBSET_VCF --site-mean-depth --out $OUT
 ```
 #### Calculate site quality
 
-We additionaly extract the site quality score for each variant.
+We additionaly extract the site quality score for each site.
 
 ```shell
 vcftools --gzvcf $SUBSET_VCF --site-quality --out $OUT
@@ -136,6 +136,19 @@ And more missing data, just this time per site rather than per individual.
 ```shell
 vcftools --gzvcf $SUBSET_VCF --missing-site --out $OUT
 ```
+
+#### Calculate heterozygosity and inbreeding coefficient per individual
+
+Computing heterozygosity and the inbreeding coefficient (F) for each individual can quickly highlight outlier individuals that are e.g. inbred (strongly negative F),
+suffer from high sequencing error problems or contamination with DNA from another individuals leading to inflated heterozygosity (high F),
+or PCR duplicates or low read depth lead to allelic dropout and thus underestimated heterozygosity and stongly negative F. However, note that here we assume Hardy-Weinberg equilibrium.
+If the individuals are not sampled from the same population, the expected heterozygosity will be overestimated due to the [Wahlund-effect](https://en.wikipedia.org/wiki/Wahlund_effect).
+However, it may still be worth to compute heterozygosities to check if any of the individuals stands out which could indicate problems.
+
+```shell
+vcftools --gzvcf $SUBSET_VCF --het --out $OUT
+```
+
 ---
 
 With the statistics calculated, take a moment to have a quick look at the output in the `~/vcftools/` directory. We will now need to download our output data onto our local machines in order to work with R.
@@ -336,6 +349,8 @@ a + theme_light()
 
 Again this shows us, the proportion of missing data per individual is very small indeed. It ranges from 0.01-0.16, so we can safely say our individuals sequenced well.
 
+### heterozygosity and inbreeding coefficient per individual
+
 ```r
 ind_het <- read_delim("./cichlid_subset.het", delim = "\t",
            col_names = c("ind","ho", "he", "nsites", "f"), skip = 1)
@@ -345,6 +360,11 @@ ind_het <- read_delim("./cichlid_subset.het", delim = "\t",
 a <- ggplot(ind_het, aes(f)) + geom_histogram(fill = "dodgerblue1", colour = "black", alpha = 0.3)
 a + theme_light()
 ```
+
+All individuals have a slightly negative inbreeding coefficient suggesting that we observed a bit less heterozygote genotypes in these individuals than we would expect
+under Hardy-Weinberg equilibrium. However, here we combined samples from four species and thus violate the assumption of Hardy-Weinberg equilibrium. We would expect slightly negative
+inbreeding coefficients due to the Wahlund-effect. Given that all individuals seem to show similar inbreeding coefficients, we are happy to keep all of them. None of them shows high levels of allelic dropout (strongly negative F) or DNA contamination (highly positive F).
+
 
 ![](/images/snpfilter/unnamed-chunk-20-1.png)
 
