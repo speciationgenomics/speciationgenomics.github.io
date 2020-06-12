@@ -140,10 +140,10 @@ vcftools --gzvcf $SUBSET_VCF --missing-site --out $OUT
 #### Calculate heterozygosity and inbreeding coefficient per individual
 
 Computing heterozygosity and the inbreeding coefficient (F) for each individual can quickly highlight outlier individuals that are e.g. inbred (strongly negative F),
-suffer from high sequencing error problems or contamination with DNA from another individuals leading to inflated heterozygosity (high F),
-or PCR duplicates or low read depth lead to allelic dropout and thus underestimated heterozygosity and stongly negative F. However, note that here we assume Hardy-Weinberg equilibrium.
+suffer from high sequencing error problems or contamination with DNA from another individual leading to inflated heterozygosity (high F),
+or PCR duplicates or low read depth leading to allelic dropout and thus underestimated heterozygosity (stongly negative F). However, note that here we assume Hardy-Weinberg equilibrium.
 If the individuals are not sampled from the same population, the expected heterozygosity will be overestimated due to the [Wahlund-effect](https://en.wikipedia.org/wiki/Wahlund_effect).
-However, it may still be worth to compute heterozygosities to check if any of the individuals stands out which could indicate problems.
+It may still be worth to compute heterozygosities even if the samples are from more than one population to check if any of the individuals stands out which could indicate problems.
 
 ```shell
 vcftools --gzvcf $SUBSET_VCF --het --out $OUT
@@ -349,7 +349,7 @@ a + theme_light()
 
 Again this shows us, the proportion of missing data per individual is very small indeed. It ranges from 0.01-0.16, so we can safely say our individuals sequenced well.
 
-### heterozygosity and inbreeding coefficient per individual
+### Heterozygosity and inbreeding coefficient per individual
 
 ```r
 ind_het <- read_delim("./cichlid_subset.het", delim = "\t",
@@ -361,12 +361,12 @@ a <- ggplot(ind_het, aes(f)) + geom_histogram(fill = "dodgerblue1", colour = "bl
 a + theme_light()
 ```
 
+![](/images/snpfilter/unnamed-chunk-20-1.png)
+
 All individuals have a slightly negative inbreeding coefficient suggesting that we observed a bit less heterozygote genotypes in these individuals than we would expect
 under Hardy-Weinberg equilibrium. However, here we combined samples from four species and thus violate the assumption of Hardy-Weinberg equilibrium. We would expect slightly negative
 inbreeding coefficients due to the Wahlund-effect. Given that all individuals seem to show similar inbreeding coefficients, we are happy to keep all of them. None of them shows high levels of allelic dropout (strongly negative F) or DNA contamination (highly positive F).
 
-
-![](/images/snpfilter/unnamed-chunk-20-1.png)
 
 ### Applying filters to the VCF
 
