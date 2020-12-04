@@ -53,3 +53,4 @@ Throughout the course, we have mentioned some key papers that might be of intere
 * [Stankowski et al 2019 PLoS Biology](https://journals.plos.org/plosbiology/article?id=10.1371/journal.pbio.3000391&rev=2)
 * [Moest et al 2020 PLoS Biology](https://journals.plos.org/plosbiology/article?id=10.1371/journal.pbio.3000597)
 * [Lee and Coop 2019 Philosophical Transactions of the Royal Society B](https://royalsocietypublishing.org/doi/full/10.1098/rstb.2018.0236)
+* [Barghi et al 2020 Nature Review Genetics](https://www.nature.com/articles/s41576-020-0250-z)
