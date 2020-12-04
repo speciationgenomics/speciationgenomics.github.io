@@ -16,11 +16,11 @@ reverse=wgs.R2
 fastp --in1 ${forward}.fastq.gz --in2 ${reverse}.fastq.gz --out1 ${forward}.trimmed.fastq.gz --out2 ${reverse}.trimmed.fastq.gz --unpaired1 ${forward}.unpaired.fastq.gz --unpaired2 ${reverse}.unpaired.fastq.gz --reads_to_process 1000000 -l 50 &> $forward.log
 ```
 ### Parameters:
-*in1 and in2: specify your files of forward (1) reads and of the reverse (2) reads.
-*out1 and out2: specify the output files for forward and reverse reads that are still Paired.
-*unpaired1 and unpaired2: specify the output files for reads that are not paired anymore.
-*reads_to_process: specify how many reads should be processed. As processing the entire file can take long, we will set this to 1 million. Importantly, this is only used for testing purposes. For the real data, you should of course remove this options.
-*l 50: this specifies that if a read is shorter than 50 basepairs after all filters, it should be removed.
+* in1 and in2: specify your files of forward (1) reads and of the reverse (2) reads.
+* out1 and out2: specify the output files for forward and reverse reads that are still Paired.
+* unpaired1 and unpaired2: specify the output files for reads that are not paired anymore.
+* reads_to_process: specify how many reads should be processed. As processing the entire file can take long, we will set this to 1 million. Importantly, this is only used for testing purposes. For the real data, you should of course remove this options.
+* l 50: this specifies that if a read is shorter than 50 basepairs after all filters, it should be removed.
 
 
 ### PolyG tail trimming
