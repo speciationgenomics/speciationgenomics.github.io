@@ -19,8 +19,8 @@ pages:
     children:
       - title: "- Understanding NGS data"
         url: /readsExploration/
-      - title: "- Quality-trimming reads"
-        url: /Trimmomatic/
+      - title: "- Filtering reads"
+        url: /fastp/
       - title: "- Mapping to a reference genome"
         url: /mapping_reference/
       - title: "- Variant calling"
@@ -45,7 +45,7 @@ pages:
         url: /pca/
       - title: "- Detecting structure with ADMIXTURE"
         url: /ADMIXTURE/
-      - title: "- Detecting hybridization with ADMIXTOOLS & admixr"
+      - title: "- Detecting hybridization"
         url: /ADMIXTOOLS_admixr/
       - title: "- Detecting hybridization with treemix"
         url: /Treemix/
