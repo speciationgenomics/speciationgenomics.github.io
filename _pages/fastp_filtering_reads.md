@@ -8,23 +8,31 @@ Sometimes Illumina adapter sequences are still present in some reads because ada
 To anyone using Novaseq, or any NextSeq Illumina technology. Watch out for overrepresented polyG sequences (weirdly long sequences of GGGGGGG), particularly in the reverse reads. This is a problem of the latest Illumina instruments that use a [two-colour system](https://sequencing.qcfail.com/articles/illumina-2-colour-chemistry-can-overcall-high-confidence-g-bases/) to infer the bases. A lack of signal is called as G with high confidence. These polyG tails need to be removed or the read will not map well to the reference genome.
 Reads that start or end with very low quality can be aligned better if the bad quality parts are trimmed off. We will use [fastp](https://github.com/OpenGene/fastp) to fix all of these issues. fastp can remove low quality reads, adapters and polyG tails. It even automatically detects what adapters were used.
 There are also other excellent read filtering and trimming tools such as [Trimmomatic](https://speciationgenomics.github.io/Trimmomatic) or the fast tool [Ktrim](https://academic.oup.com/bioinformatics/article/36/11/3561/5803071).
+fastp also generates a html file that shows the read quality before and after filtering.
 
 ```shell
-forward=wgs.R1
-reverse=wgs.R2
 
-fastp --in1 ${forward}.fastq.gz --in2 ${reverse}.fastq.gz --out1 ${forward}.trimmed.fastq.gz --out2 ${reverse}.trimmed.fastq.gz --unpaired1 ${forward}.unpaired.fastq.gz --unpaired2 ${reverse}.unpaired.fastq.gz --reads_to_process 1000000 -l 50 &> $forward.log
+# Specify the file prefix
+PREFIX=wgs
+
+# Check the options of fastp
+fastp -h
+
+# Run fastp
+fastp --in1 ${PREFIX}.R1.fastq.gz --in2 ${PREFIX}.R2.fastq.gz --out1 ${PREFIX}.R1.trimmed.fastq.gz --out2 ${PREFIX}.R2.trimmed.fastq.gz --unpaired1 ${PREFIX}.R1.unpaired.fastq.gz --unpaired2 ${PREFIX}.R2.unpaired.fastq.gz --reads_to_process 1000000 -l 50 -h ${PREFIX}.html &> ${PREFIX}.log
 ```
 ### Parameters:
-* in1 and in2: specify your files of forward (1) reads and of the reverse (2) reads.
-* out1 and out2: specify the output files for forward and reverse reads that are still Paired.
-* unpaired1 and unpaired2: specify the output files for reads that are not paired anymore.
-* reads_to_process: specify how many reads should be processed. As processing the entire file can take long, we will set this to 1 million. Importantly, this is only used for testing purposes. For the real data, you should of course remove this options.
-* l 50: this specifies that if a read is shorter than 50 basepairs after all filters, it should be removed.
+* --in1 and --in2: specify your files of forward (1) reads and of the reverse (2) reads.
+* --out1 and --out2: specify the output files for forward and reverse reads that are still Paired.
+* --unpaired1 and --unpaired2: specify the output files for reads that are not paired anymore.
+* --reads_to_process: specify how many reads should be processed. As processing the entire file can take long, we will set this to 1 million. Importantly, this is only used for testing purposes. For the real data, you should of course remove this options.
+* -l 50: this specifies that if a read is shorter than 50 basepairs after all filters, it should be removed.
+* -h : specifies name for the html file with plots showing the read quality before and after filtering
 
+For other options
 
 ### PolyG tail trimming
-This feature is enabled for NextSeq/NovaSeq data by default, and you can specify -g to enable it for any data, or specify -G to disable it.
+This feature removes the polyG tails that arise from lack of signal in NextSeq/NovaSeq technologies. It is enabled for Nextseq/Novaseq data by default, and you can specify -g to enable it for any data, or specify -G to disable it.
 
 ### Removal of adapter sequences
 Adapter trimming is enabled by default, but you can disable it with -A. Adapter sequences can be automatically detected for both PE/SE data.
