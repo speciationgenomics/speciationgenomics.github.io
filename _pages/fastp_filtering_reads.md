@@ -33,7 +33,7 @@ Adapter trimming is enabled by default, but you can disable it by -A or --disabl
 Reads below the length threshold (e.g. due to adapter removal) are removed. Length filtering is enabled by default. The minimum length requirement is specified with -l or --length_required.
 
 ### Quality filtering
-Quality filtering is enabled by default, but you can disable it by -Q or disable_quality_filtering. Currently it supports filtering by limiting the N base number (-n, --n_base_limit), and the percentage of unqualified bases.
+Quality filtering is enabled by default, but you can disable it by -Q or --disable_quality_filtering. Currently fastp supports filtering by limiting the number of uncalled (N) bases (-n, --n_base_limit, Default 5) and the percentage of unqualified bases.
 To filter reads by its percentage of unqualified bases, two options should be provided:
-    -q, --qualified_quality_phred     the quality value that a base is qualified. Default 15 means phred quality >=Q15 is qualified.
-    -u, --unqualified_percent_limit   how many percents of bases are allowed to be unqualified (0~100). Default 40 means 40%
+* -q or --qualified_quality_phred     Quality threshold per base required. Default: 15, which means that a Phred quality score of at least 15 is required
+* -u or --unqualified_percent_limit   Percent of bases allowed to be below the quality threshold to keep the read (0~100). Default 40 means 40% bases can fail the quality threshold. If more bases fail, the read is removed.
