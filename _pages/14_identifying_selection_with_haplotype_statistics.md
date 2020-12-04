@@ -123,8 +123,8 @@ x <- hit$position
 Here we also set the position of our putative selection SNP as the object `x`. This is because we need to identify where it occurs in our haplotype objects - unfortunately we cannot use the position for this. In the code below, we find the marker id for both our datasets.
 
 ```r
-marker_id_h <- which(house_hh_f@positions == x)
-marker_id_b <- which(bac_hh_f@positions == x)
+marker_id_h <- which(house_hh_f@POSITION == x)
+marker_id_b <- which(bac_hh_f@POSITION == x)
 ```
 
 Now we are ready to plot the bifurcation of haplotypes around our site of selection. We do this like so:
