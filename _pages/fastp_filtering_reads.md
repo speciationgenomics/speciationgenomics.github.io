@@ -22,10 +22,10 @@ fastp -h
 fastp --in1 ${PREFIX}.R1.fastq.gz --in2 ${PREFIX}.R2.fastq.gz --out1 ${PREFIX}.R1.trimmed.fastq.gz --out2 ${PREFIX}.R2.trimmed.fastq.gz --unpaired1 ${PREFIX}.R1.unpaired.fastq.gz --unpaired2 ${PREFIX}.R2.unpaired.fastq.gz --reads_to_process 1000000 -l 50 -h ${PREFIX}.html &> ${PREFIX}.log
 ```
 ### Parameters:
-* --in1 and --in2: specify your files of forward (1) reads and of the reverse (2) reads.
-* --out1 and --out2: specify the output files for forward and reverse reads that are still Paired.
-* --unpaired1 and --unpaired2: specify the output files for reads that are not paired anymore.
-* --reads_to_process: specify how many reads should be processed. As processing the entire file can take long, we will set this to 1 million. Importantly, this is only used for testing purposes. For the real data, you should of course remove this options.
+* \-\-in1 and --in2: specify your files of forward (1) reads and of the reverse (2) reads.
+* \-\-out1 and --out2: specify the output files for forward and reverse reads that are still Paired.
+* \-\-unpaired1 and --unpaired2: specify the output files for reads that are not paired anymore.
+* \-\-reads_to_process: specify how many reads should be processed. As processing the entire file can take long, we will set this to 1 million. Importantly, this is only used for testing purposes. For the real data, you should of course remove this options.
 * -l 50: this specifies that if a read is shorter than 50 basepairs after all filters, it should be removed.
 * -h : specifies name for the html file with plots showing the read quality before and after filtering
 
