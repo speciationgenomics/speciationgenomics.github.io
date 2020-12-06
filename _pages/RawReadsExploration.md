@@ -25,7 +25,7 @@ zcat ${FILE} | wc -l
 The number of sequences is thus this number divided by 4, or we can count the number of lines starting with the header
 
 ```shell
-zgrep "@HWI" ${FILE} -c
+zgrep "@J00" ${FILE} -c
 ```
 
 We might think that we could have just counted the number of `@` - i.e. the first symbols for each header.
