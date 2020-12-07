@@ -81,13 +81,11 @@ mv cichlids.info.full.tmp cichlids.info.full
 cut -f 2 cichlids.info.full | sort | uniq -c
 
 # Get the mean missing data proportion per group
-awk '{missing[$2]+=$7; count[$2]++}END{for(g in count){print g,missing[g]/count[g]}}' cichlids.info.full | column -t
+awk '{missing[$7]+=$5; count[$7]++}END{for(g in missing){print g,missing[g]/count[g]}}' cichlids.info.full  | column -t
 
-# Get the mean missing data proportion per group
-awk '{missing[$2]+=$7; count[$2]++}END{for(g in count){print g,missing[g]/count[g]}}' cichlids.info.full | column -t
-
-# Add a new column with the individual name (column 1) and group information (column 7) combined
-awk '{print $0"\t"$1"_"$7}' cichlids.info.full
+# Add a new column with the individual name (column 1, e.g. ind1) and group information (column 7, e.g. piscivore) combined, e.g. ind1_piscivore
+# To make it neater to look at, I pipe it into column -t which shows the result with all columns aligned
+awk '{print $0"\t"$1"_"$7}' cichlids.info.full | column -t
 
 # replace the fifth column by this new combined individual and group information
 awk '{$5=$1"_"$7; print $0}' cichlids.info.full | head | column -t
