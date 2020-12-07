@@ -1,8 +1,8 @@
-\-\--
+---
 title: "Trimming reads and removing adapter sequences and polyG tails"
 layout: archive
 permalink: /fastp/
-\-\--
+---
 
 Sometimes Illumina adapter sequences are still present in some reads because adapters can form adapter dimers and then one of them gets sequenced or if a DNA fragment is shorter than the read length, the sequencer continues to "read-through" into the adapter at the end of the DNA fragment. In the latter case the forward and the reverse read will contain adapter sequences, which is called a "palindrome". While a full adapter sequence can be identified relatively easily, reliably identifying a short partial adapter sequence is inherently difficult. However, if there is a short partial adapter present at the end of the forward read and the beginning of the reverse read, that is a good sign for a "palindrome" sequence.
 To anyone using Novaseq, or any NextSeq Illumina technology. Watch out for overrepresented polyG sequences (weirdly long sequences of GGGGGGG), particularly in the reverse reads. This is a problem of the latest Illumina instruments that use a [two-colour system](https://sequencing.qcfail.com/articles/illumina-2-colour-chemistry-can-overcall-high-confidence-g-bases/) to infer the bases. A lack of signal is called as G with high confidence. These polyG tails need to be removed or the read will not map well to the reference genome.
@@ -19,7 +19,7 @@ PREFIX=wgs
 fastp -h
 
 # Run fastp
-fastp \-\-in1 ${PREFIX}.R1.fastq.gz \-\-in2 ${PREFIX}.R2.fastq.gz \-\-out1 ${PREFIX}.R1.trimmed.fastq.gz \-\-out2 ${PREFIX}.R2.trimmed.fastq.gz \-\-unpaired1 ${PREFIX}.R1.unpaired.fastq.gz \-\-unpaired2 ${PREFIX}.R2.unpaired.fastq.gz \-\-reads_to_process 1000000 -l 50 -h ${PREFIX}.html &> ${PREFIX}.log
+fastp --in1 ${PREFIX}.R1.fastq.gz --in2 ${PREFIX}.R2.fastq.gz --out1 ${PREFIX}.R1.trimmed.fastq.gz --out2 ${PREFIX}.R2.trimmed.fastq.gz --unpaired1 ${PREFIX}.R1.unpaired.fastq.gz --unpaired2 ${PREFIX}.R2.unpaired.fastq.gz --reads_to_process 1000000 -l 50 -h ${PREFIX}.html &> ${PREFIX}.log
 ```
 ### Parameters specified here:
 * \-\-in1 and \-\-in2: specify your files of forward (1) reads and of the reverse (2) reads.
