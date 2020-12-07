@@ -168,7 +168,7 @@ sed -n 3p ishmael.txt
 In this command, `3p` is just telling the `-n` flag we want to see the third line. We could also extract lines 3-5 like so:
 
 ```shell
-sed -n 3-5p ishmael.txt
+sed -n 3,5p ishmael.txt
 ```
 
 But `sed` can actually do much more than this. For example, it can replace text. Let's replace all instances of "Ishmael" with another name, like "Dave":
