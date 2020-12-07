@@ -11,8 +11,16 @@ Let's have a look at the first sequence from our raw read files which are stored
 First we set the name of the fastq file that we will work with as the variable `FILE`. Then, we copy that file to our directory. Finally, we will examine the first 4 lines. However, we cannot just directly write `head -4 $FILE` like we might with a normal text file because the fastq file is actually compressed. It is thus a binary file which cannot just be read. Luckily, there are many commands that can directly read binary files. Instead of `cat`, which we saw in the [Unix introduction](https://speciationgenomics.github.io/getting_used_to_unix/), we use `zcat`, instead of `grep`, we use `zgrep`. If we want to use any other command, we need to read the file with `zcat` and then pipe the output into our command of choice such as `head` or `tail`.
 
 ```shell
+
+# First, we will make a folder to work in
+mkdir fastqc
+cd fastqc
+
+# Now let's specify FILE as the name of the file containing the forward reads
 FILE="wgs.R1.fastq.gz"
 cp /home/data/fastq/${FILE} ./
+
+# Let's have a look at the first read:
 zcat ${FILE} | head -4
 ```
 
@@ -57,19 +65,27 @@ We should now also run fastqc on the file or reverse reads. As we do not need co
 `fastqc` allows an output directory with the `-o` flag. We will thus just work in our home directories and run `fastqc` giving the file name with its path and specifying the output folder as the current directory (i.e. `-o ./`).
 
 ```shell
+# Reverse reads
 fastqc -o ./ /home/data/fastq/wgs.R2.fastq.gz
+
+# Let's also have a look at some RAD data
+fastqc -o ./ /home/data/fastq/RAD1.fastq.gz
+fastqc -o ./ /home/data/fastq/RAD2.fastq.gz
+
+# And some whole genome data run on a Novaseq
+fastqc -o ./ /home/data/fastq/wgs.Novaseq.R2.fastq.gz
 ```
 
 Now, we need to download the html or all files to the local computer for visualization. To download files, mac and linux users can use the command `scp`, Windows users can use `FileZilla` [(see instructions here)](https://speciationgenomics.github.io/logging_on/). You can then open the html file with any internet browser.
 
 ### Challenging exercises for the bash wizards and those with extra time left
 
-In the `RAD.fastq.gz `there are some reads with very low GC content which likely represent reads of contaminants. Find the 10 reads with the lowest GC content and check what they are by blasting them.
+In the `RAD2.fastq.gz `there are some reads with very low GC content which likely represent reads of contaminants. Find the 10 reads with the lowest GC content and check what they are by blasting them.
 
 
 Here one very condensed solution: Try to find your own solution first!
 ```shell
-FILE=RAD
+FILE=RAD2
 
 cp /home/data/fastq/${FILE} ./
 
