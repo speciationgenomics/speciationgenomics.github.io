@@ -12,11 +12,19 @@ fastp also generates a html file that shows the read quality before and after fi
 
 ```shell
 
-# Specify the file prefix
-PREFIX=wgs
-
 # Check the options of fastp
 fastp -h
+
+# Now let's again make a folder to work in
+cd ~
+mkdir filteredReads
+cd filteredReads
+
+# Let's get the wgs read files:
+cp /home/data/fastq/wgs.R*.fastq.gz ./
+
+# Specify the file prefix
+PREFIX="wgs"
 
 # Run fastp
 fastp --in1 ${PREFIX}.R1.fastq.gz --in2 ${PREFIX}.R2.fastq.gz --out1 ${PREFIX}.R1.trimmed.fastq.gz --out2 ${PREFIX}.R2.trimmed.fastq.gz --unpaired1 ${PREFIX}.R1.unpaired.fastq.gz --unpaired2 ${PREFIX}.R2.unpaired.fastq.gz --reads_to_process 1000000 -l 50 -h ${PREFIX}.html &> ${PREFIX}.log
