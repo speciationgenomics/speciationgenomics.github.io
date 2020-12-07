@@ -66,14 +66,15 @@ We should now also run fastqc on the file or reverse reads. As we do not need co
 
 ```shell
 # Reverse reads
-fastqc -o ./ /home/data/fastq/wgs.R2.fastq.gz
+FILE=wgs.R2.fastq.gz
+fastqc -o ./ /home/data/fastq/$FILE
 
-# Let's also have a look at some RAD data
-fastqc -o ./ /home/data/fastq/RAD1.fastq.gz
-fastqc -o ./ /home/data/fastq/RAD2.fastq.gz
-
-# And some whole genome data run on a Novaseq
-fastqc -o ./ /home/data/fastq/wgs.Novaseq.R2.fastq.gz
+# Let's also have a look at some RAD data  and a Novaseq whole genome dataset
+# Because we do not want to type the fastqc command many times, we will use a for loop
+for PREFIX in RAD1 RAD2 Novaseq.R2 Novaseq.R1
+do
+fastqc -o ./ /home/data/fastq/${PREFIX}.fastq.gz
+done
 ```
 
 Now, we need to download the html or all files to the local computer for visualization. To download files, mac and linux users can use the command `scp`, Windows users can use `FileZilla` [(see instructions here)](https://speciationgenomics.github.io/logging_on/). You can then open the html file with any internet browser.
