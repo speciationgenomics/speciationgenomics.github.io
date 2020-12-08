@@ -23,11 +23,14 @@ cd filteredReads
 # Let's get the wgs read files:
 cp /home/data/fastq/wgs.R*.fastq.gz ./
 
-# Specify the file prefix
-PREFIX="wgs"
-
 # Run fastp
-fastp --in1 ${PREFIX}.R1.fastq.gz --in2 ${PREFIX}.R2.fastq.gz --out1 ${PREFIX}.R1.trimmed.fastq.gz --out2 ${PREFIX}.R2.trimmed.fastq.gz --unpaired1 ${PREFIX}.R1.unpaired.fastq.gz --unpaired2 ${PREFIX}.R2.unpaired.fastq.gz --reads_to_process 1000000 -l 50 -h ${PREFIX}.html &> ${PREFIX}.log
+fastp --in1 wgs.R1.fastq.gz --in2 wgs.R2.fastq.gz --out1 wgs.R1.trimmed.fastq.gz --out2 wgs.R2.trimmed.fastq.gz --unpaired1 wgs.R1.unpaired.fastq.gz --unpaired2 wgs.R2.unpaired.fastq.gz --reads_to_process 1000000 -l 50 -h wgs.html &> wgs.log
+
+# Note &> redirects the information on what it did into the file wgs.log (both stderror and stdout are written into this file)
+
+# Let's have a look at what files fastp produced:
+ls
+# You can see that it produced the four output files we specified and also an html file which shows some quality information
 ```
 ### Parameters specified here:
 * \-\-in1 and \-\-in2: specify your files of forward (1) reads and of the reverse (2) reads.
