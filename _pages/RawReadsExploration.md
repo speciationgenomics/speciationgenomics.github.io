@@ -77,7 +77,9 @@ fastqc -o ./ /home/data/fastq/${PREFIX}.fastq.gz
 done
 ```
 
-Now, we need to download the html or all files to the local computer for visualization. To download files, mac and linux users can use the command `scp`, Windows users can use `FileZilla` [(see instructions here)](https://speciationgenomics.github.io/logging_on/). You can then open the html file with any internet browser.
+Now, we need to download the html files to the local computer for visualization. To download files, mac and linux users can use the command `scp`, Windows users can use `FileZilla` [(see instructions here)](https://speciationgenomics.github.io/logging_on/). You can then open the html file with any internet browser.
+
+Here some [slides](https://github.com/speciationgenomics/presentations/blob/master/fastqc_interpretation.pdf) on interpreting fastqc html output.
 
 ### Challenging exercises for the bash wizards and those with extra time left
 
