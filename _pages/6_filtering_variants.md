@@ -16,7 +16,7 @@ To rememdy this, we are going to use a vcf we prepared on your behalf using the 
 # move to your vcf directory
 cd ~/vcf
 # copy the data file from the data directory
-cp $~/data/vcf/cichlid_full.vcf.gz* ./
+cp /home/data/vcf/cichlid_full.vcf.gz* ./
 ```
 
 This will copy both the vcf and its index to your directory. Let's take a moment to see how big the file is:
