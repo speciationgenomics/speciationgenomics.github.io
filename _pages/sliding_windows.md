@@ -48,7 +48,7 @@ ABBABABAwindows.py -w 20000 -m 10 -s 20000 -g subset.geno.gz \
    -o subset.fd.PundP.NyerP.NyerM.Kivu.csv.gz \
    -f phased --minData 0.5 --writeFailedWindow \
    -P1 PundPyt -P2 NyerPyt -P3 NyerMak -O kivu \
-   --popsFile pop_file
+   --popsFile pop.info
 ```
 
 To speed up the calculation of these statistics, the script can be run on multiple threads by specifying -T <thread number>.
