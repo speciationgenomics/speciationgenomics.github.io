@@ -22,10 +22,18 @@ First, let's convert the vcf file into Simon Martin's geno file. You can downloa
 ```shell
 mkdir ~/genome_scans
 cd ~/genome_scans
-FILE="Pundamilia.Kivu.chr20"
-cp /home/data/vcf/Pundamilia.Kivu.chr20.vcf.gz ./
-cp /home/data/vcf/pop_file ./
+FILE="Pundamilia.Kivu.chr20.subset"
+
+# Copy the vcf file and the information file and a small subset file
+cp /home/data/genomeScans/* ./
+
+# Convert the vcf file to geno.gz which is the format that Simons script requires
 parseVCF.py -i $FILE.vcf.gz | bgzip > $FILE.geno.gz
+
+# Get the full geno.gz file
+FILE="Pundamilia.Kivu.chr20"
+cp /home/data/vcf/$FILE.geno.gz ./
+
 ```
 
 First, we will calculate pi for each species and Fst and dxy for each pair of species all in one go.
@@ -33,7 +41,7 @@ First, we will calculate pi for each species and Fst and dxy for each pair of sp
 popgenWindows.py -g $FILE.geno.gz -o $FILE.Fst.Dxy.pi.csv.gz \
    -f phased -w 20000 -m 10000 -s 20000 \
    -p PundPyt -p NyerPyt -p NyerMak -p PundMak -p kivu 64253 \
-   --popsFile pop_file
+   --popsFile pop.info
 ```
 
 Note that -w 20000 specifies a window size of 20 kb that is sliding by 20 kb (-s 20000) and -m 10000 requests these windows to have a minimum number of 10 kb sites covered. The way we have encoded the genotypes (e.g. A/T) in our geno.gz file is called "phased" and we specify that with "-f phased" even though our data is actually not phased. Instead of writing all the individual names into the command, we could give only the species names in the code (e.g. -p pundPyt -p NyerPyt) and with `--popsFile` specify a file that contains a line for each individual with its name and species in a text file.
