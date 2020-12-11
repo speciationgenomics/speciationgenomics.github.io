@@ -22,23 +22,18 @@ First, let's convert the vcf file into Simon Martin's geno file. You can downloa
 ```shell
 mkdir ~/genome_scans
 cd ~/genome_scans
-FILE="Pundamilia.Kivu.chr20.subset"
 
 # Copy the vcf file and the information file and a small subset file
 cp /home/data/genomeScans/* ./
 
 # Convert the vcf file to geno.gz which is the format that Simons script requires
-parseVCF.py -i $FILE.vcf.gz | bgzip > $FILE.geno.gz
-
-# Get the full geno.gz file
-FILE="Pundamilia.Kivu.chr20"
-cp /home/data/vcf/$FILE.geno.gz ./
+parseVCF.py -i subset.vcf.gz | bgzip > subset.geno.gz
 
 ```
 
 First, we will calculate pi for each species and Fst and dxy for each pair of species all in one go.
 ```shell
-popgenWindows.py -g $FILE.geno.gz -o $FILE.Fst.Dxy.pi.csv.gz \
+popgenWindows.py -g subset.geno.gz -o subset.Fst.Dxy.pi.csv.gz \
    -f phased -w 20000 -m 10000 -s 20000 \
    -p PundPyt -p NyerPyt -p NyerMak -p PundMak -p kivu 64253 \
    --popsFile pop.info
@@ -49,8 +44,8 @@ Note that -w 20000 specifies a window size of 20 kb that is sliding by 20 kb (-s
 Next, we calculate fd to test for introgression from the original Pundamilia nyererei (NyerMak) into P. sp. "nyererei-like" (NyerPyt) using the Lake Kivu cichlid as outgroup. fd is a measure of introgression suitable for small windows. As the output file will not retain any information on which combination of species was used for the test, I like to add this information to the file name. We thus have quite a long file name.
 
 ```shell
-ABBABABAwindows.py -w 20000 -m 10 -s 20000 -g $FILE.geno.gz \
-   -o $FILE.fd.PundP.NyerP.NyerM.Kivu.csv.gz \
+ABBABABAwindows.py -w 20000 -m 10 -s 20000 -g subset.geno.gz \
+   -o subset.fd.PundP.NyerP.NyerM.Kivu.csv.gz \
    -f phased --minData 0.5 --writeFailedWindow \
    -P1 PundPyt -P2 NyerPyt -P3 NyerMak -O kivu \
    --popsFile pop_file
