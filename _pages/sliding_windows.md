@@ -60,33 +60,28 @@ To plot the results, we need will use the full dataset and read it into R. You c
 Then we can start plotting:
 
 ```r
-# Prepare input files:
+rm(list = ls())
 
+# Prepare input files:
 # Read in the file with sliding window estimates of FST, pi and dxy
-windowStats<-read.csv("genomeScans/Pundamilia_kivu_div_stats.csv",header=T)
+windowStats<-read.csv("./genome_scan/Pundamilia_kivu_div_stats.csv",header=T)
 
 # Let's have a look at what columns are present
 names(windowStats)
 length(windowStats$scaffold)
 
 # Get chrom ends for making positions additive
-chrom<-read.table("genomeScans/chrEnds.txt",header=T)
+chrom<-read.table("./genome_scan/chrEnds.txt",header=T)
 chrom$add<-c(0,cumsum(chrom$end)[1:21])
 
 # Make the positions of the divergence and diversity window estimates additive
 windowStats$mid<-windowStats$mid+chrom[match(windowStats$scaffold,chrom$chr),3]
 
 # Get fd estimates of 20 kb windows for NyerMak into NyerPyt
-fd<-read.delim(file = "genomeScans/Pundamilia_ABBABABA.csv",sep=",",header=T,na.strings = "NaN")
+fd<-read.delim(file = "./genome_scan/Pundamilia_ABBABABA.csv",sep=",",header=T,na.strings = "NaN")
 
-# Make a density plot to show the distribution of number of sites used per window
-# And to find a good threshold
-plot(density(fd$sitesUsed,na.rm=T))
-abline(v=10)
-
-# Set windows with less than 5 sites to NA for all hybridization stats
-fd[fd$sitesUsed<10 & !is.na(fd$fd),"fd"]<-NA
-fd[fd$sitesUsed<10 & !is.na(fd$fd),"fdM"]<-NA
+# Remove windows without mid position (windows with 0 sites)
+fd<-fd[!is.na(fd$mid),]
 
 # make positions additive
 fd$mid<-fd$mid+chrom[match(fd$scaffold,chrom$chr),3]
@@ -95,18 +90,23 @@ fd$mid<-fd$mid+chrom[match(fd$scaffold,chrom$chr),3]
 # Plotting statistics along the genome:
 
 # Combine 2 plots into a single figure:
-par(mfrow=c(2,1),oma=c(0,0,0,0),mar=c(3,3,1,1))
+par(mfrow=c(2,1),oma=c(3,0,0,0),mar=c(1,5,1,1))
 
 # Plot Fst between species at Makobe Island
-plot(windowStats$mid,windowStats$Fst_NyerMak_PundMak,cex=0.5,pch=19,xaxt="n",ylab="Fst Makobe",ylim=c(0,1),col=windowStats$scaffold)
+plot(windowStats$mid,windowStats$Fst_NyerMak_PundMak,cex=0.5,pch=19,xaxt="n",
+     ylab="Fst Makobe",ylim=c(0,1),col=windowStats$scaffold)
 abline(h=mean(windowStats$Fst_NyerMak_PundMak,na.rm=T),col="grey")
 
 # Plot Fst between species at Python Island
-plot(windowStats$mid,windowStats$Fst_PundPyt_NyerPyt,cex=0.5,pch=19,xaxt="n",ylab="Fst Python",ylim=c(0,1),col=windowStats$scaffold)
+plot(windowStats$mid,windowStats$Fst_PundPyt_NyerPyt,cex=0.5,pch=19,xaxt="n",
+     ylab="Fst Python",ylim=c(0,1),col=windowStats$scaffold)
 abline(h=mean(windowStats$Fst_PundPyt_NyerPyt,na.rm=T),col="grey")
+# Add the LG names to the center of each LG
+axis(1,at=chrom$add+chrom$end/2,tick = F,labels = 1:22)
 
 # Plot Dxy between species at Makobe Island
-plot(windowStats$mid,windowStats$dxy_NyerMak_PundMak,cex=0.5,pch=19,xaxt="n",ylab="dxy Makobe",ylim=c(0,0.03),col=windowStats$scaffold)
+plot(windowStats$mid,windowStats$dxy_NyerMak_PundMak,cex=0.5,pch=19,xaxt="n",
+     ylab="dxy Makobe",ylim=c(0,0.03),col=windowStats$scaffold)
 abline(h=mean(windowStats$dxy_NyerMak_PundMak,na.rm=T),col="grey")
 
 # Plot Dxy between species at Python Island
@@ -121,18 +121,31 @@ abline(h=mean(fd$fdM,na.rm=T),col="grey")
 # Add the LG names to the center of each LG
 axis(1,at=chrom$add+chrom$end/2,tick = F,labels = 1:22)
 
-# Is dxy and fst correlated?
-plot(windowStats$dxy_NyerMak_PundMak,windowStats$Fst_NyerMak_PundMak)
+# Are dxy and fst correlated?
+par(mfrow=c(1,1),mar=c(5,5,1,1),oma=c(1,1,1,1))
+
+plot(windowStats$dxy_NyerMak_PundMak,windowStats$Fst_NyerMak_PundMak,
+     xlab="dxy",ylab="Fst",pch=19,cex=0.3)
+# ignoring the outliers:
+plot(windowStats$dxy_NyerMak_PundMak,windowStats$Fst_NyerMak_PundMak,
+     xlab="dxy",ylab="Fst",pch=19,cex=0.3,xlim=c(0,0.01))
 
 # Is dxy correlated with pi, indicating that it is mostly driven by variance in mutation and recombination rates?
-plot(windowStats$dxy_NyerMak_PundMak,rowMeans(cbind(windowStats$pi_PundMak,windowStats$pi_NyerMak),na.rm=T))
+plot(rowMeans(cbind(windowStats$pi_PundMak,windowStats$pi_NyerMak),na.rm=T),
+     windowStats$dxy_NyerMak_PundMak,cex=0.3,
+     xlab="pi",ylab="dxy")
+abline(a=0,b=1,col="grey")
 
-# If we correct for dxy
-plot(windowStats$dxy_NyerMak_PundMak/rowMeans(cbind(windowStats$dxy_NyerMak_kivu,windowStats$dxy_PundMak_kivu),na.rm=T),windowStats$Fst_NyerMak_PundMak)
-
+# If we correct for mutation rate differences with dxy to kivu
+plot(windowStats$dxy_NyerMak_PundMak/rowMeans(cbind(windowStats$dxy_NyerMak_kivu,
+                                                    windowStats$dxy_PundMak_kivu),na.rm=T),
+     windowStats$Fst_NyerMak_PundMak,ylab="Fst",xlab="dxy normalized",pch=19,cex=0.3)
 
 
 ##############################################################################
+
+# Supplementary
+
 
 # What are the FST distributions between the two species pairs?
 par(mfrow=c(2,2))
@@ -164,6 +177,7 @@ vioplot(sharedHighFst$pi_NyerMak,normalFST$pi_NyerMak)
 # Do shared high FST windows contain haplotypes predating the Victoria-Kivu split?
 vioplot(sharedHighFst$ratio,normalFST$ratio,horizontal = T)
 
+install.packages("beanplot")
 require("beanplot")
 
 par(mfrow=c(1,1),mar=c(1,3,1,1),mgp=c(1.6,0.5,0),cex.axis=0.9,cex=1.3,xaxs="i",yaxs="i")
@@ -211,5 +225,6 @@ colPlot(dataset = windowStats,varx = "dxy_PundPyt_NyerPyt",vary = "dxy_NyerMak_P
 # Are dxy and pi correlated?
 colPlot(dataset = windowStats,varx = "pi_NyerPyt",vary = "dxy_PundPyt_NyerPyt",maxx = 0.03,maxy=0.03)
 colPlot(dataset = windowStats,varx = "pi_NyerMak",vary = "dxy_NyerMak_PundMak",maxx = 0.03,maxy=0.03)
+
 
 ```
