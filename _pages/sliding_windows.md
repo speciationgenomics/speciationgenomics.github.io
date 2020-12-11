@@ -24,7 +24,8 @@ mkdir ~/genome_scans
 cd ~/genome_scans
 FILE="Pundamilia.Kivu.chr20"
 cp /home/data/vcf/Pundamilia.Kivu.chr20.vcf.gz ./
-parseVCF.py -i $FILE.vcf.gz -o $FILE.geno.gz
+cp /home/data/vcf/pop_file ./
+parseVCF.py -i $FILE.vcf.gz | bgzip > $FILE.geno.gz
 ```
 
 First, we will calculate pi for each species and Fst and dxy for each pair of species all in one go.
