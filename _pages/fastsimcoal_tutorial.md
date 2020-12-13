@@ -3,7 +3,7 @@ title: "Demographic modeling with fastsimcoal2"
 layout: archive
 permalink: /fastsimcoal2/
 ---
-`fastsimcoal2` is an extremely flexible demographic modelling software developed by the group of [Laurent Excoffier at University of Bern](http://www.cmpg.iee.unibe.ch/about_us/team/researchers/prof_dr_excoffier_laurent/index_eng.html). It uses the site frequency spectrum (SFS) to fit model parameters to the observed data by performing coalescent simulations. You can find the manual and more information [here](http://cmpg.unibe.ch/software/fastsimcoal2/) and look at the [lecture slides](https://github.com/speciationgenomics/presentations/blob/master/2020-8-Demographic_modeling_JM.pdf).
+`fastsimcoal2` is an extremely flexible demographic modelling software developed by the group of [Laurent Excoffier at University of Bern](http://www.cmpg.iee.unibe.ch/about_us/team/researchers/prof_dr_excoffier_laurent/index_eng.html). It uses the site frequency spectrum (SFS) to fit model parameters to the observed data by performing coalescent simulations. You can find the manual and more information [here](http://cmpg.unibe.ch/software/fastsimcoal2/) and look at the [lecture slides](https://github.com/speciationgenomics/presentations/blob/master/Demographic_modeling_JM.pdf).
 
 ### Preparing the input files
 
@@ -101,6 +101,21 @@ Joana wrote a [script](https://github.com/speciationgenomics/scripts/raw/master/
 ```shell
 fsc-selectbestrun.sh
 ```
+
+Now run multiple models by modifying the $PREFIX.tpl and $PREFIX.est files and also rename the SFS to ${PREFIX}_jointDAFpop1_0.txt.
+
+<details><summary>Click here to see a possible solution.</summary>
+<p>
+Possible models:
+
+Early geneflow: [tpl](https://github.com/speciationgenomics/data/blob/master/early_geneflow.tpl), [est](https://github.com/speciationgenomics/data/blob/master/early_geneflow.tpl)
+No geneflow: [tpl](https://github.com/speciationgenomics/data/blob/master/no_geneflow.tpl), [est](https://github.com/speciationgenomics/data/blob/master/no_geneflow.tpl)
+Recent geneflow: [tpl](https://github.com/speciationgenomics/data/blob/master/recent_geneflow.tpl), [est](https://github.com/speciationgenomics/data/blob/master/recent_geneflow.tpl)
+Different geneflow strengths: [tpl](https://github.com/speciationgenomics/data/blob/master/diff_geneflow.tpl), [est](https://github.com/speciationgenomics/data/blob/master/diff_geneflow.tpl)
+Constant gene flow: [tpl](https://github.com/speciationgenomics/data/blob/master/ongoing_geneflow.tpl), [est](https://github.com/speciationgenomics/data/blob/master/ongoing_geneflow.tpl)
+
+</p>
+</details>
 
 ### Model comparison with AIC
 
