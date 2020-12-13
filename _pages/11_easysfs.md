@@ -21,14 +21,14 @@ Once we have done that, we need to create a population file. For the demonstrati
 bcftools query -l $VCF | grep "Mak" | awk '{split($0,a,"."); print $1,a[2]}' > pop_file
 ```
 
-`easySFS` has a nice feature for estimating how to project the populations. In some cases, you might have unbalanced samples (i.e. 20 individuals of species A, 15 of species B) and so it might be worth limiting the number of individuals included to ensure that you get the maximum number of segregating sites. To use this feature, you can use the following command:
+`easySFS` has a nice feature for estimating how to downsample the populations to retain the highest number of sites. The SFS cannot be computed with sites that contain missing data. By projecting down the number of individuals per population, more sites can be recovered. Alternatively, if your dataset has a lot of missing data and low coverage, you may want to generate the SFS with [ANGSD](http://www.popgen.dk/angsd/index.php/ANGSD) which takes genotype uncertainties into account. For easySFS, to identify the best projection value, you can use the following command:
 
 ```shell
 # estimate projections
 easySFS.py -i $VCF -p pop_file -a -f --preview
 ```
 
-However in our case, we have 4 individuals of each species (and thus 8 chromosomes from each). There is no need to downsample or alter our projection. Therefore we run `easySFS` like so:
+However in our case, we have very little missing data. There is no need to downsample. Therefore we run `easySFS` like so:
 
 ```shell
 # this line will calculate the necessary SFS files
