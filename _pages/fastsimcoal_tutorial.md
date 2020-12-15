@@ -108,7 +108,13 @@ Now run multiple models by modifying the $PREFIX.tpl and $PREFIX.est files and a
 <p>
 Possible models:
 
-Early geneflow: [tpl](https://github.com/speciationgenomics/data/blob/master/early_geneflow.tpl), [est](https://github.com/speciationgenomics/data/blob/master/early_geneflow.tpl)
+Early Geneflow:
+<a href="https://github.com/speciationgenomics/data/blob/master/early_geneflow.tpl">
+tpl</a>
+<a href="https://github.com/speciationgenomics/data/blob/master/early_geneflow.est">
+est</a>
+
+Early geneflow: [tpl]()
 No geneflow: [tpl](https://github.com/speciationgenomics/data/blob/master/no_geneflow.tpl), [est](https://github.com/speciationgenomics/data/blob/master/no_geneflow.tpl)
 Recent geneflow: [tpl](https://github.com/speciationgenomics/data/blob/master/recent_geneflow.tpl), [est](https://github.com/speciationgenomics/data/blob/master/recent_geneflow.tpl)
 Different geneflow strengths: [tpl](https://github.com/speciationgenomics/data/blob/master/diff_geneflow.tpl), [est](https://github.com/speciationgenomics/data/blob/master/diff_geneflow.tpl)
@@ -119,7 +125,7 @@ Constant gene flow: [tpl](https://github.com/speciationgenomics/data/blob/master
 
 ### Model comparison with AIC
 
-In order to find the best model, the likelihoods of the best run of each model should be compared. Comparing raw likelihoods is problematic, because a model with more parameters will always tend to result in a better fit to the data. Therefore, the (Akaike information criterium)[https://en.wikipedia.org/wiki/Akaike_information_criterion] or AIC is typically calculated to determine if the models differ in their likelihoods accounting for the number of parameters in each model. Also for this you can use a [script](https://github.com/speciationgenomics/scripts/blob/master/calculateAIC.sh) that is mostly based on R code by [Vitor Sousa](http://ce3c.ciencias.ulisboa.pt/member/vitorsousa).
+In order to find the best model, the likelihoods of the best run of each model should be compared. Comparing raw likelihoods is problematic, because a model with more parameters will always tend to result in a better fit to the data. Therefore, the [Akaike information criterium](https://en.wikipedia.org/wiki/Akaike_information_criterion) or AIC is typically calculated to determine if the models differ in their likelihoods accounting for the number of parameters in each model. Also for this you can use a [script](https://github.com/speciationgenomics/scripts/blob/master/calculateAIC.sh) that is mostly based on R code by [Vitor Sousa](http://ce3c.ciencias.ulisboa.pt/member/vitorsousa).
 
 ```shell
 cd bestrun/
