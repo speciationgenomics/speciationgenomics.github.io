@@ -104,35 +104,37 @@ fsc-selectbestrun.sh
 
 Now modify the $PREFIX.tpl and $PREFIX.est files to specify different models and also rename the SFS to ${PREFIX}_jointDAFpop1_0.txt. Then run fastsimcoal2 for all models to see which one shows the best fit to the observed SFS.
 
+![](/images/modeling/models.png)
+
 <details><summary>Click here to see a possible solution.</summary>
 <p>
 Possible models:
 
-* Early Geneflow (this is the model expalined in the example, gene flow right after the split and then no gene flow anymore, e.g. speciation with gene flow and then no gene flow anymore as reproductive isolation becomes strong):
+Early Geneflow (this is the model expalined in the example, gene flow right after the split and then no gene flow anymore, e.g. speciation with gene flow and then no gene flow anymore as reproductive isolation becomes strong):
 <a href="https://github.com/speciationgenomics/data/blob/master/early_geneflow.tpl">
 tpl</a>
 <a href="https://github.com/speciationgenomics/data/blob/master/early_geneflow.est">
 est</a>
-
-* No geneflow:
+<br/>
+No geneflow:
 <a href="https://github.com/speciationgenomics/data/blob/master/no_geneflow.tpl">
 tpl</a>
 <a href="https://github.com/speciationgenomics/data/blob/master/no_geneflow.est">
 est</a>
-
-* Recent geneflow (no gene flow intially after the split but gene flow in recent times, e.g. secondary contact scenario)
+<br/>
+Recent geneflow (no gene flow intially after the split but gene flow in recent times, e.g. secondary contact scenario)
 <a href="https://github.com/speciationgenomics/data/blob/master/recent_geneflow.tpl">
 tpl</a>
 <a href="https://github.com/speciationgenomics/data/blob/master/recent_geneflow.est">
 est</a>
-
-* Different gene flow matrices (higher or lower gene flow right after the split than recently, e.g. initially higher gene flow then lower gene flow as reproductive isolation accumulates):
+<br/>
+Different gene flow matrices (higher or lower gene flow right after the split than recently, e.g. initially higher gene flow then lower gene flow as reproductive isolation accumulates):
 <a href="https://github.com/speciationgenomics/data/blob/master/diff_geneflow.tpl">
 tpl</a>
 <a href="https://github.com/speciationgenomics/data/blob/master/diff_geneflow.est">
 est</a>
-
-* Constant gene flow (same gene flow strengths since the split until now):
+<br/>
+Constant gene flow (same gene flow strengths since the split until now):
 <a href="https://github.com/speciationgenomics/data/blob/master/ongoing_geneflow.tpl">
 tpl</a>
 <a href="https://github.com/speciationgenomics/data/blob/master/ongoing_geneflow.est">
