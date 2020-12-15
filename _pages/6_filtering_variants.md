@@ -49,7 +49,7 @@ How can we get an idea of how to set filters? We could just take the first 100 0
 A far better idea is to randomly sample your VCF. Luckily there is a tool to do exactly this and it is part of the extremely useful [`vcflib` pipeline](https://github.com/vcflib/vcflib). Using it is also very simple. Here we will use it to extract ~100 000 variants at random from our unfiltered VCF.
 
 ```shell
-bcftools view cichlid_full.vcf.gz | vcfrandomsample -r 0.012 > cichlid_subset.vcf.gz
+bcftools view cichlid_full.vcf.gz | vcfrandomsample -r 0.012 > cichlid_subset.vcf
 
 ```
 Note that `vcfrandomsample` cannot handle an uncompressed VCF, so we first open the file using `bcftools` and then pipe it to the `vcfrandomsample` utility. We set only a single parameter, `-r` which is a bit confusingly named for the rate of sampling. This essentially means the fraction of variants we want to retain.
