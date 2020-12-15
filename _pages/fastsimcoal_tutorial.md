@@ -102,7 +102,7 @@ Joana wrote a [script](https://github.com/speciationgenomics/scripts/raw/master/
 fsc-selectbestrun.sh
 ```
 
-Now run multiple models by modifying the $PREFIX.tpl and $PREFIX.est files and also rename the SFS to ${PREFIX}_jointDAFpop1_0.txt.
+Now modify the $PREFIX.tpl and $PREFIX.est files to specify different models and also rename the SFS to ${PREFIX}_jointDAFpop1_0.txt. Then run fastsimcoal2 for all models to see which one shows the best fit to the observed SFS.
 
 <details><summary>Click here to see a possible solution.</summary>
 <p>
