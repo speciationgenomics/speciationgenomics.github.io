@@ -8,7 +8,8 @@ ADMIXTOOLS is a software package developed by the David Reich group. You can fin
 
 ### Generating the input files
 
-ADMIXTOOLS requires `eigenstrat` input files. To convert a vcf file to eigenstrat, we will use a conversion script written by Joana. That script just requires the name of the vcf file (NB - the script can use uncompressed vcfs too). We are going to use a dataset of whole genome resequence data from a set of dogs that originally stems comes from [here](https://datadryad.org/resource/doi:10.5061/dryad.sk3p7).
+ADMIXTOOLS requires `eigenstrat` input files. To convert a vcf file to eigenstrat, we will use a conversion script written by Joana. That script just requires the name of the vcf file (NB - the script can use uncompressed vcfs too).  Note that if the script fails because it does not like your scaffold names, you can add the option --renameScaff
+It will then rename your scaffolds to 1 and make the positions cumulative, i.e. concatenate your scaffolds. It assumes a constant recombination rate of 2 cM/Mb. If that is way off for your species, you may want to change it at the top of the script. We are going to use a dataset of whole genome resequence data from a set of dogs that originally stems comes from [here](https://datadryad.org/resource/doi:10.5061/dryad.sk3p7).
 
 ```shell
 # move to your home directory
@@ -27,6 +28,7 @@ cp /home/scripts/convertVCFtoEigenstrat.sh .
 
 # Convert the vcf to the eigenstrat format required by AMDIXTOOLS
 sh convertVCFtoEigenstrat.sh dogs.vcf.gz
+
 ```
 
 Have a look in your directory, this will produce a number of files, all named `dogs.pruned`. Before we can progress however, we need to do a little housekeeping to ensure we can read these files in our `R` session. This is a nice moment to test out our `bash` skills.
