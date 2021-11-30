@@ -19,7 +19,7 @@ locale                   : "en-US"
 title                    : "Speciation & Population Genomics: a how-to-guide"
 title_separator          : "|"
 name                     : "Mark Ravinet & Joana Meier"
-description              : "Physalia course, Berlin 2018"
+description              : "Physalia course"
 url                      : # the base hostname & protocol for your site e.g. "https://mmistakes.github.io"
 baseurl                  : # the subpath of your site, e.g. "/blog"
 repository               : speciationgenomics/speciationgenomics.github.io
