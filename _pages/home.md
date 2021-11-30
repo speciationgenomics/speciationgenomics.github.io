@@ -13,7 +13,9 @@ You can find a recommended reading list [here](https://speciationgenomics.github
 
 ![](/images/other/pundamilia.png)
 
-<span style="color:red">**Disclaimer:
+<span style="color:red"> **Disclaimer:
 The tutorials and resources on this site are written for the Physalia Speciation genomics course that we have been teaching since 2018. We are really glad to hear that the resources are of use to others that do not participate in the class and we are happy for you to use them.
+</span>
 
-However we want to make it clear that we do not actively maintain the resources on the website or the scripts that are implemented for general use beyond the course. So please use these at your own risk - we are both very busy and do not have time to troubleshoot special case uses. Similarly, some of the large datasets are not available on github but they are publicly available via links in the original papers. If you wish to follow the tutorials, here we encourage you to do so but we cannot help with individual requests. Good luck!**</span>.
+<span style="color:red">
+However we want to make it clear that we do not actively maintain the resources on the website or the scripts that are implemented for general use beyond the course. So please use these at your own risk - we are both very busy and do not have time to troubleshoot special case uses. Similarly, some of the large datasets are not available on github but they are publicly available via links in the original papers. If you wish to follow the tutorials, here we encourage you to do so but we cannot help with individual requests. Good luck!** </span>.
