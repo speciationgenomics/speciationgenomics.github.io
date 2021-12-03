@@ -19,6 +19,14 @@ Firstly, download the keyfile and open a terminal window. Then copy it into your
 ```shell
 cp mark.pem ~
 ```
+
+You made need to change permissions on this keyfile. If you get an error about permissions, try the following:
+
+```shell
+chmod go= mark.pem
+chmod -R u+x mark.pem
+```
+
 Then you should be able to log in with `ssh` whatever your working directory is. You need to provide `ssh` with the path to your key, which you can do with the `-i` flag. This basically points to your identity file or keyfile. For example:
 
 ```shell
