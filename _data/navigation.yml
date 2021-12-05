@@ -52,6 +52,8 @@ pages:
 
   - title: "Genome scans"
     children:
+      - title: "- Calculating LD decay"
+        url: /ld_decay/      
       - title: "- Computing per site Fst"
         url: /per_site_Fst/
       - title: "- Sliding window differentiation, variance and introgression"
