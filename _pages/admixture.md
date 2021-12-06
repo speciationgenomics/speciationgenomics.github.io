@@ -56,7 +56,7 @@ To make plotting easier, we can make a file with the individual names in one col
 awk '{split($1,name,"."); print $1,name[2]}' ${FILE}.nosex > $FILE.list
 ```
 
-Now we are ready to plot the results in `R`. To make it a bit easier, Joana Meier has written an `R` script for you that generates the plot. It requires four arguments, the prefix for the `ADMIXTURE` output files (-p <prefix>), the file with the species information (-i <file.list>), the maximum number of K to be plotted (-k 5), and a list with the populations or species separated by commas (-l <pop1,pop2...>). The list of populations provided with -l gives the order in which the populations or species shall be plotted.
+Now we are ready to plot the results in `R`. To make it a bit easier, Joana Meier has written an `R` script for you that generates the plot. It requires four arguments, the prefix for the `ADMIXTURE` output files (-p <prefix>), the file with the species information (-i <file.list>), the maximum number of K to be plotted (-k 5), and a list with the populations or species separated by commas (-l <pop1,pop2...>). The list of populations provided with -l gives the order in which the populations or species shall be plotted. Note, that alternatively, if working with your own data, you could also try [this](https://github.com/ramachandran-lab/pong/blob/master/pong-manual.pdf) for plotting.
 
 You can get it from [here](https://github.com/speciationgenomics/scripts/blob/master/plotADMIXTURE.r) or download it with wget:
 
