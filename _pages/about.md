@@ -6,7 +6,7 @@ permalink: /about/
 
 ### Joana Meier
 
-Joana Meier is a Research Fellow University of Cambridge, UK. Her research focus is on speciation and evolutionary genomics. Why do some taxa rapidly generate new species, whereas others remain species-poor? She is particularly interested in the role of hybridisation (interbreeding) in rapid speciation and adaptation. Her study systems include *Heliconius* and ithomiine butterflies from South America and cichlid fishes from the East African Lake Victoria. You can learn more on [her website](https://joanameier.ch/) or on [her Google scholar profile](https://scholar.google.co.uk/citations?user=5C_BoWQAAAAJ&hl=en&oi=ao).
+Joana Meier is a Research Fellow at University of Cambridge, UK. Her research focus is on speciation and evolutionary genomics. Why do some taxa rapidly generate new species, whereas others remain species-poor? She is particularly interested in the role of hybridisation (interbreeding) in rapid speciation and adaptation. Her study systems include *Heliconius* and ithomiine butterflies from South America and cichlid fishes from the East African Lake Victoria. You can learn more on [her website](https://joanameier.ch/) or on [her Google scholar profile](https://scholar.google.co.uk/citations?user=5C_BoWQAAAAJ&hl=en&oi=ao).
 
 ### Mark Ravinet
 
