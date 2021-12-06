@@ -14,7 +14,7 @@ pages:
         url: /getting_used_to_unix/
       - title: "- Going further with Unix"
         url: /going_further_unix/
-      - title: "awk tutorial"
+      - title: "- awk tutorial"
         url: /awk/
 
   - title: "Handling NGS data"
