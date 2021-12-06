@@ -91,7 +91,7 @@ To make sure that you will not get logged out if you are inactive for a while, y
 
 ![](/images/putty/fig6.png)
 
-To avoid having to change the settings each time you log in, you can save the PuTTY session. Click on Session to get back to the basic options window. Once you are happy with all settings, give the session a name and click Save. Now you are ready to start the session with "Open". The first time PuTTY will display a security alert dialog box that asks whether you trust the host you are connecting to. Click Accept.
+To avoid having to change the settings each time you log in, you can save the PuTTY session. Click on Session to get back to the basic options window. Once you are happy with all settings, give the session a name and click Save. Now you are ready to start the session with "Open". The first time PuTTY will display a security alert dialog box that asks whether you trust the host you are connecting to. Click "Accept".
 
 ![](/images/putty/fig7.png)
 
