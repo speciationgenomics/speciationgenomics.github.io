@@ -14,6 +14,8 @@ pages:
         url: /getting_used_to_unix/
       - title: "- Going further with Unix"
         url: /going_further_unix/
+      - title: "awk tutorial"
+        url: /awk/
 
   - title: "Handling NGS data"
     children:
@@ -53,7 +55,7 @@ pages:
   - title: "Genome scans"
     children:
       - title: "- Calculating LD decay"
-        url: /ld_decay/      
+        url: /ld_decay/
       - title: "- Computing per site Fst"
         url: /per_site_Fst/
       - title: "- Sliding window differentiation, variance and introgression"
