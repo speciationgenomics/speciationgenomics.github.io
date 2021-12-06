@@ -24,42 +24,31 @@ awk 'NR==10' cichlids.imiss # or the tenth line
 # Get only every 20th line
 awk 'NR%20==0' cichlids.imiss
 
-# awk can be used like grep:
-grep "INDV" cichlids.imiss
+# awk can be used like grep to select all lines with a specific word
 awk '/INDV/' cichlids.imiss
-
-# There are some samples in here that are duplicates
-# They end with .00
-
-# If we get the with grep, we get lot's of other lines
-grep ".00" cichlids.imiss
-
-# in awk we can say, that it should only look in the first column
-# Columns are referred to with a "$" sign
-awk '$1~/.00/' cichlids.imiss
-
-# Now the problem is that just like grep, awk interprets the dot a any character
-# To avoid that, we have to escape it with the backslash
-awk '$1~/\.00/' cichlids.imiss
+# this gives the same output as
+grep "INDV" cichlids.imiss
 
 # Let's use awk for something else that grep cannot do
 # Get all samples with more than 1% missing data
+# note: $5 means fifth column
 awk '$5>0.01' cichlids.imiss
 
-# Get just the codes of these samples with high missing data proportion
-awk '$5>0.01' cichlids.imiss | cut -f 1
-awk '{if($5>0.01) print $1}' cichlids.imiss
+# With curly brackets {} we can specify more complex awk commands.
 
-# Get the mean missing data proportion
+# Get just the codes of these samples (column 1) with missing data proportion above 0.01
+awk '{if($5>0.01) print $1}' cichlids.imiss
+# with if() we can define a specific criterium that needs to be fulfilled (e.g. column 5 needs to be greater than 0.01)
+
+# To get the mean missing data proportion, we can use the END{} statement. The part in END{} is preformed after going through all lines.
 awk '{a+=$5}END{print a/NR}' cichlids.imiss
 
-# Actually the header is still in here, so let's
+# Actually the header is still in here, so let's skip the first line
 awk '{if(NR>1) a+=$5}END{print a/(NR-1)}' cichlids.imiss
 
-# Now if let's get the mean missing data proportion per group
-# Add the information of the samples:
+# Now if we want to get the mean missing data proportion per group
+# we need to first combine the two files to get the missing data proportion and group information in a single file.
 
-# First we need to combine the two files
 # Let's have a look at their structure again
 head cichlids.info
 head cichlids.imiss
