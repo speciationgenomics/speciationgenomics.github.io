@@ -24,19 +24,17 @@ cd filteredReads
 cp /home/data/fastq/wgs.R*.fastq.gz ./
 
 # Run fastp
-fastp --in1 wgs.R1.fastq.gz --in2 wgs.R2.fastq.gz --out1 wgs.R1.trimmed.fastq.gz --out2 wgs.R2.trimmed.fastq.gz --unpaired1 wgs.R1.unpaired.fastq.gz --unpaired2 wgs.R2.unpaired.fastq.gz --reads_to_process 1000000 -l 50 -h wgs.html &> wgs.log
+fastp --in1 wgs.R1.fastq.gz --in2 wgs.R2.fastq.gz --out1 wgs.R1.trimmed.fastq.gz --out2 wgs.R2.trimmed.fastq.gz -l 50 -h wgs.html &> wgs.log
 
 # Note &> redirects the information on what it did into the file wgs.log (both stderror and stdout are written into this file)
 
 # Let's have a look at what files fastp produced:
 ls
-# You can see that it produced the four output files we specified and also an html file which shows some quality information
+# You can see that it produced the two output files we specified and also an html and a json file which shows some quality information
 ```
 ### Parameters specified here:
 * \-\-in1 and \-\-in2: specify your files of forward (1) reads and of the reverse (2) reads.
 * \-\-out1 and \-\-out2: specify the output files for forward and reverse reads that are still Paired.
-* \-\-unpaired1 and \-\-unpaired2: specify the output files for reads that are not paired anymore.
-* \-\-reads_to_process: specify how many reads should be processed. As processing the entire file can take long, we will set this to 1 million. Importantly, this is only used for testing purposes. For the real data, you should of course remove this options.
 * -l 50: this specifies that if a read is shorter than 50 basepairs after all filters, it should be removed.
 * -h: specifies name for the html file with plots showing the read quality before and after filtering
 
