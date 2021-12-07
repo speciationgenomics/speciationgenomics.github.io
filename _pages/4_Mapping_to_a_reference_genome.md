@@ -253,7 +253,7 @@ Now thatwe have built our script, it is time to use it. Save it and name it `ali
 Once the script is on the cluster, open a screen and call it `align`; (i.e. `screen -S align`). Then run the script like so:
 
 ```shell
-sh align_sort.sh
+bash align_sort.sh
 ```
 
 You will now see the script running as the sequences align. Press `Ctrl + A + D` in order to leave the screen. Now is a good time to take a break as you wait for the job to complete.

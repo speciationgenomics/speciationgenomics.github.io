@@ -33,8 +33,6 @@ In this tutorial, we will first write a model of two species that diverged in th
 
 All keywords introduced in the template file need to be defined in the estimation file. For each keyword, the parameter distribution (uniform or log-uniform) and search range (min and max) are given on a single line. Each parameter can be an integer or a float, as specified by a first indicator variable.
 
-It is also possible to specify rules which limit the possible parameter values. Typically, they are used to restrict a parameter to be smaller than another one. As an example, the parameter specifying the size before the bottleneck may be restricted to be at least ten times as large as the population size at the bottleneck. In more complex models, you might use rules to specify that a species pair may be required to split before another species pair.
-
 Lastly, complex parameters can be used to compute parameter values with simple operations such as computing the ratio between two simple parameters or specifying a parameter as the minimum of two parameters. In addition, for each simple or complex parameter, one needs to specify if the parameter value should be written into an output file or not.
 
 As with the template file, the estimation file is best produced by modifying an example `est` file in a text editor.
@@ -52,7 +50,7 @@ cd fastsimcoal
 mkdir early_geneflow
 cd early_geneflow
 cp /home/data/fastsimcoal2/early_geneflow/* ./
-fsc26 -t ${PREFIX}.tpl -e ${PREFIX}.est -m -0 -C 10 -n 10000 -L 40 -s 0 -M
+fastsimcoal2 -t ${PREFIX}.tpl -e ${PREFIX}.est -m -0 -C 10 -n 10000 -L 40 -s 0 -M
 ```
 
 This command runs `fastsimcoal` using a MAF (`-m`) while ignoring monomorphic sites (`-0`) and SFS entries with less than 10 SNPs (`-C`). This means that entries with less than 10 SNPs are pooled together. This option is useful when there are many entries in the observed SFS with few SNPs and with a limited number of SNPS to avoid overfitting.
@@ -84,7 +82,7 @@ Due to time constraints, we will only run this model 5 times. Note, I added the 
    mkdir run$i
    cp ${PREFIX}.tpl ${PREFIX}.est ${PREFIX}_jointMAFpop1_0.obs run$i"/"
    cd run$i
-   fsc26 -t ${PREFIX}.tpl -e ${PREFIX}.est -m -0 -C 10 -n 10000 -L 40 -s0 -M -q
+   fastsimcoal2 -t ${PREFIX}.tpl -e ${PREFIX}.est -m -0 -C 10 -n 10000 -L 40 -s0 -M -q
    cd ..
  done
 ```
@@ -168,7 +166,7 @@ plotModel.r -p early_geneflow -l NyerMak,PundMak
 Now, let's download the pdfs these scripts generated.
 
 ```shell
-scp -i c.pem user@<ip>:~/fastsimcoal/early_geneflow/bestrun/*pdf ./
+scp -i c1.pem user1@<ip>:~/fastsimcoal/early_geneflow/bestrun/*pdf ./
 ```
 
 ### Model comparison with Likelihood distributions
@@ -188,7 +186,7 @@ cp ${PREFIX}_jointMAFpop1_0.obs ${PREFIX}_maxL_jointMAFpop1_0.obs
 # Run fastsimcoal 20 times (in reality better 100 times) to get the likelihood of the observed SFS under the best parameter values with 1 mio simulated SFS.
 for iter in {1..20}
 do
- fsc26 -i ${PREFIX}_maxL.par -n1000000 -m -q -0
+ fastsimcoal2 -i ${PREFIX}_maxL.par -n1000000 -m -q -0
  # Fastsimcoal will generate a new folder called ${model}_maxL and write files in there
 
  # collect the lhood values (Note that >> appends to the file, whereas > would overwrite it)
@@ -300,7 +298,7 @@ do
     mkdir run$i
     cd run$i
     cp ${PREFIX}.bs.$bs.* ./
-    fsc26 -t ${PREFIX}.bs.$bs.tpl -e ${PREFIX}.bs.$bs.est -m -0 -C 10 -n 10000 -L 40 -s0 -M -q
+    fastsimcoal2 -t ${PREFIX}.bs.$bs.tpl -e ${PREFIX}.bs.$bs.est -m -0 -C 10 -n 10000 -L 40 -s0 -M -q
     cd ..
   done
   # Find the best run:
