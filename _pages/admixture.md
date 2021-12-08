@@ -8,7 +8,7 @@ You can find the manual [here](http://software.genetics.ucla.edu/admixture/admix
 
 ## Generating the input file
 
-`ADMIXTURE` requires unlinked (i.e. LD-pruned) SNPs in plink format. See the [slides](https://github.com/speciationgenomics/presentations/blob/master/ADMIXTURE.pdf) for additional requirements. It is very easy to generate the input file from a VCF containing such SNPs. This time we are using a RAD dataset of the same *Pundamilia* species which includes more than 4 individuals per population and some putative hybrid individuals. Linked sites, monomorphic or multiallelic sites, or sites with more than 25% missing data have already been filtered out. Also sites with MAF smaller than 0.05 or Phred quality lower than 30 were removed. We can use `plink` to generate the `.bed` file which can be read by `ADMIXTURE` (and other files we do not need):
+`ADMIXTURE` requires unlinked (i.e. LD-pruned) SNPs in plink format. See the [slides](https://github.com/speciationgenomics/presentations/blob/master/ADMIXTURE.pdf) for additional requirements. It is very easy to generate the input file from a VCF containing such SNPs. This time we are using a RAD dataset of the same *Pundamilia* species which includes more than 4 individuals per population and some putative hybrid individuals. Linked sites, monomorphic or multiallelic sites, or sites with more than 25% missing data have already been filtered out. Also sites with MAF smaller than 0.05 or Phred quality lower than 30 were removed. We can use `plink` to generate the `.bed` file which can be read by `ADMIXTURE` (and other files we do not need). A [PLINK bed file](https://www.cog-genomics.org/plink/1.9/formats#bed) is a binary biallelic genotype table (not to be confused with [UCSC bed files](https://genome.ucsc.edu/FAQ/FAQformat.html#format1)).
 
 ```shell
 FILE=Pundamilia.RAD
@@ -36,7 +36,7 @@ admixture --cv $FILE.bed 2 > log2.out
 Let's now run it in a for loop with `K=2` to `K=5` and direct the output into log files
 
 ```shell
-for i in {2..5}
+for i in {3..5}
 do
  admixture --cv $FILE.bed $i > log${i}.out
 done
