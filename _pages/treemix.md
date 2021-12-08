@@ -6,7 +6,7 @@ permalink: /Treemix/
 
 `treemix` was written by Joseph K. Pickrell and Jonathan K. Pritchard and is available [here](https://bitbucket.org/nygcresearch/treemix/wiki/Home). If given a set of allele frequencies from a number of populations, it will return the maximum likelihood tree for the set of populations, and optionally attempt to infer a number of admixture events.
 
-It assumes unlinked SNPs and we are thus first going to prune the file for SNPs in high LD. We learned how to do this previously in more detail in the [PCA tutorial](https://speciationgenomics.github.io/pca/), but we will repeat it again here. One could also account for linkage in `treemix` by setting `-k 1000` - i.e setting a large blocksize for the jacknife resampling. However, our current SNP dataset is too large for us anyway. Furthermore, `treemix` does not like missing data. We will therefore remove sites with missing data and perform linkage pruning.
+Treemix assumes unlinked SNPs and we are thus first going to prune the file for SNPs in high LD. We learned how to do this previously in more detail in the [PCA tutorial](https://speciationgenomics.github.io/pca/), but we will repeat it again here. One could also account for linkage in `treemix` by setting `-k 1000` - i.e setting a large blocksize for the jacknife resampling. However, our current SNP dataset is too large for us anyway. Furthermore, `treemix` does not like missing data. We will therefore remove sites with missing data and perform linkage pruning.
 
 ```shell
 FILE=dogs
@@ -78,3 +78,5 @@ for(edge in 0:5){
  plot_resid(stem=paste0(prefix,".",edge),pop_order="dogs.list")
 }
 ```
+
+Note, that there are also other ways of inferring admixture. One nice method is making [admixture graphs](https://uqrmaie1.github.io/admixtools/articles/admixtools.html).
