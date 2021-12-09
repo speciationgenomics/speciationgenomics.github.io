@@ -66,7 +66,7 @@ It produced a folder called `${PREFIX}` which contains a number of new files. Th
 * `${PREFIX}_maxL.par`: Model specification file with the best parameter estimates. It is basically the tpl file with the keywords replaced by estimated values. This file is useful if you want to simulate data under the best model using Arlequin.
 
 Note, the bestlhoods file contains two different likelihoods: `MaxObsLhood`: is the maximum possible value for the likelihood if there was a perfect fit of the expected to the observed SFS, i.e. if the expected SFS was the relative observed SFS.
-`MaxEstLhood`: is the maximum likelihood estimated according to the model parameters.
+`MaxEstLhood`: is the maximum likelihood estimated according to the model parameters. It is obtained by using the observed SFS as the expected SFS when computing the likelihood, i.e., returning the value of the likelihood if there was a perfect fit between the expected and observed SFS.
 
 The better the fit, the smaller the difference between `MaxObsLhood` and `MaxEstLhood`.
 
