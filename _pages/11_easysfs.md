@@ -11,7 +11,14 @@ to do this but one of the simplest is using [easysfs](https://github.com/isaacov
 Using `easySFS` is very straighforward. The first thing we will do is declare a `$VCF` variable, to make the downstream commands a bit more clear. We do this like so:
 
 ```shell
-VCF=cichlid_filtered.vcf.gz
+# As always, we work in a separate directory for this analysis
+mkdir SFS
+cd SFS
+
+# We will work with a subset of sites that are already filtered for low missing data proportions:
+cp /home/data/vcf/cichlid_subset_filtered.vcf.gz ./
+VCF="cichlid_subset_filtered.vcf.gz"
+
 ```
 
 Once we have done that, we need to create a population file. For the demonstration here, we will use only cichlids from Makobe. The following `bcftools` command, piped to `grep` and `awk` will produce what we need:
