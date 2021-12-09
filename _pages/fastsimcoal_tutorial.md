@@ -155,7 +155,7 @@ This script generates a file ${PREFIX}.AIC which contains the delta likelihood a
 
 ### Visualize the model fit
 
-To visualize the fit of the simulated SFS to the data, we can use an `R` script that David Marques wrote - `SFStools.r` - which you can download here)[https://github.com/marqueda/SFS-scripts/].
+To visualize the fit of the simulated SFS to the data, we can use an `R` script that David Marques wrote - `SFStools.r` - which you can download [here](https://github.com/marqueda/SFS-scripts/).
 
 To visualize the model with the best parameter estimates, we can use one of Joana Meier's R scripts - [plotModel.r](https://github.com/speciationgenomics/scripts/blob/master/plotModel.r).
 
