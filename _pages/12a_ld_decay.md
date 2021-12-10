@@ -72,7 +72,7 @@ Now, what we need to do next in order to calculate linkage decay is to calculate
 
 ```shell
 # run mark python script
-python ld_decay_calc.py -i cichlid.ld.gz -o cichlid_chr1
+ld_decay_calc.py -i cichlid_chr1.ld.gz -o cichlid_chr1
 ```
 This will take a few moments to run and will produce two files, the pairwise SNPs arranged into distance classes and the average LD across 100 Kb bins. We'll take the latter and then plot it in R to see the LD decay.
 
