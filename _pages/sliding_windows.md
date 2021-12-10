@@ -66,8 +66,12 @@ rm(list = ls())
 # Read in the file with sliding window estimates of FST, pi and dxy
 windowStats<-read.csv("./genome_scan/Pundamilia_kivu_div_stats.csv",header=T)
 
-# Let's have a look at the FST values
+# Read in the fd estimates of 20 kb windows for NyerMak into NyerPyt (P1=PundPyt, P2=NyerPyt, P3=NyerMak, outgroup=Kivu cichlid)
+fd<-read.csv("./genome_scan/Pundamilia_ABBABABA.csv",header=T,na.strings = "NaN")
+
+# Let's have a look at the FST and fd datasets
 head(windowStats)
+head(fd)
 
 # Let's plot FST between the two younger species
 require(ggplot2)
@@ -79,7 +83,18 @@ ggplot(windowStats,aes(mid,Fst_PundPyt_NyerPyt))+geom_point()
 require(tidyverse)
 ggplot(windowStats %>% filter(scaffold == "chr1"),aes(mid,Fst_PundPyt_NyerPyt))+geom_point()
 
-# However, we actually want to see all chromosomes next to each other, so let's add a new column with additive values
+# Let's see if the FST peaks show evidence of excess allele sharing (introgression or selection on the same standing variation) with NyerMak
+require(gridExtra)
+g1<-ggplot(windowStats%>% filter(scaffold == "chr1"),aes(mid,Fst_PundPyt_NyerPyt))+geom_point()
+g2<-ggplot(fd %>% filter(scaffold == "chr1"),aes(mid,fdM))+geom_point()
+grid.arrange(g1, g2, nrow=2)
+
+# Combine the two datasets to check if the high FST outliers have high fd values
+allStats<-merge(windowStats,fd,by=c("scaffold","mid"))
+ggplot(allStats%>% filter(scaffold == "chr1"),aes(fdM,Fst_PundPyt_NyerPyt))+geom_point()
+
+
+# We actually want to see all chromosomes next to each other, so let's add a new column with additive values
 # Get chrom ends for making positions additive
 chrom<-read.table("./genome_scan/chrEnds.txt",header=T)
 chrom$add<-c(0,cumsum(chrom$end)[1:21])
@@ -87,16 +102,10 @@ chrom$add<-c(0,cumsum(chrom$end)[1:21])
 # Make the positions of the divergence and diversity window estimates additive
 windowStats$mid<-windowStats$mid+chrom[match(windowStats$scaffold,chrom$chr),3]
 
-# Get fd estimates of 20 kb windows for NyerMak into NyerPyt
-fd<-read.delim(file = "./genome_scan/Pundamilia_ABBABABA.csv",sep=",",header=T,na.strings = "NaN")
-
-# Remove windows without mid position (windows with 0 sites)
-fd<-fd[!is.na(fd$mid),]
 
 # make positions additive
 fd$mid<-fd$mid+chrom[match(fd$scaffold,chrom$chr),3]
 
-##########################################################################
 # Plotting statistics along the genome:
 
 # Combine 2 plots into a single figure:
@@ -111,6 +120,7 @@ abline(h=mean(windowStats$Fst_NyerMak_PundMak,na.rm=T),col="grey")
 plot(windowStats$mid,windowStats$Fst_PundPyt_NyerPyt,cex=0.5,pch=19,xaxt="n",
      ylab="Fst Python",ylim=c(0,1),col=windowStats$scaffold)
 abline(h=mean(windowStats$Fst_PundPyt_NyerPyt,na.rm=T),col="grey")
+
 # Add the LG names to the center of each LG
 axis(1,at=chrom$add+chrom$end/2,tick = F,labels = 1:22)
 
