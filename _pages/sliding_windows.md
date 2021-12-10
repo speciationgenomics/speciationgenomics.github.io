@@ -66,10 +66,20 @@ rm(list = ls())
 # Read in the file with sliding window estimates of FST, pi and dxy
 windowStats<-read.csv("./genome_scan/Pundamilia_kivu_div_stats.csv",header=T)
 
-# Let's have a look at what columns are present
-names(windowStats)
-length(windowStats$scaffold)
+# Let's have a look at the FST values
+head(windowStats)
 
+# Let's plot FST between the two younger species
+require(ggplot2)
+ggplot(windowStats,aes(mid,Fst_PundPyt_NyerPyt))+geom_point()
+
+# Annoyingly, it plots all the FST values on top of each other
+
+# Let's just plot chr1, we can use the tidyverse filter function for that
+require(tidyverse)
+ggplot(windowStats %>% filter(chr == "chr1"),aes(mid,Fst_PundPyt_NyerPyt))+geom_point()
+
+# However, we actually want to see all chromosomes next to each other, so let's add a new column with additive values
 # Get chrom ends for making positions additive
 chrom<-read.table("./genome_scan/chrEnds.txt",header=T)
 chrom$add<-c(0,cumsum(chrom$end)[1:21])
