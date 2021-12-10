@@ -35,7 +35,7 @@ First, we will calculate pi for each species and Fst and dxy for each pair of sp
 ```shell
 popgenWindows.py -g subset.geno.gz -o subset.Fst.Dxy.pi.csv.gz \
    -f phased -w 20000 -m 10000 -s 20000 \
-   -p PundPyt -p NyerPyt -p NyerMak -p PundMak -p kivu 64253 \
+   -p PundPyt -p NyerPyt -p NyerMak -p PundMak -p kivu \
    --popsFile pop.info
 ```
 
