@@ -77,7 +77,7 @@ ggplot(windowStats,aes(mid,Fst_PundPyt_NyerPyt))+geom_point()
 
 # Let's just plot chr1, we can use the tidyverse filter function for that
 require(tidyverse)
-ggplot(windowStats %>% filter(chr == "chr1"),aes(mid,Fst_PundPyt_NyerPyt))+geom_point()
+ggplot(windowStats %>% filter(scaffold == "chr1"),aes(mid,Fst_PundPyt_NyerPyt))+geom_point()
 
 # However, we actually want to see all chromosomes next to each other, so let's add a new column with additive values
 # Get chrom ends for making positions additive
