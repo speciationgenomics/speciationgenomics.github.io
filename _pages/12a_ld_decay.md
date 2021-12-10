@@ -25,7 +25,10 @@ We next declare an environmental variable for our vcf. Remember we do this becau
 
 ```shell
 # declare vcf
-VCF=~/vcf/cichlid_full_filtered_rename.vcf.gz
+VCF=cichlid_full_filtered_rename.vcf.gz
+
+# copy the vcf file to the current directory
+cp /home/data/vcf/cichlid_full_filtered_rename.vcf.gz .
 ```
 With that all set up, we are ready to calculate LD with `plink`.
 
