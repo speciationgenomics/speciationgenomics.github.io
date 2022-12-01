@@ -36,7 +36,7 @@ ssh -i "~/c123.pem" user123@54.245.175.86
 
 Of course you will need to change the log in credentials shown here (i.e. the username and keyfile name) with your own. **Also be aware that the cluster IP address will change everyday**. We will update you on this each day.
 
-You might be prompted to accept an RSA key - if so just type yes and you will log in to the cluster!
+You might be prompted to accept an RSA key - if so just type `yes` and you will log in to the cluster!
 
 #### Downloading and uploading files
 
