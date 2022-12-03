@@ -26,8 +26,8 @@ In the simplest way of running awk, we can tell awk to print out all lines where
 # Let's get the first line
 # in awk, NR means number of line
 awk 'NR==1' cichlids.imiss
-#
-awk 'NR==10' cichlids.imiss # or the tenth line
+# get the tenth line
+awk 'NR==10' cichlids.imiss
 
 # Get only every 20th line
 awk 'NR%20==0' cichlids.imiss
@@ -50,8 +50,8 @@ awk '/TI/ $5>0.01' cichlids.imiss
 By using curly brackets {} we can specify more complex awk commands.
 
 ```shell
-# Get just the codes (column 1) of the samples with missing data proportion above 0.01
-awk '{if($5>0.01) print $1}' cichlids.imiss
+# Of the samples with missing data proportion above 0.01, print the first column ($1) which contains the individual labels
+awk '{ if($5>0.01) print $1 }' cichlids.imiss
 # with if() we can define a specific condition that needs to be fulfilled (e.g. column 5 needs to be greater than 0.01)
 
 # We could also specify now that the letters TI need to be in the first column and the fifth column needs to be higher than 0.01.
