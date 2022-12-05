@@ -33,17 +33,17 @@ awk 'NR==10' cichlids.imiss
 awk 'NR%20==0' cichlids.imiss
 
 # awk can be used like grep to select all lines with a specific word such as "TI" which is found in five sample names.
-awk '/TI/' cichlids.imiss
+awk '/Sa/' cichlids.imiss
 # this gives the same output as
-grep "TI" cichlids.imiss
+grep "Sa" cichlids.imiss
 
 # Let's use awk for something else that grep cannot do
 # Get all samples with more than 1% missing data
 # note: $5 means fifth column
 awk '$5>0.01' cichlids.imiss
 
-# you can can also combine the previous codes to select only lines with TI with more than 1% missing data
-awk '/TI/ $5>0.01' cichlids.imiss
+# you can can also combine the previous codes to select only lines with Sa with more than 1% missing data
+awk '/Sa/ && $5>0.01' cichlids.imiss
 
 ```
 
@@ -51,15 +51,15 @@ By using curly brackets {} we can specify more complex awk commands.
 
 ```shell
 # Of the samples with missing data proportion above 0.01, print the first column ($1) which contains the individual labels
-awk '{ if($5>0.01) print $1 }' cichlids.imiss
+awk '{if($5>0.01) print $1}' cichlids.imiss
 # with if() we can define a specific condition that needs to be fulfilled (e.g. column 5 needs to be greater than 0.01)
 
-# We could also specify now that the letters TI need to be in the first column and the fifth column needs to be higher than 0.01.
-awk '{if($1~/TI/ && $5>0.01) print $1}' cichlids.imiss
+# We could also specify now that the letters Sa need to be in the first column and the fifth column needs to be higher than 0.005.
+awk '{if($1~/Sa/ && $5>0.005) print $1}' cichlids.imiss
 # Note that && means that both conditions need to be true. You could specify lots of different conditions.
 
-# if we now wanted to print the entire line fulfilling both conditions (containing TI and >1% missing data), we have to specify print $0 ($0 stands for the entire line)
-awk '{if($1~/TI/ && $5>0.01) print $0}' cichlids.imiss
+# if we now wanted to print the entire line fulfilling both conditions (containing Sa and >0.5% missing data), we have to specify print $0 ($0 stands for the entire line)
+awk '{if($1~/Sa/ && $5>0.005) print $0}' cichlids.imiss
 
 ```
 Everything until now was always performed for each line. If we wanted to do something before or after reading the lines, we can use BEGIN{} and END{}, before or after the main code {}, respectively.
@@ -81,15 +81,17 @@ head cichlids.imiss
 
 # We cannot just paste them together as they are sorted in different ways
 # Therefore, we need to sort the files First
-sort -nk 1 cichlids.info > cichlids.info.sorted
+sort -k 1 cichlids.info > cichlids.info.sorted
 
 # Or we can just do that directly without rewriting them by using <() which makes linux interpret the output of the command between the brackets as a file
 # This is a useful alternative to generating lots of intermediate files
-paste cichlids.info.sorted <(sort -nk 1 cichlids.imiss) > cichlids.info.full
+# Let's join the two files by the first column each. (-1 1) specifies that it should take the first column in the first file and (-2 1) that it should also use the first column of the second file.
+join -1 1 -2 1 cichlids.info.sorted <(sort -k 1 cichlids.imiss) > cichlids.info.full
 
-# Now annoyingly the header is somewhere in between
+# Now annoyingly the header is somewhere in between, let's move it to the beginning
+# This code first gets the line containing INDV and then all lines not containing INDV and writes everything into a new file.
 cat <(grep INDV cichlids.info.full) <(grep -v INDV cichlids.info.full) > cichlids.info.full.tmp
-
+# let's overwrite the full file with the tmp file that has the header in the correct position
 mv cichlids.info.full.tmp cichlids.info.full
 
 # Let's check how many samples we find in each group
