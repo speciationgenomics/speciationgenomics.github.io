@@ -77,7 +77,12 @@ fastqc -o ./ /home/data/fastq/$PREFIX.fastq.gz
 done
 ```
 
-Now, we need to download the html files to the local computer for visualization. To download files, we will use the command `scp`.
+Now, we need to download the html files to the local computer for visualization. To download files, we will use the command `scp` on your local machine, so in a terminal that is not connected to the Amazon server. This command will download all html files in the folder fastqc on the Amazon server to the directory you are currently located "./".
+
+```shell
+scp -i c1.pem user1@<IP address>:/home/user1/fastqc/*html ./
+
+```
 
 Here some [slides](https://github.com/speciationgenomics/presentations/blob/master/fastqc_interpretation.pdf) on interpreting fastqc html output.
 
