@@ -18,28 +18,28 @@ cd fastqc
 
 # Now let's specify FILE as the name of the file containing the forward reads
 FILE="wgs.R1.fastq.gz"
-cp /home/data/fastq/${FILE} ./
+cp /home/data/fastq/$FILE ./
 
 # Let's have a look at the first read:
-zcat ${FILE} | head -4
+zcat $FILE | head -4
 ```
 
 These are the four lines which make up the information for each read. You can learn more about what they each mean [here](https://en.wikipedia.org/wiki/FASTQ_format). Now the file is in our directory and readable, let's count the number of lines:
 
 ```shell
-zcat ${FILE} | wc -l
+zcat $FILE | wc -l
 ```
 
 The number of sequences is thus this number divided by 4, or we can count the number of lines starting with the header
 
 ```shell
-zgrep "@J00" ${FILE} -c
+zgrep "@J00" $FILE -c
 ```
 
 We might think that we could have just counted the number of `@` - i.e. the first symbols for each header.
 
 ```shell
-zgrep "@" ${FILE} -c
+zgrep "@" $FILE -c
 ```
 
 However, we see that this does not give us the same number. The reason is that `@` is also used as a symbol for encoding [quality scores](https://en.wikipedia.org/wiki/Phred_quality_score) and thus some quality score lines were also counted.
@@ -73,11 +73,11 @@ fastqc -o ./ /home/data/fastq/$FILE
 # Because we do not want to type the fastqc command many times, we will use a for loop
 for PREFIX in RAD1 RAD2 Novaseq.R2 Novaseq.R1
 do
-fastqc -o ./ /home/data/fastq/${PREFIX}.fastq.gz
+fastqc -o ./ /home/data/fastq/$PREFIX.fastq.gz
 done
 ```
 
-Now, we need to download the html files to the local computer for visualization. To download files, mac and linux users can use the command `scp`, Windows users can use `FileZilla` [(see instructions here)](https://speciationgenomics.github.io/logging_on/). You can then open the html file with any internet browser.
+Now, we need to download the html files to the local computer for visualization. To download files, we will use the command `scp`.
 
 Here some [slides](https://github.com/speciationgenomics/presentations/blob/master/fastqc_interpretation.pdf) on interpreting fastqc html output.
 
@@ -90,22 +90,22 @@ Here one very condensed solution: Try to find your own solution first!
 ```shell
 FILE=RAD2
 
-cp /home/data/fastq/${FILE} ./
+cp /home/data/fastq/$FILE ./
 
 #Add GC content to each read in fastq file to check reads with highest or lowest GC contents:
 zcat ${FILE}.fastq.gz | awk 'NR%4==2' | awk '{split($1,seq,""); gc=0; at=0; n=0; for(base in seq){if(seq[base]=="A"||seq[base]=="T") at++; else if(seq[base]=="G"||seq[base]=="C") gc++; else n++}; print $0,gc/(at+gc+n)*100,n}' > ${FILE}.gc
 
 #Lowest GC content:
-sort -k 2 -t " " ${FILE}.gc | head
+sort -k 2 -t " " $FILE.gc | head
 
 #Highest GC content:
-sort -k 2 -t " " ${FILE}.gc | tail
+sort -k 2 -t " " $FILE.gc | tail
 
 #Get the worst 10 sequences with all information:
-zcat ${FILE}.fastq.gz | grep -f <(sort -k 2 -t " " ${FILE}.gc | tail | cut -d" " -f 1) -A 2 -B 1 > ${FILE}.lowGC
+zcat $FILE.fastq.gz | grep -f <(sort -k 2 -t " " $FILE.gc | tail | cut -d" " -f 1) -A 2 -B 1 > $FILE.lowGC
 
 # Make a new fastq file with these reads:
-grep -v "^--" ${FILE}.lowGC | gzip > ${FILE}.lowGC.fastq.gz
+grep -v "^--" $FILE.lowGC | gzip > $FILE.lowGC.fastq.gz
 ```
 
 As a second exercise, try to generate a new file from the fastqz file containing every 1000th read. This is useful as subsampling is often needed to test software. Fastqc will take very long and a lot of memory if it needs to read in a giant file. It is thus better to subsample if you have large fastq files.
