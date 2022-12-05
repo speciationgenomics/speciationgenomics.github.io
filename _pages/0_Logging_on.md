@@ -9,13 +9,16 @@ Typically when working in bioinformatics with large datasets we would log into a
 
 #### Logging on
 
-If you are using a Mac or Linux machine, you will need to open a `terminal` window. If you are using a Windows machine, start [MobaXterm](https://mobaxterm.mobatek.net/) or "Ubuntu on Windows" to get a `terminal`. To connect to the Amazon cloud, we use the command `ssh`.
+If you are using a Mac or Linux machine, you will need to open a `terminal` window. If you are using a Windows machine, start [MobaXterm](https://mobaxterm.mobatek.net/) or "Ubuntu on Windows" to get a `terminal`. For MobaXterm users, we recommend to go to "Settings" and change the "Persistent home directory" to a directory of your choice.
+
+
+To connect to the Amazon cloud, we use the command `ssh`.
 
 `ssh` stands for [secure shell](https://en.wikipedia.org/wiki/Secure_Shell) and is a way of interacting with remote servers. You will need to log in to the cluster using a keyfile that has been generated for you and sent via email.
 
-Firstly, download the keyfile and open a terminal window.
+To log on, we will need the keyfile you got from Physalia. If this was the cluster/server of your institution, you would not need that but use a password instead.
 
-Then copy it into your home directory (change the number to the user number assigned to you)
+First, copy the keyfile into your home directory (change the number (123) to the user number assigned to you).
 
 ```shell
 cp c123.pem ~
