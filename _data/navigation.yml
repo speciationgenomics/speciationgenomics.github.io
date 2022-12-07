@@ -81,9 +81,6 @@ pages:
       url: /orthofinder/
 #    - title: "- local PCA (by Gabriela Montejo-Kovacevich)"
 #      url: /localPCA/
-<<<<<<< HEAD
 #    - title: "- Simulating data with SliM (by Henry North)"
-=======
 #    - title: "- SliM tutorial (by Henry North)"
->>>>>>> parent of 1167ffa3 (Add SLiM tutorial)
 #      url: /slim/
