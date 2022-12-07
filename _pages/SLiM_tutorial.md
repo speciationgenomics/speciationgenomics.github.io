@@ -15,7 +15,7 @@ Here are four very simple models SLiM models.
 First, a model of a stable population of 1000 diploids over 5000 generations. SLiM has a neat function to output .vcf files from a subsample of individuals from the simulation. We can then analyse the output using the same tools that we would use for empirical data.  
 
 *neutral_stable.slim*
-```{eidos, eval=F}
+```shell
 // Constant popiulation size of 1000 with no selection
 initialize()
 {
@@ -56,7 +56,7 @@ allIndividuals = sim.subpopulations.individuals;
 The above model, expcept that the population expands from 1000 to 7500 at generation 4000:
 
 *neutral_expansion.slim*
-```{eidos, eval=F}
+```shell
 // Instantaneous population expansion from 1000 to 7500 at generation 4000 with no selection
 initialize()
 {
@@ -99,7 +99,7 @@ allIndividuals = sim.subpopulations.individuals;
 A population crontraction (from 1000 to 250) at generation 2000:
 
 *neutral_contraction.slim*
-```{eidos, eval=F}
+```shell
 // Instantaneous population contraction from 1000 to 250 at genneration 2000
 initialize()
 {
@@ -141,7 +141,7 @@ allIndividuals = sim.subpopulations.individuals;
 
 Finally, the same population contraction but closer to the end of the simulation (at generation 4500):
 *neutral_recentContraction.slim*
-```{eidos, eval=F}
+```shell
 // Instantaneous population contraction from 1000 to 250 at genneration 4500
 initialize()
 {
@@ -184,7 +184,8 @@ allIndividuals = sim.subpopulations.individuals;
 
 How do we implement these models? Here is a step-by-step walkthrough of how to run these on the cluster and format the output:
 
-```{bash,eval=F}
+```shell
+
 cd ~
 
 mkdir SLiM
@@ -233,7 +234,7 @@ This ran one simulation, but we are more interested in running many iterations o
 Below we implement many iterations of each model and process output in a loop:
 
 run_stable_popsize.sh
-```{bash, eval=F}
+```shell
 for (( i = 1; i < 101; i++ )); do
 
   echo "running simulation ${i} of 100"
@@ -284,7 +285,7 @@ rm stable_tajD_*.txt
 ```
 
 run_population_expansion.sh
-```{bash, eval=F}
+```shell
 for (( i = 1; i < 101; i++ )); do
 
   echo "running simulation ${i} of 100"
@@ -335,7 +336,7 @@ rm expansion_tajD_*.txt
 ```
 
 run_population_contraction.sh
-```{bash, eval=F}
+```shell
 for (( i = 1; i < 101; i++ )); do
 
   echo "running simulation ${i} of 100"
@@ -386,7 +387,7 @@ rm contraction_tajD_*.txt
 ```
 
 run_recent_population_contraction.sh
-```{bash, eval=F}
+```shell
 for (( i = 1; i < 101; i++ )); do
 
   echo "running simulation ${i} of 100"
