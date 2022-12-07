@@ -5,7 +5,7 @@ permalink: /easysfs/
 ---
 
 In order to perform demographic analyses with programs such as `fastsimcoal2` or `dadi`,
-you need to generate or estimate a **site-frequency spectrum**. There are multiple different ways
+you need to generate or estimate a **site-frequency spectrum** (SFS). There are multiple different ways
 to do this but one of the simplest is using [easysfs](https://github.com/isaacovercast/easySFS), a really nice python based utility that is built on top of the `dadi` libraries.
 
 Using `easySFS` is very straighforward. The first thing we will do is declare a `$VCF` variable, to make the downstream commands a bit more clear. We do this like so:
