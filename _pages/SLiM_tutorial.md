@@ -6,7 +6,7 @@ permalink: /slim/
 
 This tutorial was written by Henry North for the 2021 course.
 
-SLiM is software for forward-time simulation. You can read about SLiM and eidos, the language that SLiM operates in, in the [SLiM manual](http://rmarkdown.rstudio.com). There is also a [detailed online tutorial](http://benhaller.com/workshops/workshops.html) on how SLiM works. Here a short lecture on [SLiM](https://github.com/speciationgenomics/data/blob/master/SLiM_slides.pdf).
+SLiM is software for forward-time simulation of genetic data. You can read about SLiM and Eidos, the language that SLiM operates in, in the [SLiM manual](https://github.com/MesserLab/SLiM/releases/download/v4.0.1/SLiM_Manual.pdf). There is also a [detailed online tutorial](http://benhaller.com/workshops/workshops.html) on how SLiM works. Here the slides of a short lecture on [SLiM](https://github.com/speciationgenomics/data/blob/master/SLiM_slides.pdf).
 
 
 
