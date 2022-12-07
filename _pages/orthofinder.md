@@ -13,14 +13,15 @@ A protein file for the house sparrow, with aminoacid sequences (house_sparrow_pr
 A protein file for a closely related model-organism (chicken; downloaded from ensembl; Gallus_gallus.GRCg6a.pep.reduced.faa)
 
 
-1 - We start by cleaning up the space and setting an working directory.
+1 - We start by cleaning up the space and setting a working directory.
 
 ```
 # We make a folder and move inside
 cd ~
-mkdir Orthofinder_exercise; cd Orthofinder_exercise
+mkdir Orthofinder_exercise
+cd Orthofinder_exercise
 
-# We make a structure for us to work
+# We make two folders for us to work in
 mkdir 01_data 02_orthofinder_run
 ```
 
@@ -36,22 +37,19 @@ cp /home/data/orthofinder/* .
 # Orthofinder will give you tons of results. When you run it with more than two species it often gets confusing - which gene comes from species A? Is this gene from species C or D?
 # I have a solution. Add the species name to each gene :)
 
-# Run this code, but think, what does it do?
+# Run this code to extract all house sparrow genes and all chichen genes separately:
 sed -i "/^>/ s/>/>House_sparrow_/" house_sparrow_proteins_reduced.faa
 sed -i "/^>/ s/>/>chicken_/" Gallus_gallus.GRCg6a.pep.reduced.faa
 
-# Check the files using less to see what it does.
+# Check the files using less to see what output files we have now.
 ```
 
 4 - Let's run OrthoFinder
 ```
-# Ignore this next line
-PATH="/home/ubuntu/bin:/home/ubuntu/.local/bin:/home/ubuntu/miniconda3/bin:/home/ubuntu/miniconda3/condabin:/home/ubuntu/miniconda3/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/home/scripts"
-
-# Loading OrthoFinder
+# Let's have a look at the help information of OrthoFinder
 orthofinder -h
 
-# Run it on the 01_data folder
+# Run it in the 01_data folder
 orthofinder -f . -t 2
 echo " Go drink of tea or take a 2 min break "
 
