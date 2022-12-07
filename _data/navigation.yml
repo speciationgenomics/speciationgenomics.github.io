@@ -79,10 +79,10 @@ pages:
     children:
     - title: "- Comparative genomics (by José Cerca)"
       url: /orthofinder/
+    - title: "- Simulating data with SliM (by Henry North)"
+      url: /slim/
 #    - title: "- local PCA (by Gabriela Montejo-Kovacevich)"
 #      url: /localPCA/
 #    - title: "- Simulating data with SliM (by Henry North)"
 #    - title: "- SliM tutorial (by Henry North)"
 #      url: /slim/
-    - title: "- Simulating data with SliM (by Henry North)"
-      url: /slim/
