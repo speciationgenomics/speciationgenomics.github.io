@@ -81,5 +81,5 @@ pages:
       url: /orthofinder/
 #    - title: "- local PCA (by Gabriela Montejo-Kovacevich)"
 #      url: /localPCA/
-    - title: "- Simulating data with SliM (by Henry North)"
-      url: /slim/
+#    - title: "- Simulating data with SliM (by Henry North)"
+#      url: /slim/
