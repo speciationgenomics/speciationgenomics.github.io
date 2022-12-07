@@ -12,9 +12,11 @@ SLiM is software for forward-time simulation of genetic data. You can read about
 
 Here are four very simple models SLiM models.
 
-First, a model of a stable population of 1000 diploids over 5000 generations. SLiM has a neat function to output .vcf files from a subsample of individuals from the simulation. We can then analyse the output using the same tools that we would use for empirical data.  
+
 
 *neutral_stable.slim*
+First, a model of a stable population of 1000 diploids over 5000 generations. SLiM has a neat function to output vcf files from a subsample of individuals from the simulation. We can then analyse the output using the same tools that we would use for empirical data.  
+
 ```shell
 // Constant popiulation size of 1000 with no selection
 initialize()
@@ -50,12 +52,11 @@ allIndividuals = sim.subpopulations.individuals;
  sampledIndividuals.genomes.outputVCF();
 
 }
-
 ```
 
-The above model, expcept that the population expands from 1000 to 7500 at generation 4000:
-
 *neutral_expansion.slim*
+The above model, except that the population expands from 1000 to 7500 at generation 4000:
+
 ```shell
 // Instantaneous population expansion from 1000 to 7500 at generation 4000 with no selection
 initialize()
@@ -96,9 +97,9 @@ allIndividuals = sim.subpopulations.individuals;
 }
 ```
 
+*neutral_contraction.slim*
 A population crontraction (from 1000 to 250) at generation 2000:
 
-*neutral_contraction.slim*
 ```shell
 // Instantaneous population contraction from 1000 to 250 at genneration 2000
 initialize()
@@ -139,8 +140,9 @@ allIndividuals = sim.subpopulations.individuals;
 }
 ```
 
-Finally, the same population contraction but closer to the end of the simulation (at generation 4500):
 *neutral_recentContraction.slim*
+Finally, the same population contraction but closer to the end of the simulation (at generation 4500):
+
 ```shell
 // Instantaneous population contraction from 1000 to 250 at genneration 4500
 initialize()
