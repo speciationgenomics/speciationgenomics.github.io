@@ -58,7 +58,7 @@ This should run pretty quickly and at least some of it should look familiar to t
 * `--chr` - an option to choose the chromosome we are running the analysis on. Here we are only performing it on chromosome 1.
 * `--thin` - thin randomly thins out the data - i.e. it randomly retains *p* proportion of the data. Here we set that to 0.1 or 10%. This means that each site has a 10% probability of remaining in the dataset. This is done to ensure the analysis runs quickly and our output isn't too big as it can quickly get out of hand!
 * `--r2` - finally we're on to the options for LD! This tells `plink` to produce squared correlation coefficients. We also provide the argument `gz` in order to ensure the output is compressed. This is very important as it is easy to produce **EXTREMELY** large files.
-* `--ld-window` - this allows us to set the size of the lower end of the LD window. In this case, we set it to 1000 bp - i.e. any sites with < 1000 sites between them are ignored.
+* `--ld-window` - this allows us to set the size of the lower end of the LD window. In this case, we set it to 100 bp - i.e. any sites with < 100 sites between them are ignored.
 * `--ld-window-kb` - this is the upper end of the LD window. Here we set it to 1000, meaning that we ignore any two sites more than 1 Mb apart in the genome.
 * `--ld-window-r2` - the final LD command - this sets a filter on the final output but we want all values of LD to be written out, so we set it to 0.
 * `--make-bed` - this just makes a plink bedfile for future analyses
