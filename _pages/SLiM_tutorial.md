@@ -14,7 +14,8 @@ Here are four very simple models SLiM models.
 
 
 
-*neutral_stable.slim*
+**neutral_stable.slim**
+
 First, a model of a stable population of 1000 diploids over 5000 generations. SLiM has a neat function to output vcf files from a subsample of individuals from the simulation. We can then analyse the output using the same tools that we would use for empirical data.  
 
 ```shell
@@ -54,7 +55,8 @@ allIndividuals = sim.subpopulations.individuals;
 }
 ```
 
-*neutral_expansion.slim*
+**neutral_expansion.slim**
+
 The above model, except that the population expands from 1000 to 7500 at generation 4000:
 
 ```shell
@@ -97,7 +99,8 @@ allIndividuals = sim.subpopulations.individuals;
 }
 ```
 
-*neutral_contraction.slim*
+**neutral_contraction.slim**
+
 A population crontraction (from 1000 to 250) at generation 2000:
 
 ```shell
@@ -140,7 +143,8 @@ allIndividuals = sim.subpopulations.individuals;
 }
 ```
 
-*neutral_recentContraction.slim*
+**neutral_recentContraction.slim**
+
 Finally, the same population contraction but closer to the end of the simulation (at generation 4500):
 
 ```shell
@@ -188,46 +192,52 @@ How do we implement these models? Here is a step-by-step walkthrough of how to r
 
 ```shell
 
+# Make a directory for the SLiM analyses
 cd ~
-
 mkdir SLiM
-
 cd SLiM/
 
-cp /home/scripts/SLiM/*.sh .
-cp /home/scripts/SLiM/*.slim .
+# Get the scripts and slim model files
+cp /home/scripts/SLiM/*.sh ./
+cp /home/scripts/SLiM/*.slim ./
 
+# check the version of slim
 slim -version
 
+# let's have a look at a slim file specifying a model of neutral evolution with stable population size
 cat neutral_stable.slim
 
+# Run slim with this model
 slim neutral_stable.slim > stable.out
 
+# Have a look at the output file
 head stable.out
 
+# Make a vcf file of the last lines containing the genotype data
 tail -n+15 stable.out | bgzip -c > stable.vcf.gz
 
-rm stable.out
-
+# Compute FST with vcftools
 vcftools --gzvcf stable.vcf.gz --weir-fst-pop pop1.txt --weir-fst-pop pop2.txt --out stable_fst
 
+# have a look at the pop text files that are used to assign individuals to populations
 cat pop1.txt
 cat pop2.txt
 
+# compute pi (nucleotide diversity) with vcftools
 vcftools --gzvcf stable.vcf.gz --site-pi --out stable_pi
 
 # calculate the mean and remove the intermediate file
 awk 'NR > 1 {sum+=$3} END {print sum / (NR - 1)}' stable_pi.sites.pi > stable_pi_mean.txt
-# rm stable_pi.sites.pi
+rm stable_pi.sites.pi
 
-
+# Compute Tajima's D with vcftools
 vcftools --gzvcf stable.vcf.gz --out stable --TajimaD 10000
 
 cat stable.Tajima.D | column -t
-# rm stable.log
+rm stable.log
 
 awk 'NR==2' stable.Tajima.D | cut -f 4 > stable_tajD.txt
-# rm stable.Tajima.D
+rm stable.Tajima.D
 
 ```
 
