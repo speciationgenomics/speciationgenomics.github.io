@@ -75,14 +75,3 @@ pages:
         url: /fastsimcoal2/
       # - title: "Estimating past effective population size with PSMC"
       #   url: /child-3-page-url/
-  - title: "Extra material"
-    children:
-    - title: "- Comparative genomics (by José Cerca)"
-      url: /orthofinder/
-#    - title: "- local PCA (by Gabriela Montejo-Kovacevich)"
-#      url: /localPCA/
-#    - title: "- Simulating data with SliM (by Henry North)"
-#    - title: "- SliM tutorial (by Henry North)"
-#      url: /slim/
-    - title: "- Simulating data with SliM (by Henry North)"
-      url: /slim/
