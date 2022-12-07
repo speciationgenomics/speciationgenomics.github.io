@@ -73,7 +73,11 @@ Rscript plotADMIXTURE.r -p $FILE -i $FILE.list -k 5 -l PunNyerMak,PunPundMak,Pun
 
 By default, the script generates a tiff file that uses the same prefix as the one provided with -p. In our case $FILE.tiff. This can be changed with -o <output prefix>.
 
-Now we just need to download the `.tiff` file to our local machine to look at it, either using `scp`.
+Now we just need to download the `.tiff` file to our local machine to look at it, either using `scp`. In the code below make sure to replace X by your user number.
+
+```shell
+scp -i cX.pem userX@35.89.201.116:/home/userX/ADMIXTURE/Pundamilia.RAD.tiff ./
+```
 
 
 Remember that ADMIXTURE/STRUCTURE plots can be quite misleading as different demographic histories can lead to the same results (see. e.g. [Lawson et al, 2018](https://www.nature.com/articles/s41467-018-05257-7)) These plots are great to detect recent hybrids but they are not ideal to infer complex demographic histories with hybrid origins of entire populations
