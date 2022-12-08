@@ -55,7 +55,7 @@ fastsimcoal2 -t ${PREFIX}.tpl -e ${PREFIX}.est -m -0 -C 10 -n 10000 -L 40 -s 0 -
 
 This command runs `fastsimcoal` using a MAF (`-m`) while ignoring monomorphic sites (`-0`) and SFS entries with less than 10 SNPs (`-C`). This means that entries with less than 10 SNPs are pooled together. This option is useful when there are many entries in the observed SFS with few SNPs and with a limited number of SNPS to avoid overfitting.
 
-`fastsimcoal` will also perform (`-n`) 10,000 coalescent simulations to approximate the expected SFS in each cycle and will run (`-L`) 40 optimization (ECM) cycles to estimate the parameters. The number of ECM cycles should be at least 20, better between 50 and 100. The number of coalescent situations should ideally be something between 200,000 and 1,000,000 but to make it faster, we are now only running 10,000 simulations. We also specify (`-M`) that we want to perform parameter estimation. With `-s 0`, we can tell `fastsimcoal` to output SNPs.
+`fastsimcoal` will also perform (`-n`) 10,000 coalescent simulations to approximate the expected SFS in each cycle and will run (`-L`) 40 optimization (ECM) cycles to estimate the parameters. The number of ECM cycles should be at least 20, better between 50 and 100. The number of coalescent simulations should ideally be something between 200,000 and 1,000,000 but to make it faster, we are now only running 10,000 simulations. We also specify (`-M`) that we want to perform parameter estimation. With `-s 0`, we can tell `fastsimcoal` to output SNPs.
 
 Once `fastsimcoal` is finished, we can have a look at the output files.
 It produced a folder called `${PREFIX}` which contains a number of new files. The most relevant files are the following:
