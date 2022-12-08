@@ -10,7 +10,7 @@ We will be using Orthofinder to identify genes in a region where there is differ
 Files we will be using:
 A gff file, with annotations and features (house_sparrow_chr1A.gff)
 A protein file for the house sparrow, with aminoacid sequences (house_sparrow_proteins_reduced.faa)
-A protein file for a closely related model-organism (chicken; downloaded from ensembl; Gallus_gallus.GRCg6a.pep.reduced.faa)
+A protein file for a closely related model-organism (chicken; downloaded from [ensembl](https://www.ensembl.org/Gallus_gallus/Info/Index); [Gallus_gallus.GRCg6a.pep.reduced.faa](https://ftp.ensembl.org/pub/release-108/fasta/gallus_gallus/pep/Gallus_gallus.bGalGal1.mat.broiler.GRCg7b.pep.all.fa.gz))
 
 
 1 - We start by cleaning up the space and setting a working directory.
