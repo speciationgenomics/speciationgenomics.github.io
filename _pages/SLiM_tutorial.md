@@ -452,7 +452,7 @@ rm recentContraction_tajD_*.txt
 
 Visualise output in R:
 
-```{r, eval=F}
+```shell
 # Collate TajD data
 tajD_stable <- read.csv("SLIMV2/all_tajD_stable.txt")
 colnames(tajD_stable) <- c("tajD_stable")
