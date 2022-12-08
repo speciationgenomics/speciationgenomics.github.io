@@ -101,10 +101,10 @@ allIndividuals = sim.subpopulations.individuals;
 
 **neutral_contraction.slim**
 
-A population crontraction (from 1000 to 250) at generation 2000:
+A population contraction (from 1000 to 250) at generation 2000:
 
 ```shell
-// Instantaneous population contraction from 1000 to 250 at genneration 2000
+// Instantaneous population contraction from 1000 to 250 at generation 2000
 initialize()
 {
 	// set the overall mutation rate
@@ -450,7 +450,7 @@ rm recentContraction_tajD_*.txt
 ```
 
 
-Visualise output in R:
+Visualise the output in R:
 
 ```shell
 # Collate TajD data
