@@ -157,7 +157,7 @@ This script generates a file ${PREFIX}.AIC which contains the delta likelihood a
 
 To visualize the fit of the simulated SFS to the data, we can use an `R` script that David Marques wrote - `SFStools.r` - which you can download [here](https://github.com/marqueda/SFS-scripts/).
 
-To visualize the model with the best parameter estimates, we can use one of Joana Meier's R scripts - [plotModel.r](https://github.com/speciationgenomics/scripts/blob/master/plotModel.r).
+To visualize the model with the best parameter estimates, we can use one of Joana Meier's R scripts - [plotModel.r](https://github.com/speciationgenomics/scripts/blob/master/plotModel.r). There are also other options [here](http://cmpg.unibe.ch/software/fastsimcoal27/additionalScripts.html).
 
 ```shell
 SFStools.r -t print2D -i early_geneflow
@@ -206,7 +206,7 @@ Due to time constraints, we will give you the results of these models. They are 
 cp -r /home/data/fastsimcoal2/extramodels/* ~/fastsimcoal/
 ```
 
-Now, let's download the likelihoods and plot them: (NB: Windows users must use `Filezilla`)
+Now, let's download the likelihoods and plot them:
 
 ```shell
 scp -i c.pem user@<ip>:~/fastsimcoal/lhoods/* ./
