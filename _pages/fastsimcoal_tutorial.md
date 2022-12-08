@@ -184,7 +184,7 @@ cd ~/fastsimcoal/$PREFIX/bestrun
 cp ${PREFIX}_jointMAFpop1_0.obs ${PREFIX}_maxL_jointMAFpop1_0.obs
 
 # Run fastsimcoal 20 times (in reality better 100 times) to get the likelihood of the observed SFS under the best parameter values with 1 mio simulated SFS.
-for iter in {1..20}
+for i in {1..20}
 do
  fastsimcoal2 -i ${PREFIX}_maxL.par -n1000000 -m -q -0
  # Fastsimcoal will generate a new folder called ${model}_maxL and write files in there
