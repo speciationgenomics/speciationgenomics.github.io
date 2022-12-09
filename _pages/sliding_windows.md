@@ -104,7 +104,7 @@ ggplot(allStats %>% filter(scaffold == "chr1"),
 # (this is the first two columns of the fasta.fai file of the reference genome)
 chrom<-read.table("genomeScans/chrEnds.txt",header=T)
 
-# Make a cumulative sum of the chromosome lenghts and
+# Make a cumulative sum of the chromosome lengths and
 # add a bit more to get gaps between the chromosomes
 chrom$add<-c(0,cumsum(chrom$end+10000000)[1:21])
 
