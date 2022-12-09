@@ -20,8 +20,9 @@ Note, that the scripts by Simon are written in Python2 (not Python3 which may be
 First, let's convert the vcf file into Simon Martin's geno file. You can download the script [here](https://github.com/simonhmartin/genomics_general/raw/master/VCF_processing/parseVCF.py).
 
 ```shell
-mkdir ~/genome_scans
-cd ~/genome_scans
+cd ~
+mkdir genome_scans
+cd genome_scans
 
 # Copy the vcf file and the information file and a small subset file
 cp /home/data/genomeScans/* ./
