@@ -8,8 +8,11 @@ This tutorial was written by Henry North for the 2021 speciation genomics Physal
 
 SLiM is a software for forward-time simulation. You can read about SLiM and eidos, the language in which SLiM operates, in the [SLiM manual](http://benhaller.com/slim/SLiM_Manual.pdf). There is also a [detailed online tutorial](http://benhaller.com/workshops/workshops.html) on how SLiM works. Here the slides of a short lecture by Henry on [SLiM](https://github.com/speciationgenomics/data/blob/master/SLiM_slides.pdf).
 
+Simulating data is a great way to explore what patterns we would expect in the genomic data under different evolutionary scenarios such as population expansions, a bottleneck or specific selection pressures. We can use neutral simulations to get null distributions for selection statistics, or we can use simulated data to test how well new analysis methods perform.
 
-Four very simple SLiM simulations to aid our intuition on the effect of demography on population genomic summary statistics:
+SLiM is a very userfriendly software. There is also a GUI (graphical user interface). SLiM outputs the simulated data as a vcf file and we can thus apply the same methods (e.g. calculating FST) as for real data.
+
+Here are four very simple SLiM simulations to aid our intuition on the effect of demography on population genomic summary statistics:
 
 First, a model of a stable population of 1000 diploids over 5000 generations. SLiM has a neat function to output .vcf files from a subsample of individuals from the simulation. We can then analyse the output using the same tools that we would use for empirical data.  
 
