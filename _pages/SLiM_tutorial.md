@@ -10,7 +10,7 @@ SLiM is a software for forward-time simulation. You can read about SLiM and eido
 
 Simulating data is a great way to explore what patterns we would expect in the genomic data under different evolutionary scenarios such as population expansions, a bottleneck or specific selection pressures. We can use neutral simulations to get null distributions for selection statistics, or we can use simulated data to test how well new analysis methods perform.
 
-SLiM is a very userfriendly software. There is also a GUI (graphical user interface). SLiM has a neat function to output vcf files from a subsample of individuals from the simulation. We can then analyse the output using the same tools that we would use for empirical data. 
+SLiM is a very userfriendly software. There is also a GUI (graphical user interface). SLiM has a neat function to output vcf files from a subsample of individuals from the simulation. We can then analyse the output using the same tools that we would use for empirical data.
 
 Here are four very simple SLiM simulations to aid our intuition on the effect of demography on population genomic summary statistics:
 
@@ -296,14 +296,14 @@ rm stable_tajD_*.txt
 ```
 
 You can find all scripts for running the other models on the Speciation Genomics GitHub website:
-[run_stable_popsize.sh](https://github.com/speciationgenomics/scripts/blob/master/SLiM_run_stable_popsize.sh)
-[run_population_expansion.sh](https://github.com/speciationgenomics/scripts/blob/master/SLiM_neutral_expansion_loop.sh)
-[run_population_contraction.sh](https://github.com/speciationgenomics/scripts/blob/master/SLiM_run_population_contraction.sh)
+[run_stable_popsize.sh](https://github.com/speciationgenomics/scripts/blob/master/SLiM_run_stable_popsize.sh),
+[run_population_expansion.sh](https://github.com/speciationgenomics/scripts/blob/master/SLiM_neutral_expansion_loop.sh),
+[run_population_contraction.sh](https://github.com/speciationgenomics/scripts/blob/master/SLiM_run_population_contraction.sh),
 [run_recent_population_contraction.sh](https://github.com/speciationgenomics/scripts/blob/master/SLiM_run_recent_population_contraction.sh)
 
-Visualise the output in R:
+Now, let's visualise the output in R:
 
-plotting.R
+*plotting.R*
 ```shell
 
 # Collate Tajima's D data
@@ -317,7 +317,7 @@ tajD_recentContraction <- read.csv("all_tajD_recentContraction.txt")
 colnames(tajD_recentContraction) <- c("tajD_recentContraction")
 tajD <- cbind(tajD_expansion, tajD_stable, tajD_contraction, tajD_recentContraction)
 
-# Get means
+# Get the means across simulations for each model
 mean(tajD$tajD_expansion)
 mean(tajD$tajD_stable)
 mean(tajD$tajD_contraction)
