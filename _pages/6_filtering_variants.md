@@ -78,7 +78,7 @@ Luckily, `vcftools` makes it possible to easily calculate these statistics. In t
 
 #### Setting up
 
-Before we calculate our stats, lets make a little effort to make our commands simpler and also to ensure the output is written to the right place. First we need to make a directory for our results.
+Before we calculate our stats, let's make a little effort to make our commands simpler and also to ensure the output is written to the right place. First we need to make a directory for our results.
 
 ```shell
 mkdir ~/vcftools
@@ -260,7 +260,7 @@ summary(var_miss$fmiss)
     ##    Min. 1st Qu.  Median    Mean 3rd Qu.    Max.
     ## 0.00000 0.00000 0.00000 0.01312 0.00000 0.93750
 
-Most sites have almost no issing data. Although clearly, there are sum (as the max value shows). This means we can be quite conservative when we set our missing data threshold. We will remove all sites where **over 10% of individuals are missing a genotype**. One thing to note here is that `vcftools` inverts the direction of missigness, so our 10% threshold means **we will tolerate 90% missingness** (yes this is confusing and counterintuitive... but that's the way it is!). Typically missingness of 75-95% is used.
+Most sites have almost no missing data. Although clearly, there are some (as the max value shows). This means we can be quite conservative when we set our missing data threshold. We will remove all sites where **over 10% of individuals are missing a genotype**. One thing to note here is that `vcftools` inverts the direction of missingness, so our 10% threshold means **we will tolerate the minimum 90% call-rate** (yes this is confusing and counterintuitive... but that's the way it is!). Typically 75-95% is used.
 
 ### Minor allele frequency
 
@@ -404,7 +404,7 @@ What have we done here?
 * `--gvcf` - input path -- denotes a gzipped vcf file
 * `--remove-indels` - remove all indels (SNPs only)
 * `--maf` - set minor allele frequency - 0.1 here
-* `--max-missing` - set minimum missing data. A little counterintuitive - 0 is totally missing, 1 is none missing. Here 0.9 means we will tolerate 10% missing data.
+* `--max-missing` - set minimum non-missing data. A little counterintuitive - 0 is totally missing, 1 is none missing. Here 0.9 means we will tolerate 10% missing data.
 * `--minQ` - this is just the minimum quality score required for a site to pass our filtering threshold. Here we set it to 30.
 * `--min-meanDP` - the minimum mean depth for a site.
 * `--max-meanDP` - the maximum mean depth for a site.
