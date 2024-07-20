@@ -26,11 +26,11 @@ The file we copied is compressed with `gzip`, so before we can do anything with 
 gunzip P_nyererei_v2.fasta.gz
 ```
 
-In order to align reads to the genome, we are going to use `bwa` which is a very fast and straightforward aligner. See [here](http://bio-bwa.sourceforge.net/) for more details on `bwa`.
+In order to align reads to the genome, we are going to use `bwa-mem2` which is a very fast and straightforward aligner. See [here](https://github.com/bwa-mem2/bwa-mem2) for more details on `bwa-mem2`.
 
 #### Indexing the reference genome
 
-Before we can actually perform an alignment, we need to index the reference genome we just copied to our home directories. This essentially produces an index for rapid searching and aligning. We use the `bwa index` tool to achieve this. However, the command takes some time to run, so we will use a useful Unix utility called `screen` to run it in the background (we will return to **why** it is advantageous to use `screen` momentarily).
+Before we can actually perform an alignment, we need to index the reference genome we just copied to our home directories. This essentially produces an index for rapid searching and aligning. We use the `bwa-mem2 index` tool to achieve this. However, the command takes some time to run, so we will use a useful Unix utility called `screen` to run it in the background (we will return to **why** it is advantageous to use `screen` momentarily).
 
 Use the following command to start a screen:
 
@@ -49,7 +49,7 @@ Now that you are sure you are inside the screen, run the following command.
 ```shell
 bwa index P_nyererei_v2.fasta
 ```
-Let's breakdown what we actually did here. As you might imagine `bwa index` is a tool for indexing. We simply specify the reference fasta file from which to build our genome index.
+Let's breakdown what we actually did here. As you might imagine `bwa-mem2 index` is a tool for indexing. We simply specify the reference fasta file from which to build our genome index.
 
 As you will have noticed by now, this command takes quite some time to run. Rather than sit there and wait, you can press `ctrl + ad` keys all together to shift back to the main screen (i.e. the one you started in).
 
@@ -76,10 +76,10 @@ cp /home/data/reference/P_nyererei_v2.fasta.* .
 
 Use `ls` to take a look, but this will have copied in about 5 files all with the `P_nyererei_v2.fasta.` prefix that we will use for a reference alignment.
 
-When `bwa` aligns reads, it needs access to these files, so they should be in the same directory as the reference genome. Then when we actually run the alignment, we tell `bwa` where the reference is and it does the rest. To make this easier, we will make a variable pointing to the reference.
+When `bwa-mem2` aligns reads, it needs access to these files, so they should be in the same directory as the reference genome. Then when we actually run the alignment, we tell `bwa-mem2` where the reference is and it does the rest. To make this easier, we will make a variable pointing to the reference.
 
 ```shell
-REF=~/reference/P_nyererei_v2.fasta
+REF="~/reference/P_nyererei_v2.fasta"
 ```
 
 #### Performing a paired end alignment
@@ -93,21 +93,20 @@ cd align
 ```
 As a side note, it is good practice to keep your data well organised like this, otherwise things can become confusing and difficult in the future.
 
-To align our individual we will use `bwa`. You might want to first have a look at the options available for it simply by calling `bwa`. We are actually going to use `bwa mem` which is the best option for short reads.
+To align our individual we will use `bwa-mem2`. You might want to first have a look at the options available for it simply by calling `bwa-mem2`. We are actually going to use `bwa-mem2 mem` which is the best option for short reads.
 
 As we mentioned above, we will use the individual - `10558.PunPundMak` which we have already trimmed. There are two files for this individual - `R1` and `R2` which are forward and reverse reads respectively.
 
 Let's go ahead and align our data, we will break down what we did shortly after. Note that we run this command from the home directory.
 
 ```shell
-bwa mem -M -t 4 $REF \
+bwa-mem2 mem -t 4 $REF \
 /home/data/wgs_raw/10558.PunPundMak.R1.fastq.gz \
 /home/data/wgs_raw/10558.PunPundMak.R2.fastq.gz > 10558.PunPundMak.sam
 ```
 Since we are only using a shortened fastq file, with 100K reads in it, this should just take a couple of minutes. In the meantime, we can breakdown what we actually did here.
 
-* `-M` is a standard flag that tells `bwa` to mark any low quality alignments (i.e. split across long distances) as secondary - we need this for downstream compatability.
-* `-t` tells `bwa` how many threads (cores) on a cluster to use - this effectively determines its speed.
+* `-t` tells `bwa-mem2` how many threads (cores) on a cluster to use - this effectively determines its speed.
 * Following these options, we then specify the reference genome, the forward reads and the reverse reads. Finally we write the output of the alignment to a **SAM file**.
 
 Once your alignment has ended, you will see some alignment statistics written to the screen. We will come back to these later - first, we will learn about what a SAM file actually is.
@@ -179,7 +178,7 @@ samtools sort 10558.PunPundMak.bam -o 10558.PunPundMak_sort.bam
 Once this is run, we will have a sorted bam. One point to note here, could we have done this is a more efficient manner? The answer is yes, actually we could have run all of these commands in a single line using pipes like so:
 
 ```shell
-bwa mem -M -t 4 $REF /home/data/wgs_raw/10558.PunPundMak.R1.fastq.gz /home/data/wgs_raw/10558.PunPundMak.R2.fastq.gz | samtools view -b | samtools sort -T 10558.PunPundMak > ./align/10558.PunPundMak_sort.bam
+bwa-mem2 mem -t 4 $REF /home/data/wgs_raw/10558.PunPundMak.R1.fastq.gz /home/data/wgs_raw/10558.PunPundMak.R2.fastq.gz | samtools view -b | samtools sort -T 10558.PunPundMak > ./align/10558.PunPundMak_sort.bam
 ```
 
 However as you may have noticed, we have only performed this on a single individual so far... what if we want to do it on multiple individuals? Do we need to type all this everytime? The answer is no - we could do this much more efficiently using the bash scripting tools we learned earlier today.
@@ -200,7 +199,7 @@ The first thing we will do is initiate the script with the line telling the inte
 Next, we declare some variables in our script. As we learned from our adventures with `bwa mem` above, we need to point to the reference genome. We do this like so:
 
 ```shell
-REF=~/reference/P_nyererei_v2.fasta
+REF="~/reference/P_nyererei_v2.fasta"
 ```
 Next, we will declare an array to ensure that we have all our individuals
 
@@ -237,7 +236,7 @@ do
 
 	# then align and sort
 	echo "Aligning $IND with bwa"
-	bwa mem -M -t 4 $REF $FORWARD \
+	bwa-mem2 mem -t 4 $REF $FORWARD \
 	$REVERSE | samtools view -b | \
 	samtools sort -T ${IND} > $OUTPUT
 
@@ -292,7 +291,7 @@ OUTPUT=~/align/${IND}_sort.bam
 
 # then align and sort
 echo "Aligning $IND with bwa"
-bwa mem -M -t 4 $REF $FORWARD \
+bwa-mem2 mem -t 4 $REF $FORWARD \
 $REVERSE | samtools view -b | \
 samtools sort -T ${IND} > $OUTPUT
 ```
