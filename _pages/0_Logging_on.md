@@ -9,7 +9,7 @@ Typically when working in bioinformatics with large datasets we would log into a
 
 #### Logging on
 
-If you are using a Mac or Linux machine, you will need to open a `terminal` window. If you are using a Windows machine, start [MobaXterm](https://mobaxterm.mobatek.net/) or "Ubuntu on Windows" to get a `terminal`. For MobaXterm users, we recommend to go to "Settings" and change the "Persistent home directory" to a directory of your choice.
+If you are using a Mac or Linux machine, you will need to open a `terminal` window. If you are using a Windows machine, start [MobaXterm](https://mobaxterm.mobatek.net/) or "Ubuntu on Windows" to get a `terminal`. For MobaXterm users, we recommend to go to "Settings", then "Configuration" and change the "Persistent home directory" to a directory of your choice. In the same Configuration window, also go to "SSH" and tick the box "SSH keepalive".
 
 
 To connect to the Amazon cloud, we use the command `ssh`.
