@@ -13,6 +13,8 @@ To run `fastsimcoal2` we need three input files which are all named in a consist
 * template file defining the demographic model - `${PREFIX}.tpl`
 * estimation file defining the parameters - `${PREFIX}.est`
 
+Note, you can find examples [here](https://github.com/speciationgenomics/data/tree/master). 
+
 ### Observed SFS
 
 The observed SFS can be a derived SFS (i.e. also known as DAF or an unfolded SFS) if the ancestral state is unknown or a minor allele frequency SFS (i.e. MAF or folded SFS) otherwise. `fastsimcoal2` will identify the kind of SFS by its name suffix and the command flag `-m` or `-d`. For a single population, it expects the name `${PREFIX}_DAFpop0.obs` or `${PREFIX}_MAFpop0.obs`.
