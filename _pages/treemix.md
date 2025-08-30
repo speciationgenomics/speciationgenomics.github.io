@@ -4,7 +4,7 @@ layout: archive
 permalink: /Treemix/
 ---
 
-`treemix` was written by Joseph K. Pickrell and Jonathan K. Pritchard and is available [here](https://bitbucket.org/nygcresearch/treemix/wiki/Home). If given a set of allele frequencies from a number of populations, it will return the maximum likelihood tree for the set of populations, and optionally attempt to infer a number of admixture events.
+`treemix` was written by Joseph K. Pickrell and Jonathan K. Pritchard and is available [here](https://bitbucket.org/nygcresearch/treemix/wiki/Home). If given a set of allele frequencies from a number of populations, it will return the maximum likelihood tree for the set of populations, and optionally attempt to infer a number of admixture events. Note, that the direction of introgression is often wrongly inferred and in general the results of Treemix are more to be taken as a starting point for investigating introgression in more detail than a final result.
 
 Treemix assumes unlinked SNPs and we are thus first going to prune the file for SNPs in high LD. We learned how to do this previously in more detail in the [PCA tutorial](https://speciationgenomics.github.io/pca/), but we will repeat it again here. One could also account for linkage in `treemix` by setting `-k 1000` - i.e setting a large blocksize for the jacknife resampling. However, our current SNP dataset is too large for us anyway. Furthermore, `treemix` does not like missing data. We will therefore remove sites with missing data and perform linkage pruning.
 
