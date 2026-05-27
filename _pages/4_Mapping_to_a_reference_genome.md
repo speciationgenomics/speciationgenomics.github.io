@@ -10,6 +10,8 @@ Using alignment software, we essentially find where in the genome our reads orig
 
 ### Getting access to the reference genome
 
+You can find reference genomes e.g. on [NCBI](https://www.ncbi.nlm.nih.gov/) or use [GoaT](https://goat.genomehubs.org/) to figure out the clostest relative that has a reference genome.
+
 We will be aligning our sequence data to the *Pundamilia nyererei* reference genome, first published by [Brawand *et al.* (2014)](https://www.nature.com/articles/nature13726) and more recently updated using a linkage map by [Feulner *et al.* (2018)](http://www.g3journal.org/content/8/7/2411).
 
 You will find a copy of the reference genome in the `/home/data/reference/` directory. Make a `reference` directory in your own home directory and then copy the reference genome like so:
@@ -47,7 +49,7 @@ This will list the running screens and should show you one called `index`. If yo
 Now that you are sure you are inside the screen, run the following command.
 
 ```shell
-bwa index P_nyererei_v2.fasta
+bwa-mem2 index P_nyererei_v2.fasta
 ```
 Let's breakdown what we actually did here. As you might imagine `bwa-mem2 index` is a tool for indexing. We simply specify the reference fasta file from which to build our genome index.
 
